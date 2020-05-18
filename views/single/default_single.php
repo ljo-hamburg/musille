@@ -29,7 +29,6 @@
 
 		<?php get_template_part('views/utils/sharing_icons'); ?>
 		<?php get_template_part('views/utils/post_tags'); ?>
-		<?php comments_template(); ?>
 
 	<?php if (LUCILLE_SWP_single_has_sidebar()) {?>	
 	</div>

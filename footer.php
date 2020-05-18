@@ -1,7 +1,3 @@
-	<?php  if (LUCILLE_SWP_need_woo_sidebar_on_this_page()) { /*close same condition linked container from header.php*/ ?>
-		</div>
-	<?php } ?>
-
 	</div> <!--#lc_swp_content-->
 	<?php get_sidebar('footer'); ?>
 	<?php get_template_part('views/canvas_image'); ?>

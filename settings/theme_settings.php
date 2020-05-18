@@ -16,22 +16,6 @@ function LUCILLE_SWP_setup_admin_menus()
 }
 add_action("admin_menu", "LUCILLE_SWP_setup_admin_menus");
 
-/*add theme settings to admin bar*/
-function ARTEMIS_SWP_add_settings_to_adminbar($admin_bar) {
-
-	$admin_bar->add_menu( 
-		array(
-        'id'    => 'lucille-settings',
-        'title' => esc_html__("Lucille Settings", "lucille"),
-        'href'  => admin_url( 'themes.php?page=lucille_menu_page'),
-        'meta'  => array(
-            'title' => esc_html__("Go To Lucille Settings", "lucille")
-        	)
-    	)
-	);
-}
-add_action('admin_bar_menu', 'ARTEMIS_SWP_add_settings_to_adminbar', 9999);
-
 function LUCILLE_SWP_option_page_settings()
 {
 ?>  
@@ -65,13 +49,11 @@ function LUCILLE_SWP_option_page_settings()
 				$general_options_class = $active_tab == 'general_options' ? 'nav-tab-active' : '';
 				$social_options_class = $active_tab == 'social_options' ? 'nav-tab-active' : '';
 				$footer_options_class = $active_tab == 'footer_options' ? 'nav-tab-active' : '';
-				$contact_options_class = $active_tab == 'contact_options' ? 'nav-tab-active' : '';
 				$fonts_options_class = $active_tab == 'fonts_options' ? 'nav-tab-active' : '';
 			?>
 			<a href="?page=lucille_menu_page&tab=general_options" class="nav-tab <?php echo esc_attr($general_options_class); ?>">General Options</a>
 			<a href="?page=lucille_menu_page&tab=social_options" class="nav-tab <?php echo esc_attr($social_options_class); ?>">Social Options</a>  
 			<a href="?page=lucille_menu_page&tab=footer_options" class="nav-tab <?php echo esc_attr($footer_options_class); ?>">Footer Options</a>  
-			<a href="?page=lucille_menu_page&tab=contact_options" class="nav-tab <?php echo esc_attr($contact_options_class); ?>">Contact Data</a>  
 			<a href="?page=lucille_menu_page&tab=fonts_options" class="nav-tab <?php echo esc_attr($fonts_options_class); ?>">Fonts</a>
 		</h2> 		
   
@@ -87,9 +69,6 @@ function LUCILLE_SWP_option_page_settings()
 				} elseif ($active_tab == 'footer_options') {
 					settings_fields( 'lucille_theme_footer_options'); 
 					do_settings_sections( 'lucille_theme_footer_options');
-				} elseif ($active_tab == 'contact_options') {
-					settings_fields( 'lucille_theme_contact_options'); 
-					do_settings_sections( 'lucille_theme_contact_options');
 				} elseif ($active_tab == 'fonts_options') {
 					settings_fields( 'lucille_theme_fonts_options'); 
 					do_settings_sections( 'lucille_theme_fonts_options');
@@ -132,13 +111,6 @@ function LUCILLE_SWP_initialize_theme_options() {
 			'title'				=> esc_html__('Footer Options', 'lucille'),
 			'callback'			=> 'LUCILLE_SWP_footer_options_callback',
 			'sanitize_callback'	=> 'LUCILLE_SWP_sanitize_footer_options'
-		),
-		array (
-			'option_name'		=> 'lucille_theme_contact_options',
-			'section_id'		=> 'lucille_contact_settings_section',
-			'title'				=> esc_html__('Contact Options', 'lucille'),
-			'callback'			=> 'LUCILLE_SWP_contact_options_callback',
-			'sanitize_callback'	=> 'LUCILLE_SWP_sanitize_contact_options'
 		),
 		array (
 			'option_name'		=> 'lucille_theme_fonts_options',
@@ -188,21 +160,18 @@ function LUCILLE_SWP_initialize_theme_options() {
 	}
 }
 
-/*
-	Callbacks that render the description for each tab
-*/
 function LUCILLE_SWP_general_options_callback() {
-?>
-	<p>
+	?>
+    <p>
 		<?php echo esc_html__('Setup custom logo and favicon.', 'lucille'); ?>
-	</p>
-<?php	
+    </p>
+	<?php
 	/*print theme settings*/
 	if (LC_SWP_PRINT_SETTINGS) {
 		$general = get_option('lucille_theme_general_options');
-		
+
 		?>
-		<pre>lucille_theme_general_options:
+        <pre>lucille_theme_general_options:
 			<?php echo (json_encode($general)); ?>
 		</pre>
 		<?php
@@ -225,14 +194,6 @@ function LUCILLE_SWP_footer_options_callback() {
 	<?php
 }
 
-function LUCILLE_SWP_contact_options_callback() {
-	?>
-	<p>
-		<?php echo esc_html__('Please insert your contact information.', 'lucille'); ?>
-	</p>
-	<?php
-}
-
 function LUCILLE_SWP_fonts_options_callback() {
 	?>
 	<p>
@@ -251,11 +212,6 @@ function LUCILLE_SWP_add_settings_fields() {
 			'id'		=> 'lc_custom_logo',
 			'label'		=> esc_html__('Upload logo image', 'lucille'),
 			'callback'	=> 'LUCILLE_SWP_logo_select_cbk'
-		),
-		array (
-			'id'		=> 'lc_custom_favicon',
-			'label'		=> esc_html__('Upload custom favicon', 'lucille'),
-			'callback'	=> 'Lucille_SWP_favicon_select_cbk'
 		),
 		array (
 			'id'		=> 'lc_custom_innner_bg_image',
@@ -331,11 +287,6 @@ function LUCILLE_SWP_add_settings_fields() {
 			'id'		=> 'lc_shop_has_sidebar',
 			'label'		=> esc_html__('Shop pages have sidebar', 'lucille'),
 			'callback'	=> 'LUCILLE_SWP_shop_has_sidebar_cbk'
-		),
-		array (
-			'id'		=> 'lc_enable_cpt_comments',
-			'label'		=> esc_html__('Enable comments on custom post types', 'lucille'),
-			'callback'	=> 'LUCILLE_SWP_lc_enable_cpt_comments_cbk'
 		),
 		array (
 			'id'		=> 'lc_show_img_captions',
@@ -513,46 +464,6 @@ function LUCILLE_SWP_add_settings_fields() {
 	    );
 	}
 
-	/*contact options array*/
-	$contact_settings = array(
-		array(
-			'id'		=> 'lc_contact_address',
-			'label'		=> esc_html__('Contact address', 'lucille'),
-			'callback'	=> 'LUCILLE_SWP_lc_contact_address_cbk'		
-		),
-		array(
-			'id'		=> 'lc_contact_phone',
-			'label'		=> esc_html__('Contact phone', 'lucille'),
-			'callback'	=> 'LUCILLE_SWP_lc_contact_phone_cbk'		
-		),
-		array(
-			'id'		=> 'lc_contact_phone2',
-			'label'		=> esc_html__('Second contact phone', 'lucille'),
-			'callback'	=> 'LUCILLE_SWP_lc_contact_phone2_cbk'		
-		),
-
-		array(
-			'id'		=> 'lc_contact_fax',
-			'label'		=> esc_html__('Contact Fax Number', 'lucille'),
-			'callback'	=> 'LUCILLE_SWP_lc_contact_fax_cbk'		
-		),
-		array(
-			'id'		=> 'lc_contact_email',
-			'label'		=> esc_html__('Contact E-mail', 'lucille'),
-			'callback'	=> 'LUCILLE_SWP_lc_contact_email_cbk'		
-		)	
-	);
-
-	foreach($contact_settings as $contact_setting) {
-	    add_settings_field(   
-	        $contact_setting['id'],         		// ID used to identify the field throughout the theme                
-	        $contact_setting['label'],              // The label to the left of the option interface element            
-	        $contact_setting['callback'], 			// The name of the function responsible for rendering the option interface
-	        'lucille_theme_contact_options',   		// The page on which this option will be displayed  
-	        'lucille_contact_settings_section'    	// The name of the section to which this field belongs  
-	    );
-	}
-
 	/*fonts options array*/
 	$fonts_settings = array(
 		array(
@@ -593,8 +504,7 @@ function  LUCILLE_SWP_sanitize_general_options($input) {
 
 	foreach($input as $key => $val) {
 		if(isset($input[$key])) {
-			if (($key == 'lc_custom_favicon') || 
-				($key == 'lc_custom_logo')) {
+			if ($key == 'lc_custom_logo') {
 				$output[$key] = esc_url_raw(trim( $input[$key] ) );
 			} else {
 				$output[$key] =  esc_html(trim($input[$key])) ;	
@@ -645,22 +555,6 @@ function LUCILLE_SWP_sanitize_footer_options($input) {
 	return apply_filters('LUCILLE_SWP_sanitize_footer_options', $output, $input);
 }
 
-function LUCILLE_SWP_sanitize_contact_options($input) {
-	$output = array();
-
-	foreach($input as $key => $val) {
-		if(isset($input[$key])) {
-			if ($key == 'lc_contact_email') {
-				$output[$key] = sanitize_email(trim($input[$key]));	
-			} else {
-				$output[$key] =  esc_html(trim($input[$key]));	
-			}
-		}
-	}
-
-	return apply_filters('LUCILLE_SWP_sanitize_contact_options', $output, $input);
-}
-
 function LUCILLE_SWP_sanitize_fonts_options($input) {
 	$output = array();
 
@@ -691,37 +585,6 @@ function LUCILLE_SWP_logo_select_cbk() {
 		<img class="lc_swp_setting_preview_logo" src="<?php echo esc_url($logo_url); ?>">
 	</div>
 
-<?php
-}
-
-function Lucille_SWP_favicon_select_cbk() {
-	$favicon_url = LUCILLE_SWP_get_theme_option('lucille_theme_general_options', 'lc_custom_favicon');
-
-	if (function_exists('wp_site_icon')) {
-?>
-	<p class="description notice notice-success">
-		<?php echo esc_html__('Hi, your WordPress version is higher than 4.3 and allows you to use the built in WordPress functionality related to custom favicon.', 'lucille'); ?>
-		<br>
-		<?php echo esc_html__('Please go to Appearance - Customize - Site Identity and choose the favicon from that place.', 'lucille'); ?>
-		<br>
-		<?php echo esc_html__('For your WordPress version, the Upload custom favicon option will be ignored, the one from customizer will be used.', 'lucille'); ?>
-		<br>
-		<?php echo esc_html__('This option exists only for backward compatibility reasons.', 'lucille'); ?>
-	</p>
-<?php
-	}
-?>
-
-	<input id="lc_swp_favicon_upload_value" type="text" name="lucille_theme_general_options[lc_custom_favicon]" size="150" value="<?php echo esc_url($favicon_url); ?>"/>
-	<input id="lc_swp_upload_favicon_button" type="button" class="button" value="<?php echo esc_html__('Upload Favicon', 'lucille'); ?>" />
-	<input id="lc_swp_remove_favicon_button" type="button" class="button" value="<?php echo esc_html__('Remove Favicon', 'lucille'); ?>" />
-	<p class="description">
-		<?php echo esc_html__('Upload a custom favicon image.', 'lucille'); ?>
-	</p>
-
-	<div id="lc_favicon_image_preview">
-		<img class="lc_swp_setting_preview_favicon" src="<?php echo esc_url($favicon_url); ?>">
-	</div>
 <?php
 }
 
@@ -1020,131 +883,6 @@ function LUCILLE_SWP_remove_single_blog_post_meta_cbk() {
 <?php
 }
 
-function LUCILLE_SWP_shop_has_sidebar_cbk() {
-	$shop_has_sidebar = LUCILLE_SWP_get_theme_option('lucille_theme_general_options', 'lc_shop_has_sidebar');
-
-	if (empty($shop_has_sidebar)) {
-		$shop_has_sidebar = 'disabled';
-	}
-
-	$shop_has_sidebar_options = array(
-		esc_html__('Disabled - No Sidebar', 'lucille')	=> 'disabled',
-		esc_html__('Enabled - Have Sidebar', 'lucille')	=> 'enabled'
-	);
-?>
-	<select id="lc_shop_has_sidebar" name="lucille_theme_general_options[lc_shop_has_sidebar]">
-		<?php LUCILLE_SWP_render_select_options($shop_has_sidebar_options, $shop_has_sidebar); ?>
-	</select>
-	<p class="description">
-		<?php echo esc_html__('Choose to add sidebar to WooCommerce pages. Applies to shop, product category, product tag and single product pages.', 'lucille'); ?>
-	</p>
-<?php
-}
-
-function LUCILLE_SWP_lc_enable_cpt_comments_cbk() {
-	$enable_cpt_comments = LUCILLE_SWP_get_theme_option('lucille_theme_general_options', 'lc_enable_cpt_comments');
-
-	if (empty($enable_cpt_comments)) {
-		$enable_cpt_comments = 'disabled';
-	}
-
-	$enable_cpt_comments_opts = array(
-		esc_html__('Disabled - No Comments', 'lucille')	=> 'disabled',
-		esc_html__('Enabled - Have Comments', 'lucille')	=> 'enabled'
-	);
-?>
-	<select id="lc_enable_cpt_comments" name="lucille_theme_general_options[lc_enable_cpt_comments]">
-		<?php LUCILLE_SWP_render_select_options($enable_cpt_comments_opts, $enable_cpt_comments); ?>
-	</select>
-	<p class="description">
-		<?php echo esc_html__('Choose to enable comments at the end of event, album, gallery and video post.', 'lucille'); ?>
-	</p>
-<?php
-}
-
-function LUCILLE_SWP_lc_show_img_captions_cbk() {
-	$show_img_caption = LUCILLE_SWP_get_theme_option('lucille_theme_general_options', 'lc_show_img_caption');
-
-	if (empty($show_img_caption)) {
-		$show_img_caption = 'disabled';
-	}
-
-	$show_img_caption_opts = array(
-		esc_html__('Disabled - No Caption', 'lucille')	=> 'disabled',
-		esc_html__('Enabled - Show Caption', 'lucille')	=> 'enabled'
-	);
-?>
-	<select id="lc_show_img_caption" name="lucille_theme_general_options[lc_show_img_caption]">
-		<?php LUCILLE_SWP_render_select_options($show_img_caption_opts, $show_img_caption); ?>
-	</select>
-	<p class="description">
-		<?php echo esc_html__('Show image caption on hover - available for single photo gallery page.', 'lucille'); ?>
-	</p>
-<?php	
-}
-
-function LUCILLE_SWP_lc_show_cpt_tax_cbk() {
-	$show_cpt_tax = LUCILLE_SWP_get_theme_option('lucille_theme_general_options', 'lc_show_cpt_tax');
-
-	if (empty($show_cpt_tax)) {
-		$show_cpt_tax = 'disabled';
-	}
-
-	$show_cpt_tax_opts = array(
-		esc_html__('Disabled - No Categories', 'lucille')	=> 'disabled',
-		esc_html__('Enabled - Show Categories', 'lucille')	=> 'enabled'
-	);
-?>
-	<select id="lc_show_cpt_tax" name="lucille_theme_general_options[lc_show_cpt_tax]">
-		<?php LUCILLE_SWP_render_select_options($show_cpt_tax_opts, $show_cpt_tax); ?>
-	</select>
-	<p class="description">
-		<?php echo esc_html__('Show custom post types categories on top of archive pages like Videos/Discography/Events/Photo Albums.', 'lucille'); ?>
-	</p>
-<?php
-}
-
-function LUCILLE_SWP_lc_show_album_date_cbk() {
-	$show_album_date = LUCILLE_SWP_get_theme_option('lucille_theme_general_options', 'lc_show_album_date');
-
-	if (empty($show_album_date)) {
-		$show_album_date = 'full_date';
-	}
-
-	$show_album_date_opts = array(
-		esc_html__('Full Date', 'lucille')	=> 'full_date',
-		esc_html__('Year Only', 'lucille')	=> 'year'
-	);
-?>
-	<select id="lc_show_album_date" name="lucille_theme_general_options[lc_show_album_date]">
-		<?php LUCILLE_SWP_render_select_options($show_album_date_opts, $show_album_date); ?>
-	</select>
-	<p class="description">
-		<?php echo esc_html__('Choose to show only the year part for the music album date.', 'lucille'); ?>
-	</p>
-<?php
-}
-
-function LUCILLE_SWP_swp_show_download_button_cbk() {
-	$show_album_download = LUCILLE_SWP_get_theme_option('lucille_theme_general_options', 'swp_show_download_button');
-
-	if (empty($show_album_download)) {
-		$show_album_download = 'disabled';
-	}
-
-	$show_album_download_opts = array(
-		esc_html__('Disabled - No download button' , 'lucille')	=> 'disabled',
-		esc_html__('Enabled - Show download button', 'lucille')	=> 'enabled'
-	);
-?>
-	<select id="swp_show_download_button" name="lucille_theme_general_options[swp_show_download_button]">
-		<?php LUCILLE_SWP_render_select_options($show_album_download_opts, $show_album_download); ?>
-	</select>
-	<p class="description">
-		<?php echo esc_html__('Choose to show download button in picture preview.', 'lucille'); ?>
-	</p>
-<?php
-}
 
 /*
 	Social Options
@@ -1406,52 +1144,6 @@ function LUCILLE_SWP_copyright_bgc_cbk() {
 	</p>
 <?php	
 }
-
-/*
-	Contact Options
-*/
-function LUCILLE_SWP_lc_contact_address_cbk() {
-	$contact_address = LUCILLE_SWP_get_theme_option('lucille_theme_contact_options', 'lc_contact_address');
-?>
-	<input type="text" size="200" id="lc_contact_address" name="lucille_theme_contact_options[lc_contact_address]" value="<?php echo esc_attr($contact_address); ?>" />
-<?php
-}
-
-function LUCILLE_SWP_lc_contact_phone_cbk() {
-	$contact_phone = LUCILLE_SWP_get_theme_option('lucille_theme_contact_options', 'lc_contact_phone');
-?>
-	<input type="text" size="50" id="lc_contact_phone" name="lucille_theme_contact_options[lc_contact_phone]" value="<?php echo esc_attr($contact_phone); ?>" />
-<?php	
-}
-
-function LUCILLE_SWP_lc_contact_phone2_cbk() {
-	$contact_phone = LUCILLE_SWP_get_theme_option('lucille_theme_contact_options', 'lc_contact_phone2');
-?>
-	<input type="text" size="50" id="lc_contact_phone2" name="lucille_theme_contact_options[lc_contact_phone2]" value="<?php echo esc_attr($contact_phone); ?>" />
-<?php	
-}
-
-function LUCILLE_SWP_lc_contact_fax_cbk() {
-	$contact_fax = LUCILLE_SWP_get_theme_option('lucille_theme_contact_options', 'lc_contact_fax');
-?>
-	<input type="text" size="50" id="lc_contact_fax" name="lucille_theme_contact_options[lc_contact_fax]" value="<?php echo esc_attr($contact_fax); ?>" />
-<?php
-}
-
-function LUCILLE_SWP_lc_contact_email_cbk() {
-	$contact_email = sanitize_email(LUCILLE_SWP_get_theme_option('lucille_theme_contact_options', 'lc_contact_email'));
-?>
-	<input type="text" size="50" id="lc_contact_email" name="lucille_theme_contact_options[lc_contact_email]" value="<?php echo esc_attr($contact_email); ?>" />
-	<p class="description">
-		<?php
-		echo esc_html__("This is the email address shown on contact page.", "lucille");
-		?> <br> <?php
-		echo esc_html__("To set the recipient email for the contact form, please go to Settings - Lucille Music Core Settings.", "lucille");
-		?>
-	</p>
-<?php
-}
-
 
 /*
 	Fonts Options

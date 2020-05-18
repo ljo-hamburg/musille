@@ -491,19 +491,6 @@ var justifiedGallery = function($) {
 
 }
 
-var ajaxVcCfResponsive = function($) {
-	if (!$(".vc_lc_contactform").length) {
-		return;
-	}
-
-	var containerWidth = $(".vc_lc_contactform").width();
-	if (containerWidth <= 768) {
-		$(".vc_lc_contactform").find(".vc_lc_element").removeClass("three_on_row");
-	} else {
-		$(".vc_lc_contactform").find(".three_on_row_layout").addClass("three_on_row");
-	}
-}
-
 var runUnslider = function($) {
 	$('.lc_reviews_slider').each(function(){
 		var slide_speed = 400;

@@ -23,41 +23,14 @@
 		$bg_image = esc_url(LUCILLE_SWP_get_footer_bg_image());
 		$color_scheme = LUCILLE_SWP_get_footer_color_scheme();
 
-		if ( is_active_sidebar('footer-sidebar-1') || 
-			is_active_sidebar('footer-sidebar-2') ||
-			is_active_sidebar( 'footer-sidebar-3') ||
-			is_active_sidebar( 'footer-sidebar-4' )) {
+		if ( is_active_sidebar('footer-sidebar')) {
 				?>
 				<div id="footer_sidebars">
 					<div id="footer_sidebars_inner" class="clearfix <?php echo esc_attr($header_width); ?>">
 						<div id="footer_sidebar1" class="lc_footer_sidebar <?php echo esc_attr($color_scheme); ?>">
 							<?php 
-						 	if (is_active_sidebar('footer-sidebar-1')) {
-						 		dynamic_sidebar('footer-sidebar-1');
-						 	}
-							?>
-						</div>
-
-						<div id="footer_sidebar2" class="lc_footer_sidebar <?php echo esc_attr($color_scheme); ?>">
-							<?php 
-						 	if (is_active_sidebar('footer-sidebar-2')) {
-						 		dynamic_sidebar('footer-sidebar-2');
-						 	}
-							?>
-						</div>
-
-						<div id="footer_sidebar3" class="lc_footer_sidebar <?php echo esc_attr($color_scheme); ?>">
-							<?php 
-						 	if (is_active_sidebar('footer-sidebar-3')) {
-						 		dynamic_sidebar('footer-sidebar-3');
-						 	}
-							?>
-						</div>
-
-						<div id="footer_sidebar4" class="lc_footer_sidebar <?php echo esc_attr($color_scheme); ?>">
-							<?php 
-						 	if (is_active_sidebar('footer-sidebar-4')) {
-						 		dynamic_sidebar('footer-sidebar-4');
+						 	if (is_active_sidebar('footer-sidebar')) {
+						 		dynamic_sidebar('footer-sidebar');
 						 	}
 							?>
 						</div>

@@ -8,10 +8,6 @@ function LUCILLE_SWP_get_user_logo_img() {
 	return LUCILLE_SWP_get_theme_option('lucille_theme_general_options', 'lc_custom_logo');
 }
 
-function LUCILLE_SWP_get_user_favicon() {
-	return LUCILLE_SWP_get_theme_option('lucille_theme_general_options', 'lc_custom_favicon');
-}
-
 function LUCILLE_SWP_get_menu_style() {
 	$menu_style = LUCILLE_SWP_get_theme_option('lucille_theme_general_options', 'lc_menu_style');
 
@@ -144,26 +140,6 @@ function LUCILLE_SWP_keep_single_post_meta() {
 	return "enabled" == $remove_single_blog_post_meta ? false : true;
 }
 
-function LUCILLE_SWP_woo_has_sidebar() {
-	$shop_has_sidebar = LUCILLE_SWP_get_theme_option('lucille_theme_general_options', 'lc_shop_has_sidebar');
-
-	if (empty($shop_has_sidebar)) {
-		return false;
-	}
-
-	return "enabled" == $shop_has_sidebar ? true : false;
-}
-
-function LUCILLE_SWP_has_cpt_comments() {
-	$enable_cpt_comments = LUCILLE_SWP_get_theme_option('lucille_theme_general_options', 'lc_enable_cpt_comments');
-
-	if (empty($enable_cpt_comments)) {
-		return false;
-	}
-
-	return "enabled" == $enable_cpt_comments ? true : false;
-}
-
 function LUCILLE_SWP_show_img_caption() {
 	$show_img_caption = LUCILLE_SWP_get_theme_option('lucille_theme_general_options', 'lc_show_img_caption');
 
@@ -172,56 +148,6 @@ function LUCILLE_SWP_show_img_caption() {
 	}
 
 	return "enabled" == $show_img_caption ? true : false;
-}
-
-function LUCILLE_SWP_show_ctp_tax_on_archive() {
-	$show_cpt_tax = LUCILLE_SWP_get_theme_option('lucille_theme_general_options', 'lc_show_cpt_tax');
-
-	if (empty($show_cpt_tax)) {
-		return false;
-	}
-
-	return "enabled" == $show_cpt_tax ? true : false;
-}
-
-function LUCILLE_SWP_show_album_date_as_year() {
-	$show_album_date = LUCILLE_SWP_get_theme_option('lucille_theme_general_options', 'lc_show_album_date');
-
-	if (empty($show_album_date)) {
-		return false;
-	}
-
-	return "year" == $show_album_date ? true : false;
-}
-
-
-function LUCILLE_SWP_show_download_button() {
-	$show_download_button = LUCILLE_SWP_get_theme_option('lucille_theme_general_options', 'swp_show_download_button');
-
-	if (empty($show_download_button)) {
-		return false;
-	}
-
-	return "enabled" == $show_download_button ? true : false;	
-}
-
-function LUCILLE_SWP_need_woo_sidebar_on_this_page() {
-	if (!LUCILLE_SWP_is_woocommerce_active()) {
-		return false;
-	}
-
-	if (!LUCILLE_SWP_woo_has_sidebar()) {
-		return false;
-	}
-
-	if (is_shop() || 
-		is_product_category() || 
-		is_product_tag() || 
-		is_product()) {
-		return LUCILLE_SWP_woo_has_sidebar();
-	}
-
-	return false;
 }
 
 function LUCILLE_SWP_get_available_social_profiles() {
@@ -319,31 +245,6 @@ function LUCILLE_SWP_get_post_bg_image($post_id) {
 
 function LUCILLE_SWP_get_post_overlay_color($post_id) {
 	return get_post_meta($post_id, 'lc_swp_meta_page_overlay_color', true);
-}
-
-function LUCILLE_SWP_get_contact_address() 
-{
-	return esc_html(LUCILLE_SWP_get_theme_option('lucille_theme_contact_options', 'lc_contact_address'));
-}
-
-function LUCILLE_SWP_get_contact_email() 
-{
-	return sanitize_email(LUCILLE_SWP_get_theme_option('lucille_theme_contact_options', 'lc_contact_email'));
-}
-
-function LUCILLE_SWP_get_contact_phone() 
-{
-	return esc_html(LUCILLE_SWP_get_theme_option('lucille_theme_contact_options', 'lc_contact_phone'));
-}
-
-function LUCILLE_SWP_get_2nd_contact_phone() 
-{
-	return esc_html(LUCILLE_SWP_get_theme_option('lucille_theme_contact_options', 'lc_contact_phone2'));
-}
-
-function LUCILLE_SWP_get_contact_fax() 
-{
-	return esc_html(LUCILLE_SWP_get_theme_option('lucille_theme_contact_options', 'lc_contact_fax'));
 }
 
 function LUCILLE_SWP_use_default_fonts() {

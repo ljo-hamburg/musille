@@ -1,5 +1,7 @@
 <?php
 
+require_once(get_template_directory()."/lmc/lucille-music-core.php");
+
 /*
 	Load theme textdomain, editor style, auto feed links, custom background support
 	Load the main stylesheet - style.css
@@ -61,39 +63,6 @@ require_once(get_template_directory()."/core/enqueue_scripts.php");
 	Register theme sidebars
 */
 require_once(get_template_directory()."/core/register_theme_sidebars.php");
-
-
-/*
-	Comments template function used as callback in wp_list_comments() call in comments.php
-	Comment form defaults
-*/
-require_once(get_template_directory()."/core/comments_template_cbk.php");
-/*load comment reply - moved from header.php*/
-if (is_singular()) {
-	 wp_enqueue_script('comment-reply');
-}
-
-/*
-	WooCommerce related functionality
-*/
-require_once(get_template_directory()."/core/woocommerce_support.php");
-//TODO: check JAMSESSION_SWP_list_custom_terms_with_links() and JAMSESSION_SWP_add_events_query_var()
-
-
-/*
-	Checks if exists and install the required plugins that are coming with the theme
-*/
-require_once(get_template_directory()."/core/install_required_plugins.php");
-
-/* Integrating Envato WordPress Toolkit plugin to the theme - DEPRECATED*/
-//require_once(get_template_directory()."/core/load_envato_toolkit.php");
-
-/*
-	wp_ajax actions
-	deleted since it was not needed in vers 1.0.1
-	to be added once again if needed
-	//require_once(get_template_directory()."/core/ajax_binding.php");
-*/
 
 
 /*

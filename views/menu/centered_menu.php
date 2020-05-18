@@ -70,20 +70,6 @@
 				<?php } ?>
 
 				<?php 
-				if (LUCILLE_SWP_is_woocommerce_active()) {
-				?>
-
-					<div class="classic_header_icon centered_menu shop_icon">
-						<a class="cart-contents" href="<?php echo wc_get_cart_url(); ?>" title="<?php esc_html__('View your shopping cart', 'lucille'); ?>">
-							<i class="fa fa-shopping-bag" aria-hidden="true"></i>
-							<span class="cart-contents-count lc_swp_vibrant_bgc">
-								<?php echo WC()->cart->get_cart_contents_count(); ?>
-							</span>
-						</a>
-					</div>
-					
-				<?php
-				}
 				?>
 			</div>
 		</div>

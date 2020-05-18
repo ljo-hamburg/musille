@@ -3,7 +3,7 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<?php get_template_part('views/favicon'); ?>
+	<?php wp_site_icon(); ?>
 
 	<?php add_thickbox(); ?>
 	<?php wp_head(); ?>
@@ -27,12 +27,4 @@
 		?>
 
 		<div id="lc_swp_content" data-minheight="200" class="<?php echo esc_attr($color_scheme); ?>">
-			<?php
-				/*show boxed container for woo pages*/
-				if (LUCILLE_SWP_need_woo_sidebar_on_this_page()) {
-					?>
-					<div class="lc_content_full lc_swp_boxed lc_basic_content_padding">
-					<?php
-				}
-			?>
 		

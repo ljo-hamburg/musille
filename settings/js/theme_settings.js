@@ -3,7 +3,6 @@ jQuery(document).ready(function($) {
 
 	var meta_image_frame;
 	handleUploadLogo($, meta_image_frame);
-	handleUploadFavicon($, meta_image_frame);
 	handleUploadInnerBgImage($, meta_image_frame);
 	handleUploadFooterBgImage($, meta_image_frame);
 	initializeAlphaColorPicker($);
@@ -33,18 +32,6 @@ function handleUploadInnerBgImage($, meta_image_frame) {
 		$('#lc_innner_bg_image_preview img').attr('src', '');
 		$('#lc_swp_innner_bg_image_upload_value').val('');
 	});
-}
-
-function handleUploadFavicon($, meta_image_frame) {
-    $('#lc_swp_upload_favicon_button').click(function(e) {
-        e.preventDefault();
- 		openAndHandleMedia($, meta_image_frame, '#lc_swp_favicon_upload_value', '#lc_favicon_image_preview img', "Choose Custom Favicon", "Use this image as favicon");
-    });
-
-	$('#lc_swp_remove_favicon_button').click(function(){
-		$('#lc_favicon_image_preview img').attr('src', '');
-		$('#lc_swp_favicon_upload_value').val('');
-	})
 }
 
 function handleUploadLogo($, meta_image_frame) {

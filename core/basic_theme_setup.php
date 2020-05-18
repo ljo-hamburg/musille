@@ -13,7 +13,7 @@ if (!function_exists('LUCILLE_SWP_setup')) {
 		// add editor style
 		add_editor_style('custom-editor-style.css');
 		
-		// enables post and comment RSS feed links to head
+		// enables post RSS feed links to head
 		add_theme_support('automatic-feed-links');
 
 		/*

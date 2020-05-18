@@ -27,9 +27,6 @@
 		$bg_image = get_template_directory_uri().'/core/img/404NotFound.jpg';
 		$overlay = 'rgba(0,0,0, 0.8)';
 	}
-	if (LUCILLE_SWP_is_woocommerce_special_page()) {
-		$color_theme = LUCILLE_SWP_get_default_color_scheme();
-	}
 	/*for product category, use the category image as header image*/
 	if (function_exists("is_product_category")) {
 		if (is_product_category()) {
@@ -166,11 +163,5 @@
 	</div>
 
 	<?php get_template_part('views/utils/cpt_post_meta'); ?>
-	
-	<?php
-	if (LUCILLE_SWP_show_ctp_tax_on_archive()) { 
-		get_template_part('views/utils/cpt_archive_meta');
-	}
-	?>
-	
+
 </div>

@@ -53,24 +53,6 @@
 		</div>
 
 		<div class="classic_header_icons">
-			<?php 
-			//if (in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
-			if (LUCILLE_SWP_is_woocommerce_active()) {
-			?>
-
-				<div class="classic_header_icon">
-					<a class="cart-contents" href="<?php echo wc_get_cart_url(); ?>" title="<?php esc_html__('View your shopping cart', 'lucille'); ?>">
-						<i class="fa fa-shopping-bag" aria-hidden="true"></i>
-						<span class="cart-contents-count lc_swp_vibrant_bgc">
-							<?php echo WC()->cart->get_cart_contents_count(); ?>
-						</span>
-					</a>
-				</div>
-				
-			<?php
-			}
-			?>
-
 			<?php if (LUCILLE_SWP_show_search_on_menu()) { ?>
 			<div class="classic_header_icon lc_search trigger_global_search vibrant_hover transition4">
 				<span class="lnr lnr-magnifier"></span>
