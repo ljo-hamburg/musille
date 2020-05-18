@@ -1,0 +1,28 @@
+.unslider{overflow:auto;margin:0;padding:0}.unslider-wrap{position:relative}.unslider-wrap.unslider-carousel>li{float:left}.unslider-vertical>ul{height:100%}.unslider-vertical li{float:none;width:100%}.unslider-fade{position:relative}.unslider-fade .unslider-wrap li{position:absolute;left:0;top:0;right:0;z-index:8}.unslider-fade .unslider-wrap li.unslider-active{z-index:10}.unslider li,.unslider ol,.unslider ul{list-style:none;margin:0;padding:0;border:none}.unslider-arrow{display: none} .unslider-arrow.next{margin-left: 15px;} .unslider-arrow.prev{margin-left: -15px;}
+/**
+Unslider dots below
+ */
+.unslider-nav ol {
+  list-style: none;
+  text-align: center;
+}
+.unslider-nav ol li {
+display: inline-block;
+width: 8px;
+height: 8px;
+margin: 0 4px;
+background: #fff;
+border-radius: 5px;
+overflow: hidden;
+text-indent: -999em;
+border: 1px solid #fff;
+cursor: pointer;
+}
+.unslider-nav ol li.unslider-active {
+  background: #fff;
+  cursor: default;
+}
+/*custom lucille*/
+.unslider-nav {
+	margin-top: 25px;
+}

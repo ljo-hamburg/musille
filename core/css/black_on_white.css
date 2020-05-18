@@ -1,0 +1,163 @@
+body, input, textarea, 
+.vc_row,
+.single_event_list a, .single_event_list a:hover,
+.vc_row .single_event_list a,
+.woocommerce ul.products li.product .price del,
+.woocommerce div.product p.price del, 
+.woocommerce div.product span.price del,
+.woocommerce-ordering select,
+.woocommerce .woocommerce-ordering select option,
+h4.section_subtitle,
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active a  {
+	color: #4e4e4e;
+}
+
+input::-webkit-input-placeholder, 
+textarea::-webkit-input-placeholder {
+	color: #7b7b7b;
+}
+
+#lc_global_search input, #lc_global_search button, .close_search_form, .swp_img_caption, .single_artist_item:hover .artist_title {
+	color: #fff;
+}
+
+blockquote, a, .lc_button a:hover, .woocommerce a.button:hover, button.single_add_to_cart_button:hover, #commentform input#submit, input.lc_button, 
+.vc_row input.lc_button,
+.woocommerce a.button, .woocommerce a.button.alt, button.single_add_to_cart_button, 
+h1, h2, h3, h4, h5, h6, 
+.vc_row h1, .vc_row h2, .vc_row  h3, 
+.vc_row  h4, .vc_row  h5, .vc_row h6,
+thead, .single_event_list:hover a, .vc_row .single_event_list:hover a,
+.eventlist_month, .vc_row .eventlist_month,
+.woocommerce div.product .woocommerce-tabs ul.tabs li.active a,
+.woocommerce div.product .woocommerce-tabs ul.tabs li a:hover,
+.woocommerce #respond input#submit, .woocommerce #respond input#submit:hover,
+input.button, input.button:hover, .woocommerce input.button,  .woocommerce input.button:hover,
+input[type="submit"], .wave_player_entry:hover, .wave_player_entry.now_playing, .artist_name, .artist_nickname, .artist_nickname:hover, .artist_social,
+.woocommerce button.button.alt:hover, .swp_events_subscribe a, .swp_events_subscribe a:hover,
+.swp_event_scd_single_cat:hover {
+    color: #232323;
+}
+
+h1, h2, h3, h4, h5, h6,
+#respond h3, .lc_share_item_text, 
+h2.lc_post_title, 
+h3.contact_section_head,
+.page_not_found h3,
+.heading_area_subtitle.title_transparent_color h2,
+.heading_area_subtitle.title_full_color h2, .lc_view_more {
+	font-weight: 400;
+}
+.lc_blog_masonry_brick h2.lc_post_title, h3.album_heading {
+	font-weight: 300;
+}
+blockquote, .meta_entry.lc_cpt_category a {
+	font-weight: 600;
+}
+blockquote i.fa {
+	opacity: 0.3;
+}
+
+.eventlist_day {
+	opacity: 0.2;
+}
+
+
+.lc_back_to_top_btn,
+#commentform textarea,  input#author,  input#email,  input#url,
+input.lucille_cf_input,  textarea.lucille_cf_input, 
+.wpcf7-form-control-wrap input, .wpcf7-form-control-wrap textarea,
+li.single_event_list,
+.woocommerce-ordering select,
+.woocommerce .quantity .qty,
+div.product .woocommerce-tabs ul.tabs:before,
+.woocommerce-message,
+.woocommerce table,  .woocommerce th, .woocommerce td,
+.woocommerce-cart table.cart td.actions .coupon .input-text,
+.woocommerce-billing-fields input,
+.woocommerce form .form-row.woocommerce-validated input.input-text,  #order_comments_field textarea {
+	border-color: #b7b7b7 !important;
+}
+
+.lc_back_to_top_btn:hover > i {
+	color: #a7a7a7;
+}
+
+.lc_post_meta, .lc_post_meta a {
+	color: #757575;
+}
+
+.post_item.no_thumbnail .lc_post_meta,
+.post_item.no_thumbnail .lc_post_meta a {
+	color: #484848;
+}
+
+.lc_blog_masonry_brick.has_thumbnail .lc_post_meta, .lc_blog_masonry_brick.has_thumbnail .lc_post_meta a,
+.lc_blog_masonry_brick.has_thumbnail .lc_post_excerpt {
+	color: #cbcbcb;
+}
+
+.lc_blog_masonry_brick a h2 {
+	color: #f9f9f9;
+}
+
+
+.post_item.lc_blog_masonry_brick.no_thumbnail, .gallery_brick_overlay {
+	background-color: #1d1d1d;
+}
+
+.single_track {
+	background-color: #222;
+}
+
+.lnwidtget_no_featured_img {
+	background-color: #151515;
+}
+
+#commentform input#submit:hover,  input.lc_button:hover, .lc_button a:hover, .lc_button:hover > a, 
+.woocommerce a.button:hover, .woocommerce ul.products li.product:hover > a.button,
+input.button:hover,
+.album_heading, .woocommerce button.button.alt, .woocommerce button.button, h3.album_heading  {
+	color: #ffffff;
+}
+.lc_blog_masonry_container .lc_button {
+	border-color: #9c9c9c;
+}
+.lc_blog_masonry_container .lc_button a {
+	color: #dcdcdc;
+}
+
+.track_name, .lc_blog_masonry_brick.no_thumbnail .lc_post_excerpt   {
+	color: #7b7b7b;
+}
+
+
+.post_item.standard_blog_item.sticky {
+	padding: 5px 25px 25px;
+    background-color: #b7b7b7;
+    border-radius: 3px;
+}
+
+/*white on black overwrites default*/
+.white_on_black, .white_on_black h4.section_subtitle {
+	color: #7b7b7b;
+}
+
+.white_on_black h1, .white_on_black h2, .white_on_black h3, .white_on_black h4, .white_on_black h5, .white_on_black h6,
+.white_on_black a, .white_on_black input[type="submit"],
+.white_on_black .single_event_list:hover a, .white_on_black .vc_row .single_event_list:hover a, .white_on_black .eventlist_month,
+.white_on_black .wave_player_entry.now_playing {
+	color: #dcdcdc;
+}
+
+.white_on_black .lc_view_more, .white_on_black h4.section_subtitle {
+	font-weight: 300;
+}
+
+.white_on_black input.lucille_cf_input, .white_on_black li.single_event_list, .white_on_black textarea.lucille_cf_input {
+	border-color: #2b2b2b !important;
+}
+
+.white_on_black .lc_button, .white_on_black input[type="submit"] {
+	border-color: #9c9c9c;
+}

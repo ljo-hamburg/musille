@@ -1,0 +1,17 @@
+body, #heading_area.have_subtitle h1.title_full_color, #heading_area h1.title_transparent_color, 
+h3#comments-title,
+.woocommerce ul.products li.product h3,
+h2.section_title, h5.lc_reviewer_nam, textarea {
+	font-family: 'Open Sans', sans-serif;
+}
+
+#logo, #mobile_logo, #heading_area h1, .heading_area_subtitle.title_full_color h2,
+input[type="submit"],
+.heading_area_subtitle.title_transparent_color h2,
+h3.footer-widget-title, h3.widgettitle,
+.lc_share_item_text, .lb-number, .lc_button, .woocommerce a.button, input.button, .woocommerce input.button, button.single_add_to_cart_button, h2.lc_post_title,
+.page_navigation,
+.eventlist_month, .emphasize_first .event_location, .emphasize_first .event_venue, .emphasize_first .event_buy, .lc_view_more, 
+h1, h2, h3, h4, h5, h6, .wave_song_action, .artist_nickname, .swp_lightbox_downbutton {
+	font-family: 'Oswald', sans-serif;
+}
