@@ -1,0 +1,32 @@
+{
+  "name": "ljo-wordpress-theme",
+  "version": "0.1.0",
+  "description": "The Wordpress Theme for the LJO Hamburg.",
+  "scripts": {
+    "clean": "gulp clean",
+    "build": "gulp build",
+    "lint:php": "./vendor/bin/phpcs functions.php includes templates"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ljo-hamburg/wordpress-theme.git"
+  },
+  "keywords": [
+    "wordpress",
+    "orchestra"
+  ],
+  "author": "Kim Wittenburg",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/ljo-hamburg/wordpress-theme/issues"
+  },
+  "homepage": "https://github.com/ljo-hamburg/wordpress-theme#readme",
+  "devDependencies": {
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "prettier": "^2.0.5"
+  }
+}

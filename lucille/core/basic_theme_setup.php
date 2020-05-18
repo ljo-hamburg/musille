@@ -10,9 +10,6 @@ if (!function_exists('LUCILLE_SWP_setup')) {
 			load_theme_textdomain('lucille', get_template_directory().'/languages');
 		}
 
-		// add editor style
-		add_editor_style('custom-editor-style.css');
-		
 		// enables post RSS feed links to head
 		add_theme_support('automatic-feed-links');
 
@@ -41,18 +38,15 @@ if (!function_exists('LUCILLE_SWP_setup')) {
 		);
 		
 		// custom background support
-		global $wp_version;
-		if (version_compare($wp_version, '3.4', '>=')) {
-			$defaults = array(
-				'default-color'          => '151515',
-				'default-image'          => '',
-				'wp-head-callback'       => 'LUCILLE_SWP_custom_background_cb',
-				'admin-head-callback'    => '',
-				'admin-preview-callback' => ''
-			);
-			
-			add_theme_support('custom-background',  $defaults); 
-		}	
+        $defaults = array(
+            'default-color'          => '151515',
+            'default-image'          => '',
+            'wp-head-callback'       => 'LUCILLE_SWP_custom_background_cb',
+            'admin-head-callback'    => '',
+            'admin-preview-callback' => ''
+        );
+
+        add_theme_support('custom-background',  $defaults);
 
 	}
 }
@@ -60,44 +54,13 @@ add_action('after_setup_theme', 'LUCILLE_SWP_setup');
 
 
 function LUCILLE_SWP_custom_background_cb() {
-        $background = get_background_image();  
-        $color = get_background_color();  
+        $color = get_background_color();
       
-        if (!$background && !$color) {
-        	return;
-        }
-      
-        $style = $color ? "background-color: #$color;" : '';  
-      
-        if ($background) {  
-            $image = " background-image: url('$background');";  
-            $repeat = get_theme_mod('background_repeat', 'repeat');  
-      
-            if (! in_array($repeat, array('no-repeat', 'repeat-x', 'repeat-y', 'repeat'))) {
-                $repeat = 'repeat';  
-            }
-      
-            $repeat = " background-repeat: $repeat;";  
-            $position = get_theme_mod('background_position_x', 'left');  
-            if (! in_array($position, array('center', 'right', 'left'))) {
-                $position = 'left';  
-            }
-      
-            $position = " background-position: top $position;";  
-            $attachment = get_theme_mod('background_attachment', 'scroll');  
-            if (! in_array($attachment, array('fixed', 'scroll'))) {
-                $attachment = 'scroll';  
-            }
-      
-            $attachment = " background-attachment: $attachment;";  
-            $style .= $image . $repeat . $position . $attachment;  
-        }
-
-		?>  
-		<style type="text/css">  
-			body, .woocommerce .woocommerce-ordering select option { <?php echo trim($style); ?> }  
-		</style>  
-		<?php  	
+        if ($color) { ?>
+            <style type="text/css">
+                body { <?php echo trim($color ? "background-color: #$color;" : ''); ?> }
+            </style>
+        <?php }
 }
 
 /*

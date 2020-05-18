@@ -1,0 +1,26 @@
+{
+  "name": "ljo-hamburg/musille",
+  "description": "The Wordpress Theme of the LJO Hamburg.",
+  "type": "project",
+  "license": "GPL-3.0-or-later",
+  "require": {
+    "php": "^7.0",
+    "timber/timber": "^1.15"
+  },
+  "require-dev": {
+    "johnpbloch/wordpress": "^5.2",
+    "squizlabs/php_codesniffer": "^3.5"
+  },
+  "version": "0.1.0",
+  "authors": [
+    {
+      "name": "Kim Wittenburg",
+      "email": "codello@wittenburg.kim"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "LJO\\Musille\\": "includes/"
+    }
+  }
+}

@@ -15,11 +15,6 @@ function LUCILLE_SWP_plugin_load_scripts_and_styles() {
 	/*generic admin css*/
 	wp_register_style( 'js_backend_css', plugins_url('/css/backend_style.css', __FILE__));
 	wp_enqueue_style( 'js_backend_css');
-
-	/*alpha color picker*/
-	wp_register_script( 'alpha_color_picker', plugins_url('/js/alpha-color-picker.js', __FILE__), array('jquery', 'wp-color-picker'), '', true);
-	wp_enqueue_script( 'alpha_color_picker');
-	wp_enqueue_style( 'alpha_color_picker', plugins_url('/css/alpha-color-picker.css', __FILE__ ), array('wp-color-picker'));
 }
 add_action( 'admin_enqueue_scripts', 'LUCILLE_SWP_plugin_load_scripts_and_styles');
 
