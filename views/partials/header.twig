@@ -1,0 +1,14 @@
+<header>
+  {# TODO: Support multiple heading styles. #}
+  <div>
+    <h1>{{ post.title }}</h1>
+    <div>{{ post.subtitle }}</div>
+    {% if is_single %}
+      <div class="meta">
+        <span>{{ post.date }}</span>
+        <span>{{ __('by', 'musille') }} {{ post.author }}</span>
+        <span>{{ post.category }}</span>
+      </div>
+    {% endif %}
+  </div>
+</header>

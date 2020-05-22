@@ -1,0 +1,15 @@
+{% extends "site.twig" %}
+
+{% block body %}
+  {#
+      TODO: Support Color Scheme
+      $color_scheme = LUCILLE_SWP_get_default_color_scheme();
+      <div id="lc_swp_content" data-minheight="200" class="<?php echo esc_attr($color_scheme); ?>">
+  #}
+  {% include "partials/main-menu.twig" %}
+  {% include "partials/header.twig" %}
+  <main id="content">
+    {% block content %}{% endblock %}
+  </main>
+  {% include "partials/footer.twig" %}
+{% endblock %}

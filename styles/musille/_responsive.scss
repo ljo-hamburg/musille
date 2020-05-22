@@ -1,0 +1,30 @@
+@use "sass:list";
+@use "sass:meta";
+@use "sass:map";
+
+$breakpoints: (phone: 576px, tablet: 768px, laptop: 992px, desktop: 1200px);
+@use "node_modules/include-media/dist/include-media" with ($breakpoints: $breakpoints);
+
+
+$state: default !default;
+@mixin media($conditions...) {
+  $previous: $state;
+  $state: list.nth($conditions, -1) !global;
+  @include include-media.media($conditions...) {
+    @content;
+  }
+  // stylelint-disable order/order
+  $state: $previous !global;
+  // stylelint-enable order/order
+}
+
+@function responsive($condition, $breakpoint: $state) {
+  @if meta.type-of($condition) != "map" {
+    @return $condition;
+  }
+  @if map.has-key($condition, $breakpoint) {
+    @return map.get($condition, $breakpoint);
+  } @else {
+    @return map.get($condition, default);
+  }
+}

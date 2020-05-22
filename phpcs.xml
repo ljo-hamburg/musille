@@ -1,9 +1,23 @@
 <?xml version="1.0"?>
-<ruleset>
+<ruleset name="musille">
     <rule ref="PSR12">
+        <!-- Do not enforce opening braces on the next line. -->
         <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine" />
         <exclude name="PSR2.Classes.ClassDeclaration.OpenBraceNewLine" />
     </rule>
+    <!-- Enforce opening braces on the same line. -->
     <rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie" />
     <rule ref="Generic.Classes.OpeningBraceSameLine" />
+
+    <!-- Require strict typing in each file. -->
+    <rule ref="Generic.PHP.RequireStrictTypes" />
+
+    <!-- Only permit double quotes when using string interpolation. -->
+    <rule ref="Squiz.Strings.DoubleQuoteUsage.NotRequired" />
+
+    <!-- Use short array declaration syntax. -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax.Found" />
+
+    <!-- Align subsequent assignments -->
+    <rule ref="Generic.Formatting.MultipleStatementAlignment" />
 </ruleset>

@@ -1,0 +1,15 @@
+@use "responsive" as *;
+
+$admin-bar-height: (
+  ">=783px": 32px,
+  default: 46px
+);
+
+@mixin admin-bar-fix() {
+  .admin-bar & {
+    top: responsive(wp.$admin-bar-height);
+    @include media(">=783px") {
+      top: responsive(wp.$admin-bar-height);
+    }
+  }
+}

@@ -2,6 +2,9 @@ module.exports = {
   root: true,
   env: {
     node: true,
+    browser: true,
+    jquery: true,
+    es6: true,
   },
   plugins: ["prettier"],
   parserOptions: {

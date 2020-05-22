@@ -1,0 +1,55 @@
+@mixin hamburger() {
+  margin: 8px;
+
+  input[type=checkbox] {
+    position: absolute;
+    z-index: 2;
+    width: 40px;
+    height: 32px;
+    cursor: pointer;
+    opacity: 0;
+
+    ~ span {
+      position: relative;
+
+      z-index: 1;
+      display: block;
+      width: 33px;
+      height: 4px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      background: #cdcdcd;
+      border-radius: 3px;
+
+      transform-origin: 4px 0;
+      transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+        background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+        opacity 0.55s ease;
+    }
+
+    ~ span:first-of-type {
+      transform-origin: 0% 0%;
+    }
+
+    ~ span:nth-of-type(2) {
+      transform-origin: 0% 100%;
+    }
+  }
+
+  input[type=checkbox]:checked {
+    ~ span {
+      background: #232323;
+      transform: translate(0, -1px) rotate(-45deg);
+      opacity: 1;
+    }
+
+    ~ span:nth-of-type(2) {
+      transform: rotate(0deg) scale(0.2, 0.2);
+      opacity: 0;
+    }
+
+    ~ span:nth-last-of-type(3) {
+      transform: translate(3px, -3px) rotate(45deg);
+    }
+  }
+}

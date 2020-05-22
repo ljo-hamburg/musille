@@ -4,5 +4,7 @@
  * Load the Theme via Composer Autoload.
  */
 
+declare(strict_types=1);
+
 require_once __DIR__ . '/vendor/autoload.php';
-new \LJO\Musille\MusilleTheme();
+\LJO\Musille\MusilleTheme::initialize();
