@@ -8,10 +8,9 @@
     "build": "NODE_ENV=production gulp",
     "build-dev": "NODE_ENV=development gulp",
     "lint": "npm run lint:php && npm run lint:js && npm run lint:scss",
-    "lint:php": "./vendor/bin/phpcs functions.php includes templates",
+    "lint:php": "./vendor/bin/phpcs theme includes templates",
     "lint:js": "eslint --no-error-on-unmatched-pattern scripts",
-    "lint:scss": "stylelint --allow-empty-input styles",
-    "preversion": "npm run lint"
+    "lint:scss": "stylelint --allow-empty-input styles"
   },
   "repository": {
     "type": "git",
@@ -61,6 +60,7 @@
     "prettier": "^2.0.5",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "semver": "^7.3.2",
     "stylelint": "^13.5.0",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-sass-guidelines": "^7.0.0",

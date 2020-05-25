@@ -1,5 +1,8 @@
 # Musille
 
+![Build](https://github.com/ljo-hamburg/musille/workflows/Build/badge.svg)
+![Lint](https://github.com/ljo-hamburg/musille/workflows/Lint/badge.svg)
+
 Musille is a WordPress theme used by the [LJO Hamburg](https://ljo-hamburg.de).
 
 ## Installation
@@ -19,7 +22,7 @@ Note that you **must not** use the `master` branch for installation. The master 
 
 - `release`: The latest stable release.
 - `pre-release`: The latest pre-release.
-- `testing`: The latest build corresponding to the `master` branch. Note that while you should be able to use this version of the theme it is not considered stable and may contain severe bugs. Use this only for testing purposes, never in production.
+- `testing`: The latest build corresponding to the `master` branch. Note that while you may be able to use this version of the theme it is not considered stable and may contain severe bugs. Use this only for testing purposes, never in production.
 
 ### Manual Installation
 

@@ -1,0 +1,60 @@
+name: Build
+on:
+  push:
+    branches-ignore: [release, pre-release, testing]
+    tags: ['*']
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: Build Theme
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 100
+      - name: Fetch all tags
+        if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
+        run: git fetch --depth=1 origin '+refs/tags/*:refs/tags/*'
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Set Version Number
+        id: version
+        run: |
+          PACKAGE=$(jq -r .version package.json)
+          SHA=$(git rev-parse HEAD | cut -b 1-8)
+          LAST_FULL_VERSION_TAG=$(git describe --tags --abbrev=0 --exclude "*-*" --exclude "*+*")
+          COMMITS=$(git rev-list $LAST_FULL_VERSION_TAG.. --count)
+
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            VERSION=$(npx semver -c $(git describe --tags))
+          elif [[ $GITHUB_REF == refs/heads/master ]]; then
+            VERSION="$PACKAGE-$COMMITS+$SHA"
+          elif [[ $GITHUB_REF == refs/heads/* ]]; then
+            VERSION="$PACKAGE-dev.$COMMITS+$SHA"
+          fi
+          npm version $VERSION --no-git-tag-version --allow-same-version
+          VERSION=$(jq -r .version package.json)
+          echo "::set-output name=version::$VERSION"
+          echo "::set-output name=filename::musille-$VERSION.zip"
+      - name: Install dependencies
+        run: |
+          npm ci
+          composer install --no-dev --classmap-authoritative --no-progress
+      - name: Build Theme
+        run: |
+          npm run build
+          cd build
+          zip -r9 ../$FILENAME .
+        env:
+          FILENAME: ${{ steps.version.outputs.filename }}
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.version.outputs.filename }}
+          path: build/**/*
+      - name: Test
+        run: cat "${{ github.event_path }}"
