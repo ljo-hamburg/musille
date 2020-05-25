@@ -10,7 +10,9 @@
     "lint": "npm run lint:php && npm run lint:js && npm run lint:scss",
     "lint:php": "./vendor/bin/phpcs functions.php includes templates",
     "lint:js": "eslint --no-error-on-unmatched-pattern scripts",
-    "lint:scss": "stylelint --allow-empty-input styles"
+    "lint:scss": "stylelint --allow-empty-input styles",
+    "preversion": "npm run lint",
+    "version": "./sync-version.js && composer update --lock && git add composer.json composer.lock"
   },
   "repository": {
     "type": "git",
@@ -21,7 +23,7 @@
     "music",
     "orchestra"
   ],
-  "author": "Kim Wittenburg",
+  "author": "Kim Wittenburg <codello@wittenburg.kim> (https://github.com/codello)",
   "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/ljo-hamburg/musille/issues"
