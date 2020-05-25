@@ -1,3 +1,10 @@
+/**
+ * Makes an element behave as a hamburger menu. It needs to have the following shape:
+ * <div class="hamburger">
+ *   <input type="checkbox">
+ *   <span /><span /><span />
+ * </div>
+ */
 @mixin hamburger() {
   margin: 8px;
 

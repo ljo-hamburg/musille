@@ -1,25 +1,19 @@
-{# TODO: Option to disable footer. #}
+{#
+The page footer
+#}
 
-<footer class="footer-menu">
-  <nav>
-    <ul>
-      {% for item in footer_menu.items %}
-        <li class="{{ item.classes|join(' ') }}">
-          {% if item.children %}
-            <ul>
-              {% for child in item.children %}
-                <li>
-                  <a href="{{ child.link }}">{{ child.title }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </li>
+{% if footer.items %}
+  <footer class="footer-menu">
+    <nav>
+      {% for item in footer.items %}
+        <a class="footer-link {{ item.classes|join(' ') }}" href="{{ item.link }}">{{ item.title }}</a>
       {% endfor %}
-    </ul>
-  </nav>
-</footer>
+    </nav>
+  </footer>
+{% endif %}
 
-<footer class="copyright">
-  {{ site.copyright }}
-</footer>
+{% if site.copyright %}
+  <footer class="copyright">
+    {{ site.copyright }}
+  </footer>
+{% endif %}

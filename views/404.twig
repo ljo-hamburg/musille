@@ -1,0 +1,13 @@
+{#
+This template is shown when a 404 error occurs. This template is roughly equivalent to
+the WordPress 404.php template.
+#}
+
+{% extends "base.twig" %}
+
+{% block content %}
+  <article class="404 center">
+    <h2>{{ __('Sorry, the page you are looking for does not exist. Please return back to the site&#39;s homepage or contact us to report a problem.', 'musille') }}</h2>
+    <a class="button" href="{{ site.url }}">{{ __("Go Home", "musille") }}</a>
+  </article>
+{% endblock %}

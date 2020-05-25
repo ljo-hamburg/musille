@@ -1,11 +1,14 @@
-{# TODO: Add mobile menu #}
+{#
+The main menu.
+#}
+
 <nav class="main-menu">
   <div class="header">
-    {% include "partials/menu.twig" with {'items': musille.leftMainMenu} %}
+    {% include "partials/menu.twig" with {'items': main_menu.left_items} %}
     <div class="hamburger"></div>
     {# TODO: Deal with absent logo #}
-    {{ musille.logo }}
-    {% include "partials/menu.twig" with {'items': musille.rightMainMenu} %}
+    {{ main_menu.logo }}
+    {% include "partials/menu.twig" with {'items': main_menu.right_items} %}
     <div class="hamburger">
       <input type="checkbox"/>
       <span></span>
@@ -13,5 +16,5 @@
       <span></span>
     </div>
   </div>
-  {% include "partials/menu.twig" with {'items': musille.mainMenu.items} %}
+  {% include "partials/menu.twig" with {'items': main_menu.items} %}
 </nav>

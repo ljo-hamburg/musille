@@ -9,5 +9,6 @@ module.exports = {
     "selector-max-compound-selectors": 5,
     "selector-no-qualifying-type": null,
     "order/properties-alphabetical-order": null,
+    "scss/at-extend-no-missing-placeholder": null,
   },
 };

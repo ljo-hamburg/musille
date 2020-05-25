@@ -1,0 +1,29 @@
+{#
+Renders a simple post item in a list of items.
+#}
+<article class="post-item {{ post.class }}">
+  {% if post.thumbnail %}
+    <a class="thumbnail" href="{{ post.link }}">
+      <img src="{{ post.thumbnail.src }}"
+           srcset="{{ post.thumbnail.srcset }}"
+           sizes="{{ post.thumbnail.img_sizes }}"
+           alt="{{ post.thumbnail.alt }}">
+    </a>
+  {% endif %}
+  <div class="summary">
+    <h2 class="title">
+      <a href="{{ post.link }}">{{ post.title }}</a>
+    </h2>
+    <div class="meta">
+      {% if post.category %}
+        {{ __('Published on %s by %s in %s', "musille")|format(
+          post.date,
+          '<a href="'~post.author.link~'">'~post.author.display_name~'</a>',
+          '<a href="'~post.category.link~'">'~post.category.name~'</a>') }}
+      {% else %}
+        {{ __("Published on %s by %s", "musille")|format(post.date, post.author) }}
+      {% endif %}
+    </div>
+    <div class="excerpt">{{ post.preview }}</div>
+  </div>
+</article>

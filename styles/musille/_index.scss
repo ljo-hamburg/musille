@@ -1,9 +1,0 @@
-@forward "typography";
-@forward "responsive";
-
-// TODO: Convert units to rem
-$transition-duration: 0.3s;
-$transition-timing: $transition-duration ease-out 0s;
-$transition: all $transition-timing;
-$background-color: #f3f3f3;
-$highlight-color: #d15254;

@@ -1,13 +1,13 @@
-@use "sass:color";
-@use "musille";
-@use "components/hamburger";
-@use "musille/responsive" as *;
-@use "musille/wordpress" as wp;
+/**
+ * The Musille Main Menu.
+ */
 
-$height: (
-  default: 70px,
-  ">=tablet": 90px
-);
+@use "sass:color";
+@use "variables";
+@use "components/hamburger";
+@use "variables/responsive" as *;
+@use "variables/wordpress" as wp;
+
 $sticky-height: (
   default: 60px,
   ">=tablet": 70px,
@@ -25,14 +25,12 @@ $open-transition: max-height 0.3s ease-in-out;
 $close-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
 
 @mixin menu-height() {
-  height: responsive($height);
-  @include media(">=tablet") {
-    height: responsive($height);
+  @include responsive(default, ">=tablet") {
+    height: responsive(variables.$main-menu-height);
   }
 
   @at-root .sticky#{&} {
-    height: responsive($sticky-height);
-    @include media(">=tablet") {
+    @include responsive(default, ">=tablet") {
       height: responsive($sticky-height);
     }
   }
@@ -46,7 +44,7 @@ $close-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
   z-index: 100;
   width: 100%;
   background-color: $background-color;
-  transition: all musille.$transition-timing, top 0s;
+  transition: all variables.$transition-timing, top 0s;
 
   @include media(">600px") {
     position: fixed;
@@ -75,7 +73,7 @@ $close-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    transition: musille.$transition;
+    transition: variables.$transition;
 
     .menu {
       display: flex;
@@ -123,7 +121,7 @@ $close-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
     display: block;
     flex-shrink: 0;
     height: 100%;
-    transition: musille.$transition;
+    transition: variables.$transition;
 
     @include media(">=tablet") {
       padding: 0 60px;
@@ -146,8 +144,8 @@ $close-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
   .custom-logo {
     @include menu-height;
     width: auto;
-    height: responsive($height);
-    transition: musille.$transition;
+    height: responsive(variables.$main-menu-height);
+    transition: variables.$transition;
   }
 
   .hamburger {
@@ -171,12 +169,12 @@ $close-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
       font-size: responsive($font-size);
       letter-spacing: 1px;
       text-transform: uppercase;
-      transition: musille.$transition;
+      transition: variables.$transition;
 
       @include media(">=tablet") {
         height: 100%;
         font-size: responsive($font-size);
-        line-height: responsive($height, ">=tablet");
+        line-height: responsive(variables.$main-menu-height, ">=tablet");
         white-space: nowrap;
         // stylelint-disable max-nesting-depth
         @at-root .sticky#{&} {
@@ -186,7 +184,7 @@ $close-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
       }
 
       &:hover {
-        color: musille.$highlight-color;
+        color: variables.$highlight-color;
       }
     }
   }
@@ -225,14 +223,14 @@ $close-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
       color: #000;
       font-size: 13px;
       letter-spacing: 1px;
-      transition: musille.$transition;
+      transition: variables.$transition;
 
       @include media(">=tablet") {
         color: #fff;
       }
 
       &:hover {
-        color: musille.$highlight-color;
+        color: variables.$highlight-color;
         // stylelint-disable max-nesting-depth
         @include media(">=tablet") {
           color: #ccc;
@@ -240,13 +238,5 @@ $close-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
         // stylelint-enable max-nesting-depth
       }
     }
-  }
-}
-
-
-.main-menu {
-  .sub-menu2 > .menu-item a {
-    line-height: 35px;
-
   }
 }

@@ -1,0 +1,61 @@
+/**
+ * The footer bar of the musille theme.
+ */
+
+@use "sass:color";
+@use "variables" as *;
+
+
+footer.footer-menu {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  overflow-x: scroll;
+  background-color: #131313;
+  @include responsive(default, ">=tablet") {
+    padding-right: max(#{responsive($base-padding)}, env(safe-area-inset-left));
+    padding-left: max(#{responsive($base-padding)}, env(safe-area-inset-right));
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  a.footer-link {
+    $color: #dcdcdc;
+    padding-right: 15px;
+    padding-left: 15px;
+    color: $color;
+
+    + a.footer-link {
+      border-left: 1px solid #464556;
+    }
+
+    &:hover {
+      color: color.scale($color, $lightness: -30%);
+    }
+  }
+}
+
+footer.copyright {
+  position: relative;
+  width: 100%;
+  color: #7b7b7b;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 35px;
+  text-align: center;
+  background-color: #1d1d1d;
+  @include responsive(default, ">=tablet") {
+    padding-right: max(#{responsive($base-padding)}, env(safe-area-inset-left));
+    padding-left: max(#{responsive($base-padding)}, env(safe-area-inset-right));
+  }
+
+  a:not(:hover) {
+    color: inherit;
+  }
+}

@@ -1,3 +1,9 @@
+{#
+Renders a simple page with content. This template is used to render pages that were
+generated outside the theme. Following WordPress conventions such pages will begin with
+a `get_header()` and end with a `get_footer()` call. The respective templates will
+capture the output and render it using this template.
+#}
 {% extends "base.twig" %}
 
 {% block content %}

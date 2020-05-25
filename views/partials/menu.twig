@@ -1,4 +1,8 @@
-{# TODO: Deal with empty menus. #}
+{#
+This component renders a menu. It accepts the following parameters:
+- `class`: A class string applied to the menu list.
+- `items`: A sequence of menu items to be rendered.
+#}
 <ul class="menu {{ class }}">
   {% for item in items %}
     <li class="{{ item.classes|join(' ') }}">

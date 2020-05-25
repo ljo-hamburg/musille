@@ -1,9 +1,18 @@
-{% extends "base.twig" %}
+{#
+Renders a list of posts. This template is roughly equivalent to the WordPress index.php
+template.
+#}
+{% extends "template-sidebar.twig" %}
 
 {% block content %}
-  {% for post in posts %}
-    {# TODO: Content #}
-    {% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
-  {% endfor %}
-  {# TODO: Pagination #}
+  <div class="post-list">
+    {% for post in posts %}
+      {% include "partials/post-item.twig" with {'post': post} %}
+    {% else %}
+      <h2 class="message">{{ __("Nothing to see here…", "musille") }}</h2>
+    {% endfor %}
+    {% block pagination %}
+      {% include "partials/pagination.twig" %}
+    {% endblock %}
+  </div>
 {% endblock %}

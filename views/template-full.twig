@@ -1,0 +1,11 @@
+{#
+This is the default page template. This template displays its content in the center of
+the screen without further distractions.
+#}
+{% extends "base.twig" %}
+
+{% block content %}
+  <article class="{{ post.class }}">
+    {{ post.content }}
+  </article>
+{% endblock %}

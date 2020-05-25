@@ -1,83 +1,92 @@
-const { src, dest, series, parallel, lastRun, watch } = require("gulp");
+const { src, dest, parallel, watch } = require("gulp");
 const sourcemaps = require("gulp-sourcemaps");
 const sass = require("gulp-sass");
 const postcss = require("gulp-postcss");
 const babel = require("gulp-babel");
+const concat = require("gulp-concat");
+const gulpWebpack = require("webpack-stream");
+const webpack = require("webpack");
+const named = require("vinyl-named");
+const gulpif = require("gulp-if");
+const ejs = require("gulp-ejs");
+const rename = require("gulp-rename");
+
+const production = process.env.NODE_ENV === "production";
+const data = require("./package.json");
+const composer = require("./composer.json");
 
 sass.compiler = require("dart-sass");
 
-function legacyCode() {
-  return src(["lucille/**/*"], { since: lastRun(legacyCode) }).pipe(
-    dest("build")
-  );
-}
-
 function copyVendorFiles() {
-  return src("vendor/**/*", { since: lastRun(copyVendorFiles) }).pipe(
-    dest("build/vendor")
-  );
+  return src("vendor/**/*").pipe(dest("build/vendor"));
 }
 
 function copyIncludes() {
-  return src("includes/**/*", { since: lastRun(copyIncludes) }).pipe(
-    dest("build/includes")
-  );
+  return src("includes/**/*").pipe(dest("build/includes"));
 }
 
 function copyTemplates() {
-  return src("templates/**/*", { since: lastRun(copyTemplates) }).pipe(
-    dest("build")
-  );
+  return src("templates/**/*").pipe(dest("build"));
 }
 
 function copyViews() {
-  return src("views/**/*", { since: lastRun(copyViews) }).pipe(
-    dest("build/views")
-  );
-}
-
-function copyThemeFiles() {
-  return src(["functions.php", "screenshot.png", "readme.txt"], {
-    since: lastRun(copyThemeFiles),
-  }).pipe(dest("build"));
+  return src("views/**/*").pipe(dest("build/views"));
 }
 
 function compileScripts() {
-  return src(["scripts/*.js"], { since: lastRun(compileScripts) })
-    .pipe(babel({ presets: ["@babel/env"] }))
+  return src("scripts/*.js")
+    .pipe(sourcemaps.init())
+    .pipe(babel())
+    .pipe(concat("musille.js"))
+    .pipe(sourcemaps.write("."))
     .pipe(dest("build"));
 }
 
+function buildBlocks() {
+  return src("blocks/*.js")
+    .pipe(named())
+    .pipe(gulpWebpack(require("./webpack.config"), webpack))
+    .pipe(dest("build/blocks"));
+}
+
 function buildStyles() {
-  // We don't minify styles as it makes for a bad user experience when
-  // opening the theme editor. A wordpress plugin may be used to minify
-  // css and JS resources.
   return src(["styles/*.scss", "!styles/_*.scss"])
     .pipe(sourcemaps.init())
-    .pipe(sass({ outputStyle: "expanded" }).on("error", sass.logError))
+    .pipe(
+      sass({ outputStyle: production ? "compressed" : "expanded" }).on(
+        "error",
+        sass.logError
+      )
+    )
     .pipe(postcss([require("autoprefixer")]))
     .pipe(sourcemaps.write("."))
     .pipe(dest("build"));
 }
 
+function copyThemeFiles() {
+  return src(["theme/*"])
+    .pipe(gulpif(/.ejs$/, ejs({ data, composer })))
+    .pipe(gulpif(/.ejs$/, rename({ extname: "" })))
+    .pipe(dest("build"));
+}
+
 function serve() {
-  watch("includes/**/*", copyIncludes);
-  watch("templates/**/*", copyTemplates);
-  watch("views/**/*", copyViews);
-  watch("scripts/**/*", compileScripts);
+  watch("includes/**/*.php", copyIncludes);
+  watch("templates/**/*.php", copyTemplates);
+  watch("views/**/*.twig", copyViews);
+  watch("scripts/**/*.js", compileScripts);
+  watch("blocks/**/*.js", buildBlocks);
   watch("styles/**/*.scss", buildStyles);
 }
 
-exports.default = series(
-  legacyCode,
-  parallel(
-    copyVendorFiles,
-    copyIncludes,
-    copyTemplates,
-    copyViews,
-    compileScripts,
-    copyThemeFiles,
-    buildStyles
-  )
+exports.default = parallel(
+  copyVendorFiles,
+  copyIncludes,
+  copyTemplates,
+  copyViews,
+  compileScripts,
+  buildBlocks,
+  buildStyles,
+  copyThemeFiles
 );
 exports.watch = serve;

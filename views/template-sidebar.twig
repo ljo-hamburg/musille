@@ -1,0 +1,18 @@
+{#
+This template displays a sidebar next to the main content.
+#}
+{% extends "base.twig" %}
+
+{% block body_class %}has-sidebar{% endblock %}
+
+{% block content %}
+  <article class="{{ post.class }}">
+    {{ post.content }}
+  </article>
+{% endblock %}
+
+{% block aside %}
+  {{ function("get_sidebar") }}
+{% endblock %}
+
+

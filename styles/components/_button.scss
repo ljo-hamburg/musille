@@ -1,0 +1,28 @@
+/**
+ * The base Musille button
+ */
+@use "../variables";
+
+// stylelint-disable selector-class-pattern
+.button,
+.wp-block-button.is-style-musille .wp-block-button__link {
+  display: inline-block;
+  padding: 20px 40px;
+  color: #000;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: #fff;
+  border-radius: 100px;
+  transition: variables.$transition;
+
+  &:hover {
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+  }
+
+  &:active {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+  }
+}
+// stylelint-enable selector-class-pattern

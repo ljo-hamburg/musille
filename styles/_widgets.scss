@@ -1,0 +1,69 @@
+/**
+ * Styles for wordpress default widgets.
+ */
+
+@use "components/card";
+@use "variables" as *;
+
+.widget {
+  @extend .card;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  .title {
+    margin: 0;
+
+    + ul {
+      margin-top: 0;
+    }
+
+  }
+
+  a:not(:hover) {
+    color: $text-color;
+  }
+}
+
+// stylelint-disable selector-class-pattern
+.widget_search {
+  .searchform > div {
+    display: flex;
+  }
+
+  label {
+    display: none;
+  }
+
+  input[type=text] {
+    flex: 1;
+    min-width: 0;
+    padding: 12px;
+    font-size: 18px;
+    background-color: transparent;
+    border: 1px solid #808080;
+    border-right: 0;
+    border-radius: card.$border-radius 0 0 card.$border-radius;
+
+    &:focus + input[type=submit] {
+      background-color: #344e55;
+    }
+  }
+
+  input[type=submit] {
+    padding: 12px 20px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+    background-color: #aaa;
+    border: 1px solid #808080;
+    border-left: 0;
+    border-radius: 0 card.$border-radius card.$border-radius 0;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:active {
+      background-color: darken(#344e55, 10%);
+    }
+  }
+}
+// stylelint-enable selector-class-pattern

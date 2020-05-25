@@ -1,0 +1,210 @@
+/**
+ * The Musille header styles.
+ */
+@use "variables";
+@use "variables/responsive" as *;
+@use "components/overlay";
+
+@mixin padding($amount) {
+  padding: ($amount + responsive(variables.$main-menu-height)) 15px $amount;
+  @include media(">=tablet") {
+    padding: ($amount + responsive(variables.$main-menu-height)) 30px $amount;
+  }
+}
+
+$dark-text-color: #232323;
+$light-text-color: #dcdcdc;
+
+.wp-block-musille-header {
+  @include padding(30px);
+  position: relative;
+  color: $dark-text-color;
+  background-position: center;
+  background-size: cover;
+
+  @include media(">=tablet") {
+    @include padding(50px);
+  }
+
+  .overlay {
+    display: none;
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .title {
+    margin: 0;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 55px;
+    letter-spacing: 1px;
+    text-align: center;
+    text-transform: uppercase;
+
+    @include media(">=tablet") {
+      font-size: 50px;
+      line-height: 70px;
+    }
+  }
+
+  .subtitle {
+    font-size: 20px;
+    text-align: center;
+    @include media(">=tablet") {
+      font-size: 25px;
+    }
+  }
+
+  .meta {
+    margin-top: 25px;
+    font-size: 18px;
+    text-align: center;
+
+    @include media(">=tablet") {
+      font-size: 22px;
+    }
+  }
+
+  &.is-style-colored {
+    @include padding(80px);
+    color: $dark-text-color;
+
+    @include media(">=tablet") {
+      @include padding(110px);
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 40px;
+      font-family: variables.$font-family;
+      line-height: 50px;
+      letter-spacing: -1px;
+
+      @include media(">=tablet") {
+        font-size: 70px;
+        line-height: 80px;
+      }
+    }
+
+    .subtitle {
+      margin: 0;
+      color: variables.$highlight-color;
+      font-weight: 400;
+      font-size: 16px;
+      font-family: variables.$heading-font-family;
+      line-height: 24px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow: #808080 0 0 10px;
+
+      @include media(">=tablet") {
+        font-size: 18px;
+        letter-spacing: 8px;
+      }
+    }
+  }
+
+  &.is-style-subtitle {
+    @include padding(80px);
+    color: $light-text-color;
+
+    @include media(">=tablet") {
+      @include padding(110px);
+    }
+
+    .overlay {
+      display: block;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 40px;
+      font-family: variables.$font-family;
+      line-height: 50px;
+      letter-spacing: -1px;
+      text-shadow: #fff 0 0 10px;
+
+      @include media(">=tablet") {
+        font-size: 70px;
+        line-height: 80px;
+      }
+    }
+
+    .subtitle {
+      margin: 0;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+
+      @include media(">=tablet") {
+        font-size: 18px;
+        letter-spacing: 8px;
+      }
+    }
+  }
+
+  &.is-style-fancy {
+    @include padding(80px);
+    color: $dark-text-color;
+
+    @include media(">=tablet") {
+      @include padding(110px);
+    }
+
+    &:not(.no-background) .overlay {
+      display: block;
+      background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .content {
+      position: relative;
+    }
+
+    .title {
+      font-weight: 700;
+      font-size: 60px;
+      font-family: variables.$font-family;
+      line-height: 80px;
+      letter-spacing: 5px;
+      text-transform: none;
+      opacity: 0.15;
+
+      @include media(">=tablet") {
+        font-size: 110px;
+        line-height: 130px;
+        letter-spacing: -4px;
+      }
+    }
+
+    .subtitle {
+      position: absolute;
+      bottom: 40%;
+      left: 50%;
+      z-index: 3;
+      font-weight: 400;
+      font-size: 18px;
+      font-family: variables.$heading-font-family;
+      line-height: 25px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transform: translate(-50%, 50%);
+
+      @include media(">=tablet") {
+        font-size: 28px;
+        line-height: 37px;
+        letter-spacing: 1px;
+      }
+    }
+
+    .meta {
+      font-weight: 600;
+    }
+  }
+}

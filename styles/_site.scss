@@ -1,25 +1,58 @@
-@use "musille/typography" as *;
+/**
+ * The Musille base style.
+ */
 
-html,
-body {
-  height: 100%;
-  font-size: $font-size;
-  font-family: $font-family;
-  line-height: $line-height;
-}
+@use "variables" as *;
 
 * {
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 :focus {
   outline: none;
 }
 
+html,
+body {
+  height: 100%;
+  color: $text-color;
+  font-size: $font-size;
+  font-family: $font-family;
+  line-height: $line-height;
+  background-color: $background-color;
+}
+
+// stylelint-disable selector-max-id
+main#content {
+  @include content-box;
+  min-height: 585px;
+
+  .page-template-template-no-header & {
+    padding-top: 0;
+  }
+
+  a {
+    font-weight: 600;
+  }
+}
+// stylelint-enable selector-max-id
+
+.center {
+  text-align: center;
+}
+
 a,
 p a {
+  color: $link-color;
   text-decoration: none;
   cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    color: $highlight-color;
+  }
 }
 
 img {
@@ -28,22 +61,12 @@ img {
   border-width: 0;
 }
 
-// TODO: Test this
 blockquote {
   margin: 40px 50px;
   font-size: 15px;
   font-style: italic;
-
-  i.fa {
-    position: absolute;
-    margin-top: -10px;
-    margin-left: -50px;
-    font-size: 35px;
-    opacity: 0.1;
-  }
 }
 
-// TODO: Test this
 pre {
   display: block;
   margin: 15px 0;
@@ -53,7 +76,6 @@ pre {
   border: 1px solid #3c3c3c;
 }
 
-// TODO: Test this
 ul,
 ol {
   margin: 15px 0;
@@ -61,7 +83,6 @@ ol {
   list-style-position: inside;
 }
 
-// TODO: Test this
 ul li ul,
 ol li ol {
   margin: 0 0 0 30px;

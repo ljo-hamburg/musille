@@ -1,0 +1,25 @@
+@forward "typography";
+@forward "colors";
+@forward "responsive";
+@use "responsive" as *;
+
+$transition-duration: 0.3s;
+$transition-timing: $transition-duration ease-out 0s;
+$transition: all $transition-timing;
+
+$main-menu-height: (
+  default: 70px,
+  ">=tablet": 90px
+);
+
+@mixin content-box() {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  @include responsive(default, ">=tablet") {
+    padding-right: max(#{responsive($base-padding)}, env(safe-area-inset-left));
+    padding-left: max(#{responsive($base-padding)}, env(safe-area-inset-right));
+  }
+}

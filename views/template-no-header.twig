@@ -1,0 +1,12 @@
+{#
+This page template is similar to the full template but does not display a header.
+#}
+{% extends "base.twig" %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+  <article class="{{ post.class }}">
+    {{ post.content }}
+  </article>
+{% endblock %}

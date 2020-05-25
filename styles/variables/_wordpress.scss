@@ -7,9 +7,9 @@ $admin-bar-height: (
 
 @mixin admin-bar-fix() {
   .admin-bar & {
-    top: responsive(wp.$admin-bar-height);
+    top: responsive($admin-bar-height);
     @include media(">=783px") {
-      top: responsive(wp.$admin-bar-height);
+      top: responsive($admin-bar-height);
     }
   }
 }

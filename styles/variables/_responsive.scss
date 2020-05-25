@@ -22,9 +22,22 @@ $state: default !default;
   @if meta.type-of($condition) != "map" {
     @return $condition;
   }
-  @if map.has-key($condition, $breakpoint) {
-    @return map.get($condition, $breakpoint);
-  } @else {
-    @return map.get($condition, default);
+  @return map.get($condition, $breakpoint);
+}
+
+@mixin responsive($conditions...) {
+  @each $condition in $conditions {
+    @if ($condition == default) {
+      @content;
+    } @else {
+      @include media($condition) {
+        @content;
+      }
+    }
   }
 }
+
+$base-padding: (
+  default: 15px,
+  ">=tablet": 30px
+);

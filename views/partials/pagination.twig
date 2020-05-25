@@ -1,0 +1,37 @@
+{#
+Renders a pagination element. The pagination shows the currently selected page, all
+available pages and a previous and a next button.
+#}
+{% if posts.pagination.pages %}
+  <div class="pagination">
+    <div class="previous {% if not posts.pagination.prev %}disabled{% endif %}">
+      <a href="{{ posts.pagination.prev.link }}">
+        {% if function("is_archive") or function("is_home") %}
+          {{ __("< Newer", "musille") }}
+        {% else %}
+          {{ __("< Previous", "musille") }}
+        {% endif %}
+      </a>
+    </div>
+    <ul class="pages">
+      {% for page in posts.pagination.pages %}
+        <li class="page">
+          {% if page.link %}
+            <a href="{{ page.link }}" class="{{ page.class }}">{{ page.title }}</a>
+          {% else %}
+            <span class="{{ page.class }}">{{ page.title }}</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+    <div class="next {% if not posts.pagination.next %}disabled{% endif %}">
+      <a href="{{ posts.pagination.next.link }}">
+        {% if function("is_archive") or function("is_home") %}
+          {{ __("Older >", "musille") }}
+        {% else %}
+          {{ __("Next >", "musille") }}
+        {% endif %}
+      </a>
+    </div>
+  </div>
+{% endif %}

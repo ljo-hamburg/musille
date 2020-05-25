@@ -1,0 +1,66 @@
+/**
+ * A pagination element.
+ */
+
+$background: transparentize(#ccc, 0.5);
+
+.pagination {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  overflow: hidden;
+  background-color: $background;
+  border-radius: 100px;
+
+  .next,
+  .previous {
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+
+    a {
+      padding: 15px;
+      color: inherit;
+    }
+
+    &.disabled {
+      color: #808080;
+      pointer-events: none;
+    }
+
+    &:not(.disabled):hover {
+      background: darken($background, 10%);
+    }
+  }
+
+  .next {
+    justify-content: flex-end;
+  }
+
+  .previous {
+    justify-content: flex-start;
+  }
+
+  ul.pages {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-size: 1.8em;
+    list-style: none;
+  }
+
+  li.page {
+    display: block;
+
+    .page-number {
+      padding: 15px;
+
+      &:hover,
+      &.current {
+        background-color: darken($background, 10%);
+      }
+    }
+  }
+}

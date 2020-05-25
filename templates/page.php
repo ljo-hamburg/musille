@@ -1,15 +1,14 @@
 <?php
-
 /**
- * The template for displaying all pages.
+ * This is the default template to display pages. It renders the template-full.twig
+ * file.
+ *
+ * @package LJO\Musille.
  */
 
 declare(strict_types=1);
 
 use Timber\Timber;
-use Timber\Post;
 
 $context = Timber::context();
-
-$context['post'] = new Post();
-Timber::render('page.twig', $context);
+Timber::render( 'template-full.twig', $context );
