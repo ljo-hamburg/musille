@@ -13,7 +13,6 @@
     "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2",
     "wp-coding-standards/wpcs": "^2.3"
   },
-  "version": "0.1.0",
   "authors": [
     {
       "name": "Kim Wittenburg",

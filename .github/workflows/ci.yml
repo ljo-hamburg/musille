@@ -1,0 +1,52 @@
+name: Musille CI
+on:
+  push:
+  release:
+    types: [published, prereleased]
+
+jobs:
+  lint:
+    name: Lint Code Style
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - uses: xt0rted/stylelint-problem-matcher@v1
+      - name: Install NPM Dependencies
+        run: npm ci
+      #- name: Install Composer Dependencies
+      #  run: composer install --no-progress
+      - name: Run PHP_CodeSniffer
+        if: ${{ always() }}
+        uses: chekalsky/phpcs-action@v1
+        with:
+          enable_warnings: true
+      - name: Run ESLint
+        if: ${{ always() }}
+        run: npm run lint:js
+      - name: Run StyleLint
+        if: ${{ always() }}
+        run: npm run lint:scss
+  build:
+    name: Build Theme
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Install NPM Dependencies
+        run: npm ci
+      - name: Install Composer dependencies
+        run: composer install --no-dev --classmap-authoritative --no-progress
+      - name: Build Theme
+        run: npm run build
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: musille
+          path: build/**/*

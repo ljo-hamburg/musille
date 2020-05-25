@@ -11,8 +11,7 @@
     "lint:php": "./vendor/bin/phpcs functions.php includes templates",
     "lint:js": "eslint --no-error-on-unmatched-pattern scripts",
     "lint:scss": "stylelint --allow-empty-input styles",
-    "preversion": "npm run lint",
-    "version": "./sync-version.js && composer update --lock && git add composer.json composer.lock"
+    "preversion": "npm run lint"
   },
   "repository": {
     "type": "git",
