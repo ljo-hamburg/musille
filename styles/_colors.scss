@@ -1,0 +1,50 @@
+@use "variables";
+/* Gutenberg Text Colors */
+.has-primary-color {
+  color: variables.$text-color;
+}
+
+.has-accent-color {
+  color: variables.$highlight-color;
+}
+
+.has-link-color {
+  color: variables.$link-color;
+}
+
+.has-dark-color {
+  color: variables.$dark-color;
+}
+
+.has-white-color {
+  color: #fff;
+}
+
+.has-black-color {
+  color: #000;
+}
+
+/* Gutenberg Background Colors */
+.has-primary-background-color {
+  background-color: variables.$text-color;
+}
+
+.has-accent-background-color {
+  background-color: variables.$highlight-color;
+}
+
+.has-link-background-color {
+  background-color: variables.$link-color;
+}
+
+.has-dark-background-color {
+  background-color: variables.$dark-color;
+}
+
+.has-white-background-color {
+  background-color: #fff;
+}
+
+.has-black-background-color {
+  background-color: #000;
+}
