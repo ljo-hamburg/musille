@@ -7,28 +7,13 @@ Musille is a WordPress theme used by the [LJO Hamburg](https://ljo-hamburg.de).
 
 ## Installation
 
-### Installation via GitHub Updater
+Go to [Releases](https://github.com/ljo-hamburg/musille/releases) and downlaod the latest version of the theme. Install it via the WordPress admin. If you are usure how to install the theme see [this help page](https://wordpress.org/support/article/using-themes/#adding-new-themes) for more information.
 
-The easiest way to install this theme is to use [GitHub Updater](https://github.com/afragen/github-updater). Using the plugin you can go to Settings → GitHub Updater and select “Install Theme” from there. Enter the following data:
+The theme supports auto update functionality via [Plugin Update Checker](https://github.com/YahnisElsts/plugin-update-checker). This functionality is enabled by default.
 
-```
-Theme URI: https://github.com/ljo-hamburg/musille
-Repository-Branch: release
-Remote Repository Host: GitHub
-GitHub Access Token: <Your Access Token> (optional)
-```
+## Comments
 
-Note that you **must not** use the `master` branch for installation. The master branch contains the development files which must be compiled in order to yield an installable theme. Instead you can choose between the following branches for installation:
+The Musille theme **does not support comments**. Although it does nothing to prevent wordpress from using comment functionality, neither comments nor a comment form are included in the theme at the moment.
 
-- `release`: The latest stable release.
-- `pre-release`: The latest pre-release.
-- `testing`: The latest build corresponding to the `master` branch. Note that while you may be able to use this version of the theme it is not considered stable and may contain severe bugs. Use this only for testing purposes, never in production.
-
-### Manual Installation
-
-Go to [Releases](https://github.com/ljo-hamburg/musille/releases) and downlaod the theme from the latest release. Install it in WordPress by going to the administration console and selecting Design →. Themes. There you can upload and install the theme.
-
-## User Guide
-
-The rest of this document is primarily concerned with information that is relevant for developers. See the WordPress [`readme.txt`](https://github.com/ljo-hamburg/musille/blob/master/theme/readme.txt.ejs) for more information about using the theme.
+It is recommended that you use a plugin such as [Disable Comments](https://wordpress.org/plugins/disable-comments/) to completely hide the comments functionality from your site.
 
