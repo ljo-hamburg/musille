@@ -5,7 +5,8 @@
   "license": "GPL-3.0-or-later",
   "require": {
     "php": "^7.4",
-    "timber/timber": "^1.16"
+    "timber/timber": "^1.16",
+    "yahnis-elsts/plugin-update-checker": "^4.9"
   },
   "require-dev": {
     "johnpbloch/wordpress": "^5.3",

@@ -65,7 +65,19 @@ function buildStyles() {
 
 function copyThemeFiles() {
   return src(["theme/*"])
-    .pipe(gulpif(/.ejs$/, ejs({ data, composer })))
+    .pipe(
+      gulpif(
+        /.ejs$/,
+        ejs({
+          data,
+          composer,
+          release:
+            process.env.GITHUB_EVENT_NAME === "release"
+              ? require(process.env.GITHUB_EVENT_PATH).release
+              : {},
+        })
+      )
+    )
     .pipe(gulpif(/.ejs$/, rename({ extname: "" })))
     .pipe(dest("build"));
 }

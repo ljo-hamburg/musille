@@ -12,4 +12,9 @@ declare(strict_types=1);
 use LJO\Musille\MusilleTheme;
 
 require_once __DIR__ . '/vendor/autoload.php';
-MusilleTheme::initialize();
+$musille                = MusilleTheme::get_instance();
+$musille_update_checker = Puc_v4_Factory::buildUpdateChecker(
+	$musille->theme->get( 'ThemeURI' ),
+	__FILE__
+);
+$musille_update_checker->getVcsApi()->enableReleaseAssets();
