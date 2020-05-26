@@ -65,6 +65,12 @@ class Page {
 		} else {
 			$background = null;
 		}
+
+		/**
+		 * Filters the background image display on a page.
+		 *
+		 * @param Image $background The background as specified by the post.
+		 */
 		return apply_filters( 'musille/header_background', $background );
 	}
 
@@ -76,12 +82,19 @@ class Page {
 	 */
 	public function header_style(): string {
 		if ( $this->has_post() ) {
-			$style = $this->post->meta( CustomHeader::HEADER_STYLE_META_KEY );
+			$style = $this->post->meta( CustomHeader::HEADER_STYLE_META_KEY ) ?? 'basic';
 		} elseif ( is_404() ) {
 			$style = 'fancy';
 		} else {
 			$style = 'basic';
 		}
+
+		/**
+		 * Filters the header style that is used on a page.
+		 *
+		 * @param string $style The header style as specified by the post or `'basic'`
+		 *                      for all other pages.
+		 */
 		return apply_filters( 'musille/header_style', $style );
 	}
 
@@ -100,6 +113,12 @@ class Page {
 		} else {
 			$title = get_the_archive_title();
 		}
+
+		/**
+		 * Filters the page title before it is displayed.
+		 *
+		 * @param string $title The default title.
+		 */
 		return apply_filters( 'musille/title', $title );
 	}
 
@@ -119,6 +138,12 @@ class Page {
 		} else {
 			$subtitle = '';
 		}
+
+		/**
+		 * Filters the subtitle before it is displayed.
+		 *
+		 * @param string $subtitle The subtitle configured by the post.
+		 */
 		return apply_filters( 'musille/subtitle', $subtitle );
 	}
 }

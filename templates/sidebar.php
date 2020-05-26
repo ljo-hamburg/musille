@@ -12,6 +12,6 @@ namespace LJO\Musille;
 use Timber\Timber;
 
 $context            = Timber::context();
-$context['widgets'] = Timber::get_widgets( MusilleSidebar::$slug );
+$context['widgets'] = Timber::get_widgets( MusilleSidebar::SLUG );
 Timber::render( 'sidebar.twig', $context );
 
