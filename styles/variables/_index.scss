@@ -11,9 +11,10 @@ $main-menu-height: (
   default: 70px,
   ">=tablet": 90px
 );
+$max-width: 1200px;
 
 @mixin content-box() {
-  max-width: 1200px;
+  max-width: $max-width;
   margin: 0 auto;
   padding-top: 20px;
   padding-bottom: 20px;

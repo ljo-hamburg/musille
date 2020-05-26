@@ -3,8 +3,8 @@ The main page header.
 #}
 
 <header class="wp-block-musille-header is-style-{{ page.header_style }}
-               {% if not page.header_background %}no-background{% endif %}"
-        {% if page.header_style in ["subtitle", "fancy"] and page.header_background %}
+               {% if page.header_background is null %}no-background{% endif %}"
+        {% if page.header_background is not null %}
           style="background-image: url('{{ page.header_background.src }}');"
         {% endif %}
 >
@@ -25,4 +25,7 @@ The main page header.
       </div>
     {% endif %}
   </div>
+  {% if page.header_attribution %}
+    <div class="attribution">{{ page.header_attribution }}</div>
+  {% endif %}
 </header>

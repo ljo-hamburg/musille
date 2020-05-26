@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace LJO\Musille;
 
+use Cassandra\Custom;
 use LJO\Musille\Blocks\CustomHeader;
 use Timber\Image;
 use Timber\Post;
@@ -55,6 +56,9 @@ class Page {
 	 * @return Image|null The header background or `null` if no background image exists.
 	 */
 	public function header_background(): ?Image {
+		if ( ! in_array( $this->header_style(), array( 'subtitle', 'fancy' ), true ) ) {
+			return null;
+		}
 		if ( $this->has_post() ) {
 			$image_id = $this->post->meta( CustomHeader::IMAGE_ID_META_KEY );
 			if ( $image_id ) {
@@ -72,6 +76,40 @@ class Page {
 		 * @param Image $background The background as specified by the post.
 		 */
 		return apply_filters( 'musille/header_background', $background );
+	}
+
+	/**
+	 * Returns the attribution for the header image as it should be displayed. This
+	 * method takes into account whether the user has disabled the attribution.
+	 *
+	 * @return string The attribution or the empty string if no attribution exists or
+	 *                the user has disabled the attribution.
+	 */
+	public function header_attribution(): string {
+		if ( $this->has_post() ) {
+			$show_attribution = $this->post->meta( CustomHeader::SHOW_ATTRIBUTION_META_KEY );
+		} else {
+			/**
+			 * Filters the default value for whether to show an attribution text or not.
+			 *
+			 * @param bool $value `false` by default.
+			 */
+			$show_attribution = apply_filters( 'musille/show_header_attribution', false );
+		}
+
+		if ( $show_attribution ) {
+			$background  = $this->header_background();
+			$attribution = $background ? $background->caption : '';
+		} else {
+			$attribution = '';
+		}
+		/**
+		 * Filters the header background attribution before it is displayed.
+		 *
+		 * @param string $attribution The attribution from the displayed image or the
+		 *                            empty string if no attribution exists.
+		 */
+		return apply_filters( 'musille/header_attribution', $attribution );
 	}
 
 	/**

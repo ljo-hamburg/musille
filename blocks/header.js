@@ -14,7 +14,7 @@ import { __ } from "@wordpress/i18n";
 import { registerBlockType, registerBlockStyle } from "@wordpress/blocks";
 import { useSelect } from "@wordpress/data";
 import { InspectorControls } from "@wordpress/block-editor";
-import { PanelBody, TextControl } from "@wordpress/components";
+import { PanelBody, TextControl, ToggleControl } from "@wordpress/components";
 import ImageSelector from "./components/ImageSelector";
 
 const BLOCK_NAME = "musille/header";
@@ -47,12 +47,21 @@ registerBlockType(BLOCK_NAME, {
       source: "meta",
       meta: "musille_header_style",
     },
+    showAttribution: {
+      type: "boolean",
+      source: "meta",
+      meta: "musille_show_attribution",
+    },
   },
   supports: {
     html: false,
     multiple: false, // Only one header is allowed per page/post.
   },
-  edit({ className, attributes: { imageID, subtitle, style }, setAttributes }) {
+  edit({
+    className,
+    attributes: { imageID, subtitle, style, showAttribution },
+    setAttributes,
+  }) {
     const { title: postTitle, imageID: postImageID } = useSelect(
       (select) => {
         const editor = select("core/editor");
@@ -99,6 +108,15 @@ registerBlockType(BLOCK_NAME, {
             title={__("Background Image", "musille")}
             initialOpen={false}
           >
+            <ToggleControl
+              label={__("Image Attribution", "musille")}
+              help={__(
+                "Display the image's caption as an attribution notice.",
+                "musille"
+              )}
+              checked={showAttribution}
+              onChange={(showAttribution) => setAttributes({ showAttribution })}
+            />
             <ImageSelector
               action={__("Select Background Image", "musille")}
               removeAction={__("Remove Image", "musille")}
@@ -126,6 +144,9 @@ registerBlockType(BLOCK_NAME, {
               onChange={(subtitle) => setAttributes({ subtitle })}
             />
           </div>
+          {showAttribution && image && (
+            <div className={"attribution"}>{image.caption.raw}</div>
+          )}
         </div>
       </Fragment>
     );
