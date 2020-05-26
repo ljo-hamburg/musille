@@ -1,0 +1,7 @@
+@use "../variables";
+
+.is-style-section {
+  font-weight: 700;
+  font-family: variables.$font-family;
+  letter-spacing: 0;
+}

@@ -128,12 +128,49 @@ class MusilleTheme extends Site {
 	public function setup_theme(): void {
 		wp_get_theme( get_template() )->load_textdomain();
 
-		add_theme_support( 'custom-logo' );
-		add_theme_support( 'automatic-feed-links' );
 		add_theme_support( 'title-tag' );
-		add_theme_support( 'post-thumbnails' );
-		add_theme_support( 'gutenberg', array( 'wide-images' => true ) );
+		add_theme_support( 'custom-logo' );
 		add_theme_support( 'menus' );
+		add_theme_support( 'post-thumbnails' );
+		add_theme_support( 'automatic-feed-links' );
+		add_theme_support( 'gutenberg', array( 'wide-images' => true ) );
+		add_theme_support( 'wp-block-styles' );
+		add_theme_support( 'responsive-embeds' );
+		add_theme_support(
+			'editor-color-palette',
+			array(
+				array(
+					'name'  => esc_html__( 'Primary', 'musille' ),
+					'slug'  => 'primary',
+					'color' => '#4e4e4e',
+				),
+				array(
+					'name'  => esc_html__( 'Accent', 'musille' ),
+					'slug'  => 'accent',
+					'color' => '#d15254',
+				),
+				array(
+					'name'  => esc_html__( 'Link', 'musille' ),
+					'slug'  => 'link',
+					'color' => '#0693e3',
+				),
+				array(
+					'name'  => esc_html__( 'Dark', 'musille' ),
+					'slug'  => 'dark',
+					'color' => '#2a2a2a',
+				),
+				array(
+					'name'  => esc_html__( 'White', 'musille' ),
+					'slug'  => 'white',
+					'color' => '#fff',
+				),
+				array(
+					'name'  => esc_html__( 'Black', 'musille' ),
+					'slug'  => 'black',
+					'color' => '#000',
+				),
+			)
+		);
 	}
 
 	/**
@@ -160,6 +197,13 @@ class MusilleTheme extends Site {
 			array(
 				'name'  => 'full-width',
 				'label' => __( 'Full Width', 'musille' ),
+			)
+		);
+		register_block_style(
+			'core/heading',
+			array(
+				'name'  => 'section',
+				'label' => __( 'Section Heading', 'musille' ),
 			)
 		);
 		foreach ( array( 'post', 'page' ) as $post_type ) {
