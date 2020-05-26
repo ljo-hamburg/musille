@@ -15,8 +15,8 @@
 }
 
 .editor-styles-wrapper .wp-block-musille-header {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 
   h1 {
     font-family: $heading-font-family;
@@ -53,6 +53,12 @@
     &::placeholder {
       color: #444;
     }
+  }
+
+  .attribution {
+    right: 10px;
+    bottom: 10px;
+    font-family: $font-family;
   }
 }
 // stylelint-enable selector-class-pattern

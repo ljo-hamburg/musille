@@ -45,6 +45,13 @@ class CustomHeader {
 	public const HEADER_STYLE_META_KEY = 'musille_header_style';
 
 	/**
+	 * The key in the post metadata under which the show attribution flag is stored.
+	 *
+	 * @var string
+	 */
+	public const SHOW_ATTRIBUTION_META_KEY = 'musille_show_attribution';
+
+	/**
 	 * `CustomHeader` constructor. This method registers the appropriate hooks making
 	 * the block available in the editor.
 	 */
@@ -82,6 +89,15 @@ class CustomHeader {
 				'show_in_rest' => true,
 				'single'       => true,
 				'type'         => 'string',
+			)
+		);
+		register_post_meta(
+			'',
+			self::SHOW_ATTRIBUTION_META_KEY,
+			array(
+				'show_in_rest' => true,
+				'single'       => true,
+				'type'         => 'boolean',
 			)
 		);
 		/**

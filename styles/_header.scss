@@ -36,6 +36,26 @@ $light-text-color: #dcdcdc;
     text-align: center;
   }
 
+  .attribution {
+    $bottom: (
+      default: 10px,
+      ">=tablet": 20px
+    );
+    position: absolute;
+    z-index: 2;
+    text-align: right;
+
+    @include responsive(default, ">=tablet") {
+      right: max(#{responsive($base-padding)}, env(safe-area-inset-left));
+      bottom: responsive($bottom);
+      max-width: min(#{variables.$max-width}, calc(100% - 2*#{responsive($base-padding)}));
+    }
+
+    @include media(">=#{variables.$max-width}") {
+      right: calc(((100% - #{variables.$max-width}) / 2) + max(#{responsive($base-padding, ">=tablet")}, env(safe-area-inset-left)));
+    }
+  }
+
   .title {
     margin: 0;
     font-weight: 400;
