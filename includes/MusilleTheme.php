@@ -106,6 +106,13 @@ class MusilleTheme extends Site {
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_block_editor_assets' ) );
 
 		add_filter( 'timber/context', array( $this, 'setupContext' ) );
+		add_filter(
+			'timber/post/content/show_password_form_for_protected',
+			array(
+				Filters::class,
+				'show_password_form',
+			)
+		);
 		add_filter( 'widget_text', 'do_shortcode' );
 		$this->settings  = new Settings();
 		$this->main_menu = new MainMenu();
@@ -214,6 +221,15 @@ class MusilleTheme extends Site {
 		$context['post'] = apply_filters( 'musille/post', $post );
 		$context['page'] = apply_filters( 'musille/page', new Page( $context['post'] ) );
 		return $context;
+	}
+
+	/**
+	 * Returns a boolean value indicating whether the admin bar is currently visible.
+	 *
+	 * @return bool Whether the admin bar is visible.
+	 */
+	public function admin_bar_showing(): bool {
+		return is_admin_bar_showing();
 	}
 
 	/**

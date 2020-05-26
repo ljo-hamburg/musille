@@ -3,7 +3,7 @@ This is the base template for all other pages. It defines the basic HTML structu
 provides blocks to insert content at various places.
 #}
 <!DOCTYPE html>
-<html {{ site.language_attributes }}>
+<html {{ site.language_attributes }} class="{% if site.admin_bar_showing %}admin-bar{% endif %}">
 <head>
   {% block head %}
     <meta charset="{{ site.charset }}">

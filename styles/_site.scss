@@ -3,6 +3,7 @@
  */
 
 @use "variables" as *;
+@use "variables/wordpress";
 
 * {
   box-sizing: border-box;
@@ -14,20 +15,34 @@
   outline: none;
 }
 
-html,
-body {
-  height: 100%;
+html {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   color: $text-color;
   font-size: $font-size;
   font-family: $font-family;
   line-height: $line-height;
   background-color: $background-color;
+
+  &.admin-bar {
+    @include responsive(default, ">=783px") {
+      min-height: calc(100vh - #{responsive(wordpress.$admin-bar-height)});
+    }
+  }
+}
+
+body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
 // stylelint-disable selector-max-id
 main#content {
   @include content-box;
-  min-height: 585px;
+  flex: 1;
+  // min-height: 585px;
 
   .page-template-template-no-header & {
     padding-top: 0;
