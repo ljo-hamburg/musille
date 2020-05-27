@@ -119,5 +119,10 @@ class CustomHeader {
 				'editor_script' => self::BLOCK_NAME,
 			)
 		);
+		wp_set_script_translations(
+			self::BLOCK_NAME,
+			'musille',
+			get_template_directory() . '/languages'
+		);
 	}
 }

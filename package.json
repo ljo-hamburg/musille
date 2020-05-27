@@ -10,7 +10,10 @@
     "lint": "npm run lint:php && npm run lint:js && npm run lint:scss",
     "lint:php": "./vendor/bin/phpcs theme includes templates",
     "lint:js": "eslint --no-error-on-unmatched-pattern scripts",
-    "lint:scss": "stylelint --allow-empty-input styles"
+    "lint:scss": "stylelint --allow-empty-input styles",
+    "pregettext": "npm run build-dev",
+    "gettext": "./vendor/bin/wp --require=tasks/make-pot.php i18n make-twig-pot build languages/musille.pot",
+    "postgettext": "for FILE in ./languages/*.po; do msgmerge --update $FILE languages/musille.pot; done"
   },
   "repository": {
     "type": "git",
@@ -48,8 +51,10 @@
     "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-ejs": "^5.1.0",
+    "gulp-exec": "^4.0.0",
     "gulp-if": "^3.0.0",
     "gulp-postcss": "^8.0.0",
+    "gulp-potomo": "^1.1.0",
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "^2.6.5",

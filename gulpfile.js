@@ -10,6 +10,8 @@ const named = require("vinyl-named");
 const gulpif = require("gulp-if");
 const ejs = require("gulp-ejs");
 const rename = require("gulp-rename");
+const exec = require("gulp-exec");
+const msgfmt = require("gulp-potomo");
 
 const production = process.env.NODE_ENV === "production";
 const data = require("./package.json");
@@ -82,6 +84,26 @@ function copyThemeFiles() {
     .pipe(dest("build"));
 }
 
+function compileMoTranslations() {
+  return src("./languages/*.po")
+    .pipe(msgfmt())
+    .pipe(
+      rename((file) => {
+        file.basename = file.basename.replace(/^musille-/, "");
+        return file;
+      })
+    )
+    .pipe(dest("build/languages"));
+}
+
+function compileJedTranslations() {
+  return src("./languages/*.po").pipe(
+    exec(
+      './vendor/bin/wp i18n make-json --no-purge "<%= JSON.stringify(file.path) %>" build/languages/'
+    )
+  );
+}
+
 function serve() {
   watch("includes/**/*.php", copyIncludes);
   watch("templates/**/*.php", copyTemplates);
@@ -89,6 +111,11 @@ function serve() {
   watch("scripts/**/*.js", compileScripts);
   watch("blocks/**/*.js", buildBlocks);
   watch("styles/**/*.scss", buildStyles);
+  watch("theme/**/*", copyThemeFiles);
+  watch(
+    "languages/*.po",
+    parallel(compileMoTranslations, compileJedTranslations)
+  );
 }
 
 exports.default = parallel(
@@ -99,6 +126,8 @@ exports.default = parallel(
   compileScripts,
   buildBlocks,
   buildStyles,
-  copyThemeFiles
+  copyThemeFiles,
+  compileMoTranslations,
+  compileJedTranslations
 );
 exports.watch = serve;
