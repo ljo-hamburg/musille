@@ -19,8 +19,14 @@ const composer = require("./composer.json");
 
 sass.compiler = require("dart-sass");
 
-function copyVendorFiles() {
-  return src("vendor/**/*").pipe(dest("build/vendor"));
+function installDependencies() {
+  const command = ["composer", "install", "--working-dir=build", "--no-dev"];
+  if (production) {
+    command.push("--classmap-authoritative");
+  }
+  return src(["composer.json", "composer.lock"])
+    .pipe(dest("build"))
+    .pipe(exec(command.join(" ")));
 }
 
 function copyIncludes() {
@@ -119,7 +125,7 @@ function serve() {
 }
 
 exports.default = parallel(
-  copyVendorFiles,
+  installDependencies,
   copyIncludes,
   copyTemplates,
   copyViews,

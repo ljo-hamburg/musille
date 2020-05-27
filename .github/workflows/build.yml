@@ -55,7 +55,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm ci
-          composer install --no-dev --classmap-authoritative --no-progress
+          composer install
       - name: Build Theme
         run: |
           npm run build
