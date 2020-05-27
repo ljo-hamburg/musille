@@ -66,7 +66,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ steps.version.outputs.filename }}
-          path: musille/**/*
+          path: musille/
       - name: Publish Release Assets
         if: ${{ github.event_name == 'release' }}
         uses: actions/upload-release-asset@v1
