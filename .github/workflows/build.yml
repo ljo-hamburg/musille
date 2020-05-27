@@ -58,8 +58,7 @@ jobs:
           composer install
       - name: Build Theme
         run: |
-          npm run build
-          mv build musille
+          npm run build -- --dest=musille
           zip -qr9 $FILENAME musille
         env:
           FILENAME: ${{ steps.version.outputs.filename }}

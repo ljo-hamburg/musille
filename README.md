@@ -38,7 +38,13 @@ The theme provides several npm scripts that can be used to accomplish common tas
 npm run build
 ```
 
-This will simply execute `gulp` which is used as a build system. Gulp will then compile the theme into a `build` folder.
+This will simply execute `gulp` which is used as a build system. By default Gulp will compile the theme into a `build` folder. You can change the build director by providing a `--dest` argument like so:
+
+```shell
+npm run build -- --dest=dist
+```
+
+The additional `--` is required to tell npm to pass the `--dest` argument to the build script.
 
 The command above will compile a production version of the theme. In development you likely want additional features (such as the development autoloader). To compile the theme for development run
 
@@ -46,7 +52,7 @@ The command above will compile a production version of the theme. In development
 npm run build-dev
 ```
 
-The theme will be built into the `build` folder. The `build` folder can then be mounted inside a docker container or VM or be symlinked to a WordPress installation in the `themes` folder.
+The theme will be built into the `build` folder (which can be overridded using `--dest` as above). The `build` folder can then be mounted inside a docker container or VM or be symlinked to a WordPress installation in the `themes` folder.
 
 In development you can automatically recompile if you change a file. To do so run
 
@@ -54,9 +60,13 @@ In development you can automatically recompile if you change a file. To do so ru
 npm run watch
 ```
 
-This will watch most of the development files and recompile them if any changes are detected. Note that the dependencies in `composer.json` and `package.json` are not watched. If you change any of those you need to manually trigger a rebuild using `npm run build-dev`.
+This will watch most of the development files and recompile them if any changes are detected. Note that the dependencies in `composer.json` and `package.json` are not watched. If you change any of those you need to manually trigger a rebuild using `npm run build-dev`. The `--dest` arguments works with this task as well.
 
-The `build` directory is not automatically cleaned. Existing files are overridden but orphaned files are not deleted. If you want to clean the `build` directory just run `npm run clean`.
+The `build` directory is not automatically cleaned. Existing files are overridden but orphaned files are not deleted. If you want to clean the `build` directory just run
+
+```shell
+npm run clean
+```
 
 ### Creating Translations
 
