@@ -7,18 +7,14 @@
 
 
 footer.footer-menu {
-  // TODO: @extend %main-content-box;
   width: 100%;
   padding-top: 20px;
   padding-bottom: 20px;
   overflow-x: scroll;
   background-color: #131313;
-  @include responsive($base-padding) {
-    padding-right: max(#{responsive($base-padding)}, env(safe-area-inset-left));
-    padding-left: max(#{responsive($base-padding)}, env(safe-area-inset-right));
-  }
 
   nav {
+    @extend %main-content-box;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,7 +37,6 @@ footer.footer-menu {
 }
 
 footer.copyright {
-  // TODO: @extend main-content-box
   position: relative;
   width: 100%;
   color: #7b7b7b;
@@ -50,9 +45,9 @@ footer.copyright {
   line-height: 35px;
   text-align: center;
   background-color: #1d1d1d;
-  @include responsive($base-padding) {
-    padding-right: max(#{responsive($base-padding)}, env(safe-area-inset-left));
-    padding-left: max(#{responsive($base-padding)}, env(safe-area-inset-right));
+
+  .copyright-inner {
+    @extend %main-content-box;
   }
 
   a:not(:hover) {

@@ -28,6 +28,10 @@
 .widget form[role=search] {
   @extend %simple-input;
 
+  input[type=text] {
+    width: 0;
+  }
+
   label {
     display: none;
   }

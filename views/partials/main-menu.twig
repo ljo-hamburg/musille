@@ -6,7 +6,6 @@ The main menu.
   <div class="header">
     {% include "partials/menu.twig" with {'items': main_menu.left_items} %}
     <div class="hamburger"></div>
-    {# TODO: Deal with absent logo #}
     {{ main_menu.logo }}
     {% include "partials/menu.twig" with {'items': main_menu.right_items} %}
     <div class="hamburger">
