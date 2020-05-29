@@ -1,0 +1,13 @@
+/**
+ * The nextpage Gutenberg block.
+ */
+
+@use "../theme/colors";
+
+$editor: false !default;
+
+@if $editor {
+  .wp-block-nextpage span {
+    background-color: colors.$background;
+  }
+}

@@ -3,62 +3,14 @@
  * block editor is visible. They are not loaded in the user-facing frontend.
  */
 
-@use "variables/typography" as *;
-@use "header";
-@use "components/button";
-@use "components/section-heading";
-@use "colors";
+@use "variables";
+@use "site" with ($editor: true);
+@use "user";
+@use "blocks" with ($editor: true);
+@use "elements/forms" with ($editor: false);
 
 // stylelint-disable selector-class-pattern
 .editor-post-featured-image__preview {
   line-height: 0;
-}
-
-.editor-styles-wrapper .wp-block-musille-header {
-  padding-top: 20px;
-  padding-bottom: 20px;
-
-  h1 {
-    font-family: $heading-font-family;
-  }
-
-  input[type=text].components-text-control__input {
-    @extend .subtitle;
-    color: header.$dark-text-color;
-    font-family: $font-family;
-    background: transparent;
-    border-style: none;
-    box-shadow: none;
-
-    &::placeholder {
-      color: #d3d3d3;
-      opacity: 1;
-    }
-  }
-
-  &.is-style-subtitle {
-    input[type=text].components-text-control__input {
-      color: header.$light-text-color;
-      font-family: $heading-font-family;
-    }
-  }
-
-  .subtitle {
-    padding-left: 0;
-  }
-
-  &.is-style-fancy .subtitle {
-    width: 100%;
-
-    &::placeholder {
-      color: #444;
-    }
-  }
-
-  .attribution {
-    right: 10px;
-    bottom: 10px;
-    font-family: $font-family;
-  }
 }
 // stylelint-enable selector-class-pattern

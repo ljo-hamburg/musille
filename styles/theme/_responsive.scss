@@ -1,0 +1,73 @@
+@use "sass:list";
+@use "sass:meta";
+@use "sass:map";
+
+$breakpoints: (phone: 576px, tablet: 768px, laptop: 992px, desktop: 1200px) !default;
+$max-width: 1200px !default;
+$base-padding: (
+  default: 15px,
+  ">=tablet": 30px
+);
+@use "node_modules/include-media/dist/include-media" with ($breakpoints: $breakpoints);
+
+
+// stylelint-disable order/order
+$state: default !default;
+@mixin media($conditions...) {
+  $previous: $state;
+  $state: list.nth($conditions, -1) !global;
+  @include include-media.media($conditions...) {
+    @content;
+  }
+  $state: $previous !global;
+}
+// stylelint-enable order/order
+
+@function responsive($condition, $breakpoint: $state, $default: null) {
+  @if meta.type-of($condition) != "map" {
+    @return $condition;
+  } @else if map.has-key($condition, $breakpoint) {
+    @return map.get($condition, $breakpoint);
+  } @else if $default == null {
+    @return map.get($condition, default);
+  } @else {
+    @return $default;
+  }
+}
+
+@mixin responsive($conditions...) {
+  $values: ();
+  @each $condition in $conditions {
+    @if type-of($condition) == "map" {
+      @each $value in map.keys($condition) {
+        @if not list.index($values, $value) {
+          $values: list.append($values, $value);
+        }
+      }
+    } @else if type_of($condition) == "string" {
+      $values: list.append($values, $condition);
+    } @else {
+      $values: list.append($values, default);
+    }
+  }
+
+  @each $condition in $values {
+    @if ($condition == default) {
+      @content;
+    } @else {
+      @include media($condition) {
+        @content;
+      }
+    }
+  }
+}
+
+%main-content-box {
+  max-width: $max-width;
+  margin: 0 auto;
+
+  @include responsive($base-padding) {
+    padding-right: max(#{responsive($base-padding)}, env(safe-area-inset-left));
+    padding-left: max(#{responsive($base-padding)}, env(safe-area-inset-right));
+  }
+}

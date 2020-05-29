@@ -1,0 +1,34 @@
+/**
+ * Styles for wordpress default widgets.
+ */
+
+@use "../theme/colors";
+@use "../theme/card";
+@use "../theme/forms";
+
+.widget {
+  @extend %card;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  .title {
+    margin: 0;
+
+    + ul {
+      margin-top: 0;
+    }
+
+  }
+
+  a:not(:hover) {
+    color: colors.$text;
+  }
+}
+
+.widget form[role=search] {
+  @extend %simple-input;
+
+  label {
+    display: none;
+  }
+}

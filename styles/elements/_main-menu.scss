@@ -3,10 +3,16 @@
  */
 
 @use "sass:color";
-@use "variables";
-@use "components/hamburger";
-@use "variables/responsive" as *;
-@use "variables/wordpress" as wp;
+@use "../theme/colors";
+@use "../theme/transition";
+@use "../theme/responsive" as *;
+@use "../theme/wordpress" as wp;
+@use "hamburger";
+
+$height: (
+  default: 70px,
+  ">=tablet": 90px
+);
 
 $sticky-height: (
   default: 60px,
@@ -14,6 +20,7 @@ $sticky-height: (
 );
 $logo-offset: 20px;
 
+// TODO: Move to theme/colors
 $solid-background-color: #f3f3f3;
 $background-color: color.change($solid-background-color, $alpha: 0.7);
 $shadow: 0 4px 10px color.change(#000, $alpha: 0.5);
@@ -21,20 +28,22 @@ $font-size: (
   default: 14px,
   ">=tablet": 12px
 );
-$open-transition: max-height 0.3s ease-in-out;
-$close-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+$open-transition: max-height transition.$default-duration ease-in-out;
+$close-transition: max-height transition.$default-duration cubic-bezier(0, 1, 0, 1);
+
 
 @mixin menu-height() {
-  @include responsive(default, ">=tablet") {
-    height: responsive(variables.$main-menu-height);
+  @include responsive($height) {
+    height: responsive($height);
   }
 
   @at-root .sticky#{&} {
-    @include responsive(default, ">=tablet") {
-      height: responsive($sticky-height);
+    @include responsive($height) {
+      height: responsive($height);
     }
   }
 }
+
 
 .main-menu {
   // Main Menu Bar
@@ -44,7 +53,7 @@ $close-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
   z-index: 100;
   width: 100%;
   background-color: $background-color;
-  transition: all variables.$transition-timing, top 0s;
+  transition: background-color transition.$default;
 
   @include media(">600px") {
     position: fixed;
@@ -73,7 +82,7 @@ $close-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    transition: variables.$transition;
+    transition: height transition.$default;
 
     .menu {
       display: flex;
@@ -121,7 +130,7 @@ $close-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
     display: block;
     flex-shrink: 0;
     height: 100%;
-    transition: variables.$transition;
+    transition: transition.$default;
 
     @include media(">=tablet") {
       padding: 0 60px;
@@ -144,8 +153,8 @@ $close-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
   .custom-logo {
     @include menu-height;
     width: auto;
-    height: responsive(variables.$main-menu-height);
-    transition: variables.$transition;
+    height: responsive($height);
+    transition: transition.$default;
   }
 
   .hamburger {
@@ -169,12 +178,12 @@ $close-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
       font-size: responsive($font-size);
       letter-spacing: 1px;
       text-transform: uppercase;
-      transition: variables.$transition;
+      transition: transition.$default;
 
       @include media(">=tablet") {
         height: 100%;
         font-size: responsive($font-size);
-        line-height: responsive(variables.$main-menu-height, ">=tablet");
+        line-height: responsive($height, ">=tablet");
         white-space: nowrap;
         // stylelint-disable max-nesting-depth
         @at-root .sticky#{&} {
@@ -184,7 +193,7 @@ $close-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
       }
 
       &:hover {
-        color: variables.$highlight-color;
+        color: colors.$highlight;
       }
     }
   }
@@ -223,14 +232,14 @@ $close-transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
       color: #000;
       font-size: 13px;
       letter-spacing: 1px;
-      transition: variables.$transition;
+      transition: transition.$default;
 
       @include media(">=tablet") {
         color: #fff;
       }
 
       &:hover {
-        color: variables.$highlight-color;
+        color: colors.$highlight;
         // stylelint-disable max-nesting-depth
         @include media(">=tablet") {
           color: #ccc;

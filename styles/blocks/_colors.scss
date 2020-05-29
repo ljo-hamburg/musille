@@ -1,0 +1,14 @@
+/**
+ * Defines the colors that can be used in the Gutenberg Color picker.
+ */
+
+@use "../theme/colors";
+@use "../theme/wordpress" as *;
+
+@include gutenberg-color("primary", colors.$text);
+@include gutenberg-color("accent", colors.$highlight);
+@include gutenberg-color("link", colors.$link);
+@include gutenberg-color("dark", colors.$dark);
+// TODO: Do not use pure white and black.
+@include gutenberg-color("white", #fff);
+@include gutenberg-color("black", #000);

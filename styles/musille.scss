@@ -1,12 +1,17 @@
+/**
+This is the main stylesheet of Musille. It is included on all frontend pages.
+ */
+
 @use "node_modules/normalize.css/normalize";
-@use "components";
-@use "colors";
+
 @use "site";
-@use "header";
-@use "main-menu";
-@use "post-item";
-@use "sidebar";
-@use "widgets";
-@use "pagination";
-@use "footer";
-@use "passwords";
+@use "variables";
+@use "elements/main-menu";
+@use "elements/forms";
+@use "elements/post-item";
+@use "elements/sidebar";
+@use "elements/widgets";
+@use "elements/pagination";
+@use "elements/footer";
+@use "blocks" with ($main-menu-height: main-menu.$height);
+@use "user";

@@ -1,0 +1,62 @@
+@use "../theme/responsive" as *;
+@use "../theme/typography" as fonts;
+@use "../theme/card";
+@use "../theme/forms";
+@use "../theme/colors";
+
+$editor: false !default;
+
+input[type=text] {
+  color: colors.$text;
+}
+
+@if not $editor {
+  .post-password-form {
+    @extend %simple-input;
+    text-align: center;
+
+    p:first-child {
+      @extend %h4;
+      font-family: fonts.$family;
+    }
+
+    p:nth-child(2) {
+      flex-direction: column;
+      justify-content: center;
+      @include media(">=tablet") {
+        flex-direction: row;
+      }
+
+      label {
+        display: flex;
+        flex-direction: column;
+
+        @include media(">=tablet") {
+          flex-direction: row;
+          align-items: center;
+        }
+      }
+    }
+
+    input[type=password] {
+      border-right-width: initial;
+      border-radius: card.$border-radius;
+      @include media(">=tablet") {
+        margin-left: 8px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+
+    input[type=submit] {
+      margin-top: 8px;
+      border-radius: card.$border-radius;
+
+      @include media(">=tablet") {
+        margin-top: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+}

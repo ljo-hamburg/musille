@@ -1,30 +1,47 @@
 /**
- * The Musille header styles.
+ * Defines the Musille Header.
  */
-@use "variables";
-@use "variables/responsive" as *;
-@use "components/overlay";
 
-@mixin padding($amount) {
-  padding: ($amount + responsive(variables.$main-menu-height)) 15px $amount;
-  @include media(">=tablet") {
-    padding: ($amount + responsive(variables.$main-menu-height)) 30px $amount;
+@use "../theme/typography" as font;
+@use "../theme/colors";
+@use "../theme/overlay";
+@use "../theme/responsive" as *;
+
+$editor: false !default;
+$main-menu-height: 0 !default;
+$padding-lr: (
+  default: 15px,
+  ">=tablet": 30px
+) !default;
+
+/**
+ * The padding function generates a padding style for the specified bottom padding. The
+ * top padding is selected equal to the bottom padding but accounting for the menu bar
+ * height.
+ *
+ * $padding-bottom can either be a simple length or a responsive variable.
+ */
+@mixin padding($padding-bottom) {
+  @if $editor {
+    @include responsive($padding-lr) {
+      padding: 20px responsive($padding-lr);
+    }
+  } @else {
+    @include responsive($padding-lr, $padding-bottom, $main-menu-height) {
+      padding: (responsive($padding-bottom) + responsive($main-menu-height)) responsive($padding-lr) responsive($padding-bottom);
+    }
   }
 }
 
-$dark-text-color: #232323;
-$light-text-color: #dcdcdc;
-
 .wp-block-musille-header {
-  @include padding(30px);
+  $padding-bottom: (
+    default: 30px,
+    ">=tablet": 50px
+  );
+  @include padding($padding-bottom);
   position: relative;
-  color: $dark-text-color;
   background-position: center;
   background-size: cover;
-
-  @include media(">=tablet") {
-    @include padding(50px);
-  }
 
   .overlay {
     display: none;
@@ -44,24 +61,28 @@ $light-text-color: #dcdcdc;
     position: absolute;
     z-index: 2;
     text-align: right;
+    @if $editor {
+      right: 10px;
+      bottom: 10px;
+      // font-family: fonts.$family;
+    } @else {
+      @include responsive($base-padding, $bottom) {
+        right: max(#{responsive($base-padding)}, env(safe-area-inset-left));
+        bottom: responsive($bottom);
+        max-width: min(#{$max-width}, calc(100% - 2*#{responsive($base-padding)}));
+      }
 
-    @include responsive(default, ">=tablet") {
-      right: max(#{responsive($base-padding)}, env(safe-area-inset-left));
-      bottom: responsive($bottom);
-      max-width: min(#{variables.$max-width}, calc(100% - 2*#{responsive($base-padding)}));
-    }
-
-    @include media(">=#{variables.$max-width}") {
-      right: calc(((100% - #{variables.$max-width}) / 2) + max(#{responsive($base-padding, ">=tablet")}, env(safe-area-inset-left)));
+      @include media(">=#{$max-width}") {
+        right: calc(((100% - #{$max-width}) / 2) + max(#{responsive($base-padding, ">=tablet")}, env(safe-area-inset-left)));
+      }
     }
   }
 
   .title {
+    @extend %heading;
     margin: 0;
-    font-weight: 400;
     font-size: 40px;
     line-height: 55px;
-    letter-spacing: 1px;
     text-align: center;
     text-transform: uppercase;
 
@@ -90,17 +111,15 @@ $light-text-color: #dcdcdc;
   }
 
   &.is-style-colored {
-    @include padding(80px);
-    color: $dark-text-color;
-
-    @include media(">=tablet") {
-      @include padding(110px);
-    }
+    @include padding((
+      default: 80px,
+      ">=tablet": 110px
+    ));
 
     .title {
       font-weight: bold;
       font-size: 40px;
-      font-family: variables.$font-family;
+      font-family: font.$family;
       line-height: 50px;
       letter-spacing: -1px;
 
@@ -111,11 +130,10 @@ $light-text-color: #dcdcdc;
     }
 
     .subtitle {
+      @extend %heading;
       margin: 0;
-      color: variables.$highlight-color;
-      font-weight: 400;
+      color: colors.$highlight;
       font-size: 16px;
-      font-family: variables.$heading-font-family;
       line-height: 24px;
       letter-spacing: 3px;
       text-transform: uppercase;
@@ -129,14 +147,14 @@ $light-text-color: #dcdcdc;
   }
 
   &.is-style-subtitle {
-    @include padding(80px);
-    color: $light-text-color;
-
-    @include media(">=tablet") {
-      @include padding(110px);
-    }
+    @include padding((
+      default: 80px,
+      ">=tablet": 110px
+    ));
+    color: colors.$light;
 
     .overlay {
+      @extend %overlay;
       display: block;
       background-color: rgba(0, 0, 0, 0.6);
     }
@@ -144,7 +162,7 @@ $light-text-color: #dcdcdc;
     .title {
       font-weight: bold;
       font-size: 40px;
-      font-family: variables.$font-family;
+      font-family: font.$family;
       line-height: 50px;
       letter-spacing: -1px;
       text-shadow: #fff 0 0 10px;
@@ -156,8 +174,8 @@ $light-text-color: #dcdcdc;
     }
 
     .subtitle {
+      @extend %heading;
       margin: 0;
-      font-weight: 400;
       font-size: 16px;
       line-height: 24px;
       letter-spacing: 3px;
@@ -171,14 +189,13 @@ $light-text-color: #dcdcdc;
   }
 
   &.is-style-fancy {
-    @include padding(80px);
-    color: $dark-text-color;
-
-    @include media(">=tablet") {
-      @include padding(110px);
-    }
+    @include padding((
+      default: 80px,
+      ">=tablet": 110px
+    ));
 
     &:not(.no-background) .overlay {
+      @extend %overlay;
       display: block;
       background-color: rgba(255, 255, 255, 0.6);
     }
@@ -190,7 +207,7 @@ $light-text-color: #dcdcdc;
     .title {
       font-weight: 700;
       font-size: 60px;
-      font-family: variables.$font-family;
+      font-family: font.$family;
       line-height: 80px;
       letter-spacing: 5px;
       text-transform: none;
@@ -204,13 +221,12 @@ $light-text-color: #dcdcdc;
     }
 
     .subtitle {
+      @extend %heading;
       position: absolute;
       bottom: 40%;
       left: 50%;
       z-index: 3;
-      font-weight: 400;
       font-size: 18px;
-      font-family: variables.$heading-font-family;
       line-height: 25px;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -221,10 +237,44 @@ $light-text-color: #dcdcdc;
         line-height: 37px;
         letter-spacing: 1px;
       }
+
+      @if $editor {
+        width: 100%;
+      }
     }
 
     .meta {
       font-weight: 600;
+    }
+  }
+}
+
+@if $editor {
+  .wp-block-musille-header {
+    .subtitle input[type=text] {
+      @extend .subtitle;
+      padding-left: 0;
+      // color: $dark-text-color;
+      font-family: font.$family;
+      background: transparent;
+      border-style: none;
+      box-shadow: none;
+
+      &::placeholder {
+        color: #d3d3d3;
+        opacity: 1;
+      }
+    }
+
+    &.is-style-subtitle {
+      .subtitle input[type=text] {
+        color: colors.$light;
+        font-family: font.$heading-family;
+      }
+    }
+
+    &.is-style-fancy .subtitle ::placeholder {
+      color: #444;
     }
   }
 }

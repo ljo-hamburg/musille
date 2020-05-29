@@ -1,0 +1,15 @@
+/**
+This file defines variables that are available on the frontend. These can be used by
+users to easily match theme styles. The variables are not used in the theme itself.
+ */
+@use "theme/colors";
+@use "theme/responsive";
+
+:root {
+  --background-color: colors.$background;
+  --highlight-color: colors.$highlight;
+  --text-color: color.$text;
+  --link-color: colors.$link;
+
+  --max-width: responsive.$max-width;
+}

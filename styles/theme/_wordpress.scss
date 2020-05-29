@@ -1,0 +1,24 @@
+@use "responsive" as *;
+
+$admin-bar-height: (
+  ">=783px": 32px,
+  default: 46px
+);
+
+@mixin admin-bar-fix() {
+  .admin-bar & {
+    @include responsive($admin-bar-height) {
+      top: responsive($admin-bar-height);
+    }
+  }
+}
+
+@mixin gutenberg-color($name, $color) {
+  .has-#{$name}-color {
+    color: $color;
+  }
+
+  .has-#{$name}-background-color {
+    background-color: $color;
+  }
+}
