@@ -1,0 +1,10 @@
+/**
+ * The "Section Heading" Style for the Heading block.
+ */
+@use "../theme/typography" as fonts;
+
+.is-style-section {
+  font-weight: 700;
+  font-family: fonts.$family;
+  letter-spacing: 0;
+}

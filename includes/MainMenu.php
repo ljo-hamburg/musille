@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace LJO\Musille;
 
+use Timber\Image;
 use Timber\Menu;
 
 /**
@@ -41,12 +42,11 @@ class MainMenu extends Menu {
 	}
 
 	/**
-	 * Returns the website logo as html markup.
+	 * Returns the website logo.
 	 *
-	 * @return string HTML markup representing the logo.
+	 * @return Image The website logo.
 	 */
 	public function logo(): string {
-		// TODO: Return image instead and generate HTML in Twig.
 		return get_custom_logo();
 	}
 

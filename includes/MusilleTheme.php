@@ -103,6 +103,7 @@ class MusilleTheme extends Site {
 		add_action( 'init', array( $this, 'init_theme' ) );
 		add_action( 'init', array( $this, 'register_block_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_block_editor_assets' ) );
 
 		add_filter( 'timber/context', array( $this, 'setupContext' ) );
@@ -142,7 +143,7 @@ class MusilleTheme extends Site {
 				array(
 					'name'  => esc_html__( 'Primary', 'musille' ),
 					'slug'  => 'primary',
-					'color' => '#4e4e4e',
+					'color' => '#32373c',
 				),
 				array(
 					'name'  => esc_html__( 'Accent', 'musille' ),
@@ -184,12 +185,18 @@ class MusilleTheme extends Site {
 	 * Registers custom block styles in the Gutenberg editor.
 	 */
 	public function register_block_styles(): void {
-		// TODO: Add heading variant with multiple colors.
 		register_block_style(
 			'core/button',
 			array(
 				'name'  => 'musille',
 				'label' => __( 'Musille', 'musille' ),
+			)
+		);
+		register_block_style(
+			'core/group',
+			array(
+				'name'  => 'full-bg',
+				'label' => __( 'Full Background', 'musille' ),
 			)
 		);
 		register_block_style(
@@ -240,6 +247,18 @@ class MusilleTheme extends Site {
 			array( 'jquery' ),
 			filemtime( get_template_directory() . '/musille.js' ),
 			true
+		);
+	}
+
+	/**
+	 * Enqueue styles and scripts to be used in the backend.
+	 */
+	public function enqueue_admin_assets(): void {
+		wp_enqueue_style(
+			'musille-admin',
+			get_template_directory_uri() . '/admin.css',
+			array(),
+			filemtime( get_template_directory() . '/admin.css' )
 		);
 	}
 

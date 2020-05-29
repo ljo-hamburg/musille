@@ -1,9 +1,9 @@
 /**
- * The footer bar of the musille theme.
+ * The footer bars of the musille theme.
  */
 
 @use "sass:color";
-@use "variables" as *;
+@use "../theme/responsive" as *;
 
 
 footer.footer-menu {
@@ -12,12 +12,9 @@ footer.footer-menu {
   padding-bottom: 20px;
   overflow-x: scroll;
   background-color: #131313;
-  @include responsive(default, ">=tablet") {
-    padding-right: max(#{responsive($base-padding)}, env(safe-area-inset-left));
-    padding-left: max(#{responsive($base-padding)}, env(safe-area-inset-right));
-  }
 
   nav {
+    @extend %main-content-box;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,17 +23,15 @@ footer.footer-menu {
   }
 
   a.footer-link {
-    $color: #dcdcdc;
     padding-right: 15px;
     padding-left: 15px;
-    color: $color;
 
     + a.footer-link {
       border-left: 1px solid #464556;
     }
 
-    &:hover {
-      color: color.scale($color, $lightness: -30%);
+    &:not(:hover) {
+      color: #dcdcdc;
     }
   }
 }
@@ -50,9 +45,9 @@ footer.copyright {
   line-height: 35px;
   text-align: center;
   background-color: #1d1d1d;
-  @include responsive(default, ">=tablet") {
-    padding-right: max(#{responsive($base-padding)}, env(safe-area-inset-left));
-    padding-left: max(#{responsive($base-padding)}, env(safe-area-inset-right));
+
+  .copyright-inner {
+    @extend %main-content-box;
   }
 
   a:not(:hover) {

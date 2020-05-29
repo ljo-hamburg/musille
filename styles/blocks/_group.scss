@@ -1,0 +1,30 @@
+/**
+ * Custom group style that spans the whole width of the page.
+ */
+@use "../theme/responsive" as *;
+
+$editor: false !default;
+
+@if not $editor {
+  .wp-block-group {
+    &.is-style-full-width {
+      position: relative;
+      right: 50%;
+      left: 50%;
+      width: 100vw;
+      margin-right: -50vw;
+      margin-left: -50vw;
+    }
+
+    &.is-style-full-bg {
+      @extend .is-style-full-width;
+
+      // stylelint-disable selector-class-pattern
+      div.wp-block-group__inner-container {
+        @extend %main-content-box;
+      }
+
+      // stylelint-enable
+    }
+  }
+}

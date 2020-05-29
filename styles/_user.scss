@@ -1,0 +1,24 @@
+/**
+This file defines classes that may be applied to elements by the user to easily match
+the default theme styles. These classes should not be used by the theme itself.
+ */
+
+@use "theme/card";
+@use "theme/button";
+@use "theme/overlay";
+
+.card {
+  @extend %card;
+}
+
+.button {
+  @extend %button;
+}
+
+.overlay {
+  @extend %overlay;
+}
+
+.center {
+  text-align: center;
+}

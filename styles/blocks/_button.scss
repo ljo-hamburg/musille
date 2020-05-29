@@ -1,0 +1,11 @@
+/**
+ * Defines the Musille button style for Gutenberg.
+ */
+
+@use "../theme/button";
+
+// stylelint-disable selector-class-pattern
+.wp-block-button.is-style-musille .wp-block-button__link {
+  @extend %button;
+}
+// stylelint-enable selector-class-pattern

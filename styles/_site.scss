@@ -1,9 +1,28 @@
 /**
- * The Musille base style.
+ * The Musille base style. This file can be included in different ways, depending on the
+ * values of the variables $editor and $admin:
+ *
+ * If neither is true this file generates frontend styles that apply to any elements on
+ * a page. For frontend stylesheets this is usually fine but in the backend we do not
+ * want to override the WordPress default styles.
+ *
+ * In order to use this stylesheet on the backend you can set $admin to true. This will
+ * exclude any styles that should not apply in the backend.
+ *
+ * Lastly you can set $editor to true. This assumes that $admin is also true. By doing
+ * so most styles will be included but they will be scoped so that they will only be
+ * applied inside of the Gutenberg block editor.
  */
 
-@use "variables" as *;
-@use "variables/wordpress";
+@use "theme/colors";
+@use "theme/typography" as text;
+@use "theme/responsive" as *;
+@use "theme/wordpress";
+
+$editor: false !default;
+$admin: $editor !default;
+
+@import url("#{text.$url}");
 
 * {
   box-sizing: border-box;
@@ -11,144 +30,113 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-:focus {
-  outline: none;
+@mixin content() {
+  a,
+  p a {
+    @extend %link;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-width: 0;
+  }
+
+  blockquote {
+    @extend %blockquote;
+  }
+
+  pre {
+    @extend %code-block;
+  }
+
+  ul,
+  ol {
+    margin: 15px 0;
+    padding-left: 0;
+    list-style-position: inside;
+  }
+
+  ul li ul,
+  ol li ol {
+    margin: 0 0 0 30px;
+  }
+
+  thead,
+  th {
+    text-align: left;
+  }
+
+  td,
+  th {
+    padding: 10px 30px 10px 0;
+  }
+
+  th {
+    font-weight: 600;
+  }
 }
 
-html {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  color: $text-color;
-  font-size: $font-size;
-  font-family: $font-family;
-  line-height: $line-height;
-  background-color: $background-color;
+@if not $admin {
+  :focus {
+    outline: none;
+  }
 
-  &.admin-bar {
-    @include responsive(default, ">=783px") {
-      min-height: calc(100vh - #{responsive(wordpress.$admin-bar-height)});
+  html {
+    @extend %text;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: colors.$background;
+
+    &.admin-bar {
+      @include responsive(wordpress.$admin-bar-height) {
+        min-height: calc(100vh - #{responsive(wordpress.$admin-bar-height)});
+      }
+    }
+  }
+
+  body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  main#content {
+    @extend %main-content-box;
+    flex: 1;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .page-template-template-no-header & {
+      padding-top: 0;
+    }
+
+    a {
+      font-weight: 600;
     }
   }
 }
 
-body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-}
+@if not $admin {
+  @include text.headings;
+  @include content;
+} @else if $editor {
+  .editor-styles-wrapper {
+    @extend %text;
 
-// stylelint-disable selector-max-id
-main#content {
-  @include content-box;
-  flex: 1;
-  // min-height: 585px;
-
-  .page-template-template-no-header & {
-    padding-top: 0;
+    @include content;
+    background-color: colors.$background;
   }
-
-  a {
+  // stylelint-disable selector-class-pattern
+  .editor-post-title .editor-post-title__input {
+    @extend %h1;
     font-weight: 600;
+    font-size: 2.44em;
   }
-}
-// stylelint-enable selector-max-id
+  // stylelint-enable selector-class-pattern
 
-.center {
-  text-align: center;
-}
-
-a,
-p a {
-  color: $link-color;
-  text-decoration: none;
-  cursor: pointer;
-  transition: $transition;
-
-  &:hover {
-    color: $highlight-color;
+  .editor-styles-wrapper {
+    @include text.headings;
   }
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  border-width: 0;
-}
-
-blockquote {
-  margin: 40px 50px;
-  font-size: 15px;
-  font-style: italic;
-}
-
-pre {
-  display: block;
-  margin: 15px 0;
-  padding: 0 10px;
-  overflow: visible;
-  overflow-y: hidden;
-  border: 1px solid #3c3c3c;
-}
-
-ul,
-ol {
-  margin: 15px 0;
-  padding-left: 0;
-  list-style-position: inside;
-}
-
-ul li ul,
-ol li ol {
-  margin: 0 0 0 30px;
-}
-
-thead,
-th {
-  text-align: left;
-}
-
-td,
-th {
-  padding: 10px 30px 10px 0;
-}
-
-th {
-  font-weight: 600;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: $heading-font-weight;
-  font-family: $heading-font-family;
-  line-height: $heading-line-height;
-  letter-spacing: $heading-letter-spacing;
-}
-
-h1 {
-  font-size: $h1-font-size;
-}
-
-h2 {
-  font-size: $h2-font-size;
-}
-
-h3 {
-  font-size: $h3-font-size;
-}
-
-h4 {
-  font-size: $h4-font-size;
-}
-
-h5 {
-  font-size: $h5-font-size;
-}
-
-h6 {
-  font-size: $h6-font-size;
 }

@@ -1,0 +1,15 @@
+/**
+ * A card is a simple visual wrapper around content.
+ */
+$padding: 20px !default;
+$background-color: #fff !default;
+$border-radius: 3px !default;
+$box-shadow: 0 1px 3px #dfdfdf !default;
+
+%card {
+  padding: $padding;
+  overflow: hidden;
+  background-color: $background-color;
+  border-radius: $border-radius;
+  box-shadow: 0 1px 3px #dfdfdf;
+}

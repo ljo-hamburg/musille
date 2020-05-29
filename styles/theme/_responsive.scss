@@ -1,0 +1,121 @@
+/**
+ * Utilities for responsive design.
+ */
+
+@use "sass:list";
+@use "sass:meta";
+@use "sass:map";
+
+/**
+ * Media breakpoints used by the theme. These differ from the breakpoints that WordPress
+ * uses.
+ */
+$breakpoints: (phone: 576px, tablet: 768px, laptop: 992px, desktop: 1200px) !default;
+
+/**
+ * The maximum width for content.
+ */
+$max-width: 1200px !default;
+
+/**
+ * The base padding is the minimum distance from the screen's edges to content elements.
+ */
+$base-padding: (
+  default: 15px,
+  ">=tablet": 30px
+);
+
+@use "node_modules/include-media/dist/include-media" with ($breakpoints: $breakpoints);
+
+
+/**
+ * The $state variable keeps track in which media breakpoint we currently are. This can
+ * be used with the responsive function to get appropriate variable values.
+ *
+ * See the documentation on include-media for details on this function.
+ */
+// stylelint-disable order/order
+$state: default !default;
+@mixin media($conditions...) {
+  $previous: $state;
+  $state: list.nth($conditions, -1) !global;
+  @include include-media.media($conditions...) {
+    @content;
+  }
+  $state: $previous !global;
+}
+// stylelint-enable order/order
+
+/**
+ * The responsive function selects a value from a variable based on the media query that
+ * is currently being used.
+ *
+ * $condition can be a simple variable in which case it is output directly. If
+ * $condition is a map however we try to get a value out of it using the key $breakpoint
+ * (which defaults to the current $state). If that doesn't work $default is returned.
+ * If $default is unset (null) the value from $condition for the key `default` is
+ * returned. If that doesn't exist, `null` is returned.
+ */
+@function responsive($condition, $breakpoint: $state, $default: null) {
+  @if meta.type-of($condition) != "map" {
+    @return $condition;
+  } @else if map.has-key($condition, $breakpoint) {
+    @return map.get($condition, $breakpoint);
+  } @else if $default == null {
+    @return map.get($condition, default);
+  } @else {
+    @return $default;
+  }
+}
+
+/**
+ * The responsive mixin allows you to easily repeat styles for multiple responsive
+ * variable values. It works together with the responsive function like so:
+ *
+ * $var: (default: 5px, ">=200px": 10px);
+ * @responsive($var) {
+ *   padding: responsive($var);
+ * }
+ *
+ * This will produce CSS that sets padding to 5px by default and overrides it in a
+ * ">=200px" with the value 10px.
+ */
+@mixin responsive($conditions...) {
+  $values: ();
+  @each $condition in $conditions {
+    @if type-of($condition) == "map" {
+      @each $value in map.keys($condition) {
+        @if not list.index($values, $value) {
+          $values: list.append($values, $value);
+        }
+      }
+    } @else if type_of($condition) == "string" {
+      $values: list.append($values, $condition);
+    } @else {
+      $values: list.append($values, default);
+    }
+  }
+
+  @each $condition in $values {
+    @if ($condition == default) {
+      @content;
+    } @else {
+      @include media($condition) {
+        @content;
+      }
+    }
+  }
+}
+
+/**
+ * A main content box keeps its contents centered and width-bounded by $max-width.
+ */
+%main-content-box {
+  max-width: $max-width;
+  margin: 0 auto;
+
+  @include responsive($base-padding) {
+    padding-right: max(#{responsive($base-padding)}, env(safe-area-inset-left));
+    padding-left: max(#{responsive($base-padding)}, env(safe-area-inset-right));
+  }
+}

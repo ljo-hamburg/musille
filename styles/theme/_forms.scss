@@ -1,0 +1,40 @@
+/**
+ * Styles for form elements.
+ */
+
+@use "transition";
+@use "card";
+
+%simple-input {
+  > div,
+  > p {
+    display: flex;
+  }
+
+  input[type=text],
+  input[type=password] {
+    flex: 1;
+    min-width: 0;
+    padding: 12px;
+    font-size: 18px;
+    background-color: transparent;
+    border: 1px solid #344e55;
+    border-radius: card.$border-radius 0 0 card.$border-radius;
+  }
+
+  input[type=submit] {
+    padding: 12px 20px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+    background-color: #344e55;
+    border: 1px solid #344e55;
+    border-radius: 0 card.$border-radius card.$border-radius 0;
+    cursor: pointer;
+    transition: background-color transition.$default;
+
+    &:active {
+      background-color: darken(#344e55, 10%);
+    }
+  }
+}

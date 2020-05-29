@@ -1,0 +1,121 @@
+/**
+ * This file contains the base text styles for Musille.
+ */
+
+@use "colors";
+@use "transition";
+
+$url: "https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Oswald:300,400,700&subset=latin,latin-ext";
+
+$family: "Open Sans", sans-serif;
+$size: 14px;
+$line-height: 26px;
+
+$heading-family: "Oswald", sans-serif;
+$heading-weight: 400;
+$heading-line-height: 1.8em;
+$heading-letter-spacing: 1px;
+$h1-font-size: 34px;
+$h2-font-size: 30px;
+$h3-font-size: 26px;
+$h4-font-size: 22px;
+$h5-font-size: 18px;
+$h6-font-size: 16px;
+
+%text {
+  color: colors.$text;
+  font-size: $size;
+  font-family: $family;
+  line-height: $line-height;
+}
+
+%link {
+  color: colors.$link;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color transition.$default;
+
+  &:hover {
+    color: colors.$highlight;
+  }
+}
+
+%code-block {
+  display: block;
+  margin: 15px 0;
+  padding: 0 10px;
+  overflow: visible;
+  overflow-y: hidden;
+  border: 1px solid #3c3c3c;
+}
+
+%blockquote {
+  margin: 40px 50px;
+  font-size: 15px;
+  font-style: italic;
+}
+
+%heading {
+  font-weight: $heading-weight;
+  font-family: $heading-family;
+  line-height: $heading-line-height;
+  letter-spacing: $heading-letter-spacing;
+}
+
+// stylelint-disable scss/percent-placeholder-pattern
+%h1 {
+  @extend %heading;
+  font-size: $h1-font-size;
+}
+
+%h2 {
+  @extend %heading;
+  font-size: $h2-font-size;
+}
+
+%h3 {
+  @extend %heading;
+  font-size: $h3-font-size;
+}
+
+%h4 {
+  @extend %heading;
+  font-size: $h4-font-size;
+}
+
+%h5 {
+  @extend %heading;
+  font-size: $h5-font-size;
+}
+
+%h6 {
+  @extend %heading;
+  font-size: $h6-font-size;
+}
+// stylelint-enable scss/percent-placeholder-pattern
+
+@mixin headings {
+  h1 {
+    @extend %h1;
+  }
+
+  h2 {
+    @extend %h2;
+  }
+
+  h3 {
+    @extend %h3;
+  }
+
+  h4 {
+    @extend %h4;
+  }
+
+  h5 {
+    @extend %h5;
+  }
+
+  h6 {
+    @extend %h6;
+  }
+}

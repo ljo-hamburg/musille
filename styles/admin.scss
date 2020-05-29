@@ -1,0 +1,5 @@
+/**
+This stylesheet is included in all admin pages.
+ */
+
+@use "site" with ($admin: true);
