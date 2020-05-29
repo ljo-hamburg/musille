@@ -195,6 +195,13 @@ class MusilleTheme extends Site {
 		register_block_style(
 			'core/group',
 			array(
+				'name'  => 'full-bg',
+				'label' => __( 'Full Background', 'musille' ),
+			)
+		);
+		register_block_style(
+			'core/group',
+			array(
 				'name'  => 'full-width',
 				'label' => __( 'Full Width', 'musille' ),
 			)

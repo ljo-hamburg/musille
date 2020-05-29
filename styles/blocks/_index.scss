@@ -6,7 +6,7 @@ $main-menu-height: 0 !default;
   $main-menu-height: $main-menu-height !default,
 );
 @forward "colors";
-@forward "group" as group-*;
+@forward "group" as group-* with ($editor: $editor);
 @forward "button";
 @forward "section-heading";
 @forward "code" as code-* with ($editor: $editor);
