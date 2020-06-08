@@ -3,25 +3,29 @@
  */
 
 @use "transition";
+@use "typography" as fonts;
+@use "colors";
+@use "card";
 
 %button {
-  // TODO: Update the design
   display: inline-block;
-  padding: 20px 40px;
-  color: #000;
+  padding: 10px 20px;
+  color: colors.$text;
+  font-weight: fonts.$heading-weight;
+  font-family: fonts.$heading-family;
+  letter-spacing: 1px;
+  text-align: center;
   text-transform: uppercase;
   text-decoration: none;
-  background-color: #fff;
-  border-radius: 100px;
-  transition: box-shadow transition.$default, transform transition.$default;
+  background-color: colors.$background;
+  border: 1px solid colors.$dark;
+  border-radius: card.$border-radius;
+  cursor: pointer;
+  transition: background-color transition.$default, color transition.$default;
 
   &:hover {
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
-    transform: translateY(-3px);
-  }
-
-  &:active {
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    transform: translateY(-1px);
+    color: colors.$background;
+    background-color: colors.$highlight;
+    border-color: colors.$highlight;
   }
 }

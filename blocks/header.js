@@ -15,7 +15,7 @@ import { registerBlockType, registerBlockStyle } from "@wordpress/blocks";
 import { useSelect } from "@wordpress/data";
 import { InspectorControls } from "@wordpress/block-editor";
 import { PanelBody, TextControl, ToggleControl } from "@wordpress/components";
-import ImageSelector from "./components/ImageSelector";
+import ImageSelector from "@ljo-hamburg/gutenberg-image-selector";
 
 const BLOCK_NAME = "musille/header";
 
@@ -118,18 +118,14 @@ registerBlockType(BLOCK_NAME, {
               onChange={(showAttribution) => setAttributes({ showAttribution })}
             />
             <ImageSelector
-              action={__("Select Background Image", "musille")}
-              removeAction={__("Remove Image", "musille")}
+              label={__("Select Background Image", "musille")}
+              removeLabel={__("Remove Image", "musille")}
               authMessage={__(
                 "To edit the background image, you need permission to upload media.",
                 "musille"
               )}
               imageID={imageID}
-              onChange={(media) =>
-                setAttributes({
-                  imageID: media ? media.id : null,
-                })
-              }
+              onChange={(imageID) => setAttributes({ imageID })}
             />
           </PanelBody>
         </InspectorControls>
@@ -150,6 +146,9 @@ registerBlockType(BLOCK_NAME, {
         </div>
       </Fragment>
     );
+  },
+  save() {
+    return null;
   },
 });
 

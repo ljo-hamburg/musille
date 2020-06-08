@@ -112,9 +112,11 @@ $admin: $editor !default;
       padding-top: 0;
     }
 
-    a {
+    // stylelint-disable selector-class-pattern
+    a:not(.wp-block-button__link):not(.button) {
       font-weight: 600;
     }
+    // stylelint-enable selector-class-pattern
   }
 }
 
@@ -122,7 +124,7 @@ $admin: $editor !default;
   @include text.headings;
   @include content;
 } @else if $editor {
-  .editor-styles-wrapper {
+  div.editor-styles-wrapper {
     @extend %text;
 
     @include content;

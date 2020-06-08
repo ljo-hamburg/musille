@@ -3,22 +3,34 @@ This file defines classes that may be applied to elements by the user to easily 
 the default theme styles. These classes should not be used by the theme itself.
  */
 
+$editor: false !default;
+
 @use "theme/card";
 @use "theme/button";
 @use "theme/overlay";
 
-.card {
-  @extend %card;
+@mixin styles {
+  .card {
+    @extend %card;
+  }
+
+  .button {
+    @extend %button;
+  }
+
+  .overlay {
+    @extend %overlay;
+  }
+
+  .center {
+    text-align: center;
+  }
 }
 
-.button {
-  @extend %button;
-}
-
-.overlay {
-  @extend %overlay;
-}
-
-.center {
-  text-align: center;
+@if $editor {
+  .editor-styles-wrapper {
+    @include styles;
+  }
+} @else {
+  @include styles;
 }

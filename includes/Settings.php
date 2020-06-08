@@ -9,6 +9,10 @@ declare(strict_types=1);
 
 namespace LJO\Musille;
 
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 use WP_Customize_Manager;
 
 /**

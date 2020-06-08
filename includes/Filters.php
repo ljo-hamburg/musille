@@ -9,6 +9,10 @@ declare(strict_types=1);
 
 namespace LJO\Musille;
 
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 /**
  * The `Filters` class contains implementations of some WordPress filters that are used
  * to configure the Musille theme. Not all filters used by the theme use methods from

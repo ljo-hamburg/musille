@@ -9,6 +9,10 @@ declare(strict_types=1);
 
 namespace LJO\Musille;
 
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 /**
  * The `MusilleSidebar` registers the main sidebar of the musille theme.
  *

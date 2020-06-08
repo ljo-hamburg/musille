@@ -1,0 +1,81 @@
+@use "../theme/typography" as fonts;
+@use "../theme/card";
+@use "../theme/colors";
+
+$editor: false !default;
+
+@mixin header-styles {
+  h2 {
+    margin-bottom: 10px;
+    font-weight: 800;
+    font-family: fonts.$family;
+    line-height: 1;
+    text-transform: uppercase;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  h3 {
+    margin-bottom: 0;
+    font-weight: 800;
+  }
+}
+
+@if ($editor) {
+  .post-type-concert {
+    // stylelint-disable selector-class-pattern
+    :not(.block-editor-inner-blocks) > .block-editor-block-list__layout > .wp-block:not([data-type="musille/header"]):not(.editor-post-title__block) {
+      // stylelint-enable selector-class-pattern
+      @extend %card;
+
+      &[data-type="core/image"] {
+        padding: 0;
+
+        figure {
+          overflow: hidden;
+          border-radius: card.$border-radius;
+        }
+      }
+    }
+
+    .editor-styles-wrapper {
+      @include header-styles;
+    }
+  }
+} @else {
+  .single-concert {
+    @include header-styles;
+
+    main#content {
+      display: flex;
+      flex-flow: column wrap;
+
+      &::after {
+        flex-basis: 100%;
+        order: 2;
+        width: 0;
+        content: "";
+      }
+
+      > * {
+        @extend %card;
+      }
+
+      > :not(.in-sidebar) {
+        order: 1;
+      }
+
+      > .in-sidebar {
+        order: 3;
+      }
+    }
+  }
+}
+
+.wp-block-wp-concerts-featured-concert {
+  a:not(:hover) {
+    color: colors.$text;
+  }
+}

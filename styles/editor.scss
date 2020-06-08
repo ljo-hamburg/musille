@@ -5,9 +5,10 @@
 
 @use "variables";
 @use "site" with ($editor: true);
-@use "user";
+@use "user" with ($editor: true);
 @use "blocks" with ($editor: true);
-@use "elements/forms" with ($editor: false);
+@use "elements/forms" with ($editor: true);
+@use "elements/concerts" with ($editor: true);
 
 // stylelint-disable selector-class-pattern
 .editor-post-featured-image__preview {

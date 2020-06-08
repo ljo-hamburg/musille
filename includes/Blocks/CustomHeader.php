@@ -9,6 +9,10 @@ declare(strict_types=1);
 
 namespace LJO\Musille\Blocks;
 
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 /**
  * The `CustomHeader` class registers the respective Gutenberg block that allows users
  * to modify the default theme header.
@@ -16,6 +20,7 @@ namespace LJO\Musille\Blocks;
  * @package LJO\Musille\Blocks
  */
 class CustomHeader {
+
 	/**
 	 * The name of the block as registered in the editor.
 	 *
@@ -57,6 +62,7 @@ class CustomHeader {
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'wp_concerts/load_meta', array( $this, 'init_concert' ), 10, 2 );
 	}
 
 	/**
@@ -124,5 +130,24 @@ class CustomHeader {
 			'musille',
 			get_template_directory() . '/languages'
 		);
+	}
+
+	// TODO: Add Concert parameter type.
+	/**
+	 * This hook is called when a `Concert` instance is created. If the user has set a
+	 * custom header image for a concert we add it to the concert images here so it is
+	 * available in the structured data as well.
+	 *
+	 * @param Concert $concert The concert instance.
+	 * @param int     $post_id The ID of the concert post.
+	 */
+	public function init_concert( $concert, int $post_id ) {
+		$image_id = get_post_meta( $post_id, self::IMAGE_ID_META_KEY, true );
+		if ( isset( $image_id ) ) {
+			$image = wp_get_attachment_image_src( $image_id, 'full' );
+			if ( isset( $image[0] ) ) {
+				$concert->image_urls[] = $image[0];
+			}
+		}
 	}
 }

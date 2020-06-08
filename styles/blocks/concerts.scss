@@ -1,0 +1,89 @@
+@use "../theme/typography" as fonts;
+@use "../theme/button";
+
+$editor: false !default;
+
+.wp-block-wp-concerts-cast-member {
+  line-height: 1.2;
+
+  .name-role {
+    display: flex;
+  }
+
+  .name {
+    margin-right: 8px;
+    font-weight: 800;
+
+    &::after {
+      content: " ";
+    }
+  }
+  @if $editor {
+    font-size: 16px;
+  }
+}
+
+.wp-block-wp-concerts-program-item {
+  line-height: 1.2;
+
+  .composer {
+    font-weight: 700;
+  }
+
+  .detail {
+    display: flex;
+
+    .link::before {
+      content: "\00a0—\00a0";
+    }
+  }
+  @if $editor {
+    font-size: 16px;
+  }
+}
+
+.wp-block-wp-concerts-tickets {
+  line-height: 1.2;
+
+  .availability {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #4e4e4e;
+    font-weight: 600;
+    font-size: 1.2em;
+  }
+
+  > .notes {
+    margin-top: 20px;
+  }
+
+  .button {
+    @extend %button;
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
+.wp-block-wp-concerts-ticket-item {
+  margin: 10px 0;
+
+  .price {
+    display: flex;
+    align-items: baseline;
+
+    .amount {
+      font-weight: 600;
+      font-size: 120%;
+    }
+
+    .extra {
+      font-weight: 400;
+      font-size: 0.8em;
+      line-height: 0.9;
+
+      &::before {
+        content: " ";
+      }
+    }
+  }
+}

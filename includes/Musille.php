@@ -9,6 +9,10 @@ declare(strict_types=1);
 
 namespace LJO\Musille;
 
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 use LJO\Musille\Blocks\CustomHeader;
 use Timber\Post;
 use Timber\PostQuery;
@@ -19,23 +23,23 @@ use Timber\Site;
  * registers hooks in WordPress that setup the Musille theme.
  *
  * In order to access this class (for example to use its methods or to remove some
- * hooks) you can use the {@link MusilleTheme::get_instance()} method.
+ * hooks) you can use the {@link Musille::get_instance()} method.
  *
  * @package LJO\Musille
  */
-class MusilleTheme extends Site {
+class Musille extends Site {
 
 	/**
 	 * The current instance of the `MusilleTheme`. Use
-	 * {@link MusilleTheme::get_instance()} to access it.
+	 * {@link Musille::get_instance()} to access it.
 	 *
-	 * @var MusilleTheme|null
+	 * @var Musille|null
 	 */
-	private static ?MusilleTheme $instance = null;
+	private static ?Musille $instance = null;
 
 	/**
 	 * Initializes the Musille theme. This method must not be called more than once.
-	 * Usually it is best to instead use {@link MusilleTheme::get_instance()} instead
+	 * Usually it is best to instead use {@link Musille::get_instance()} instead
 	 * which will lazily call this method.
 	 *
 	 * This method must be called before any hooks are invoked as it registers the
@@ -49,9 +53,9 @@ class MusilleTheme extends Site {
 	 * Returns the instance of `MusilleTheme`. If the instance does not yet exist it
 	 * will be created.
 	 *
-	 * @return MusilleTheme
+	 * @return Musille
 	 */
-	public static function get_instance(): MusilleTheme {
+	public static function get_instance(): Musille {
 		if ( ! self::$instance ) {
 			self::initialize();
 		}
@@ -79,6 +83,13 @@ class MusilleTheme extends Site {
 	 * @var Blocks\CustomHeader
 	 */
 	public Blocks\CustomHeader $header;
+
+	/**
+	 * The block-pseudo class that modifies existing blocks for the concerts theme.
+	 *
+	 * @var Blocks\Concerts
+	 */
+	public Blocks\Concerts $concerts_block;
 
 	/**
 	 * The main sidebar.
@@ -115,11 +126,12 @@ class MusilleTheme extends Site {
 			)
 		);
 		add_filter( 'widget_text', 'do_shortcode' );
-		$this->settings  = new Settings();
-		$this->main_menu = new MainMenu();
-		$this->header    = new Blocks\CustomHeader();
-		$this->sidebar   = new MusilleSidebar();
-		$this->footer    = new FooterMenu();
+		$this->settings       = new Settings();
+		$this->main_menu      = new MainMenu();
+		$this->header         = new Blocks\CustomHeader();
+		$this->concerts_block = new Blocks\Concerts();
+		$this->sidebar        = new MusilleSidebar();
+		$this->footer         = new FooterMenu();
 	}
 
 	/**
@@ -137,6 +149,7 @@ class MusilleTheme extends Site {
 		add_theme_support( 'gutenberg', array( 'wide-images' => true ) );
 		add_theme_support( 'wp-block-styles' );
 		add_theme_support( 'responsive-embeds' );
+		add_theme_support( 'html5', array( 'gallery', 'caption' ) );
 		add_theme_support(
 			'editor-color-palette',
 			array(

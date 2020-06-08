@@ -13,5 +13,6 @@ This is the main stylesheet of Musille. It is included on all frontend pages.
 @use "elements/widgets";
 @use "elements/pagination";
 @use "elements/footer";
+@use "elements/concerts";
 @use "blocks" with ($main-menu-height: main-menu.$height);
 @use "user";

@@ -11,3 +11,4 @@ $main-menu-height: 0 !default;
 @forward "section-heading";
 @forward "code" as code-* with ($editor: $editor);
 @forward "nextpage" as nextpage-* with ($editor: $editor);
+@forward "concerts" as concerts-* with ($editor: $editor);
