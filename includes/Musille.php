@@ -17,6 +17,7 @@ use LJO\Musille\Blocks\CustomHeader;
 use Timber\Post;
 use Timber\PostQuery;
 use Timber\Site;
+use Timber\Timber;
 
 /**
  * The `MusilleTheme` is the main entry point of the Musille theme. On creation it
@@ -116,6 +117,7 @@ class Musille extends Site {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_block_editor_assets' ) );
+		add_filter( 'document_title_parts', array( $this, 'filter_document_title' ) );
 
 		add_filter( 'timber/context', array( $this, 'setupContext' ) );
 		add_filter(
@@ -291,12 +293,42 @@ class Musille extends Site {
 		} elseif ( is_home() ) {
 			$post = new Post( get_option( 'page_for_posts' ) );
 		} else {
-			$post = null;
+			$post           = null;
+			$queried_object = get_queried_object();
+			if ( $queried_object instanceof \WP_Post_Type ) {
+				$slug = $queried_object->has_archive;
+				if ( ! is_string( $slug ) ) {
+					$slug = $queried_object->rewrite['slug'];
+				}
+				if ( ! is_string( $slug ) ) {
+					$slug = $queried_object->name;
+				}
+				$page_data = get_page_by_path( $slug );
+				$post      = $page_data ? new Post( $page_data->ID ) : null;
+			}
 		}
 		$context['site'] = $this;
 		$context['post'] = apply_filters( 'musille/post', $post );
 		$context['page'] = apply_filters( 'musille/page', new Page( $context['post'] ) );
 		return $context;
+	}
+
+	/**
+	 * Filters the document title. If the user has created a page living at the same
+	 * path as another part of the site that page should override the title. This filter
+	 * ensures that this is the case.
+	 *
+	 * @param array $title The current document title components.
+	 *
+	 * @return array The modified document title components.
+	 */
+	public function filter_document_title( array $title ): array {
+		$context = Timber::context();
+		$page    = $context['page'];
+		if ( $page ) {
+			$title['title'] = $page->title();
+		}
+		return $title;
 	}
 
 	/**

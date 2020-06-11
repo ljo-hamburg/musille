@@ -8,7 +8,7 @@
 $url: "https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|Oswald:300,400,700&subset=latin,latin-ext";
 
 $family: "Open Sans", sans-serif;
-$size: 14px;
+$size: 16px;
 $line-height: 26px;
 
 $heading-family: "Oswald", sans-serif;
@@ -18,9 +18,9 @@ $heading-letter-spacing: 1px;
 $h1-font-size: 34px;
 $h2-font-size: 30px;
 $h3-font-size: 26px;
-$h4-font-size: 22px;
-$h5-font-size: 18px;
-$h6-font-size: 16px;
+$h4-font-size: 23px;
+$h5-font-size: 20px;
+$h6-font-size: 18px;
 
 %text {
   color: colors.$text;
@@ -34,6 +34,15 @@ $h6-font-size: 16px;
   text-decoration: none;
   cursor: pointer;
   transition: color transition.$default;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    transition: color transition.$default;
+  }
 
   &:hover {
     color: colors.$highlight;

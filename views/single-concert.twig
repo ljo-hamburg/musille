@@ -1,0 +1,68 @@
+{#
+This is the page template used to display concerts.
+#}
+{% extends "base.twig" %}
+
+{% set blocks = function('parse_blocks', post.post_content) %}
+
+{% block body_class %}has-sidebar{% endblock %}
+
+{% block content %}
+  <div class="main">
+    <div class="concert-meta">
+      {% if concert.date %}
+        <a href="{{ concert.ics_url }}">
+          <time datetime="{{ concert.date|date("Y-m-d") }}" class="date">
+            <strong class="month">{{ concert.date|date("F") }}</strong>
+            <span class="day">{{ concert.date|date("d") }}</span>
+            <em class="weekday">{{ concert.date|date("l") }}</em>
+          </time>
+        </a>
+      {% endif %}
+      <div class="summary">
+        {% if concert.location %}
+          <div class="location">
+            {% if concert.location_url %}
+              <a class="name" href="{{ concert.location_url|e('esc_url') }}">{{ concert.location }}</a>
+            {% else %}
+              <span class="name">{{ concert.location }}</span>
+            {% endif %}
+            {% if concert.location_extra %}
+              <span class="extra">{{ concert.location_extra|e }}</span>
+            {% endif %}
+            {% if concert.location_address %}
+              <span class="address">{{ concert.location_address|e }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+        {% if concert.date %}
+          <div class="datetime">
+            <span class="date">{{ concert.date|date("l, j.n.Y") }}</span>
+            <span class="time">
+              {% if concert.end_date %}
+                {{ __("Time: %s – %s", "wp-concerts")|
+                  format(concert.date|date("H:i"),
+                         concert.end_date|date("H:i")) }}
+              {% else %}
+                {{ __("Time: %s", "wp-concerts")|format(concert.date|date("H:i")) }}
+              {% endif %}
+            </span>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    {% for block in blocks %}
+      {{ function('render_block', block) }}
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block aside %}
+  <aside class="sidebar">
+    {% for block in blocks %}
+      {% if block.attrs.sidebar %}
+        {{ function('render_block', block) }}
+      {% endif %}
+    {% endfor %}
+  </aside>
+{% endblock %}

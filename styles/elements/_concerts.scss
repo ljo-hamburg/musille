@@ -1,12 +1,14 @@
+@use "../theme/responsive" as *;
 @use "../theme/typography" as fonts;
 @use "../theme/card";
 @use "../theme/colors";
+@use "../theme/transition";
 
 $editor: false !default;
 
 @mixin header-styles {
   h2 {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-weight: 800;
     font-family: fonts.$family;
     line-height: 1;
@@ -48,29 +50,157 @@ $editor: false !default;
   .single-concert {
     @include header-styles;
 
-    main#content {
-      display: flex;
-      flex-flow: column wrap;
-
-      &::after {
-        flex-basis: 100%;
-        order: 2;
-        width: 0;
-        content: "";
-      }
-
-      > * {
+    .main,
+    .sidebar {
+      > :not(.concert-meta) {
         @extend %card;
+        margin-top: 20px;
+        margin-bottom: 20px;
       }
 
-      > :not(.in-sidebar) {
-        order: 1;
+      > :first-child {
+        margin-top: 0;
       }
 
-      > .in-sidebar {
-        order: 3;
+      > .wp-block-image {
+        margin-right: 0;
+        margin-left: 0;
+        padding: 0;
+      }
+
+      > .wp-block-uagb-google-map {
+        padding: 10px;
       }
     }
+
+    .main {
+      .in-sidebar {
+        @include media(">=laptop") {
+          display: none;
+        }
+      }
+    }
+
+    .sidebar {
+      display: none;
+      width: 30%;
+      margin-left: 20px;
+      @include media(">=laptop") {
+        display: block;
+      }
+    }
+  }
+}
+
+.main .concert-meta {
+  display: flex;
+  margin-bottom: 30px;
+
+  time.date {
+    display: flex;
+    flex-direction: column;
+    width: 70px;
+    overflow: hidden;
+    font-size: 0.25em;
+    background-color: #fff;
+    border-radius: 0.6em;
+    box-shadow: 0 1px 0 #bdbdbd, 0 2px 0 #fff, 0 3px 0 #bdbdbd, 0 4px 0 #fff, 0 5px 0 #bdbdbd, 0 0 0 1px #bdbdbd;
+    transition: 0.3s all;
+
+    @include media(">=phone") {
+      width: 120px;
+      font-size: 0.4em;
+    }
+
+    * {
+      font-weight: bold;
+      font-size: 1em;
+      font-style: normal;
+      text-align: center;
+    }
+
+    .month {
+      color: #fff;
+      font-size: 2.5em;
+      line-height: 2;
+      background-color: colors.$highlight;
+      box-shadow: 0 2px 0 colors.$highlight;
+      @include media(">=phone") {
+        padding: 0.4em 0;
+        line-height: unset;
+      }
+    }
+
+    .day {
+      padding-top: 0.3em;
+      color: #2f2f2f;
+      font-size: 6em;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      @include media(">=phone") {
+        padding-top: 0.5em;
+        padding-bottom: 0.4em;
+        line-height: unset;
+      }
+    }
+
+    .weekday {
+      color: colors.$text;
+      font-size: 2.2em;
+      line-height: 2.5;
+      transition: transition.$default;
+      @include media(">=phone") {
+        line-height: unset;
+      }
+    }
+
+    &:hover {
+      background-color: #f5f5f5;
+
+      .weekday {
+        color: colors.$highlight;
+      }
+    }
+  }
+
+  .summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: 10px;
+
+    @include media(">=phone") {
+      margin-left: 20px;
+    }
+  }
+
+  .location {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1.2em;
+
+    .name {
+      font-weight: 700;
+
+      &:not(:hover) {
+        color: colors.$text;
+      }
+    }
+
+    .extra::before {
+      content: "\00a0";
+    }
+
+    .address {
+      flex: 100%;
+      font-size: 1em;
+    }
+  }
+
+  .datetime {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
   }
 }
 

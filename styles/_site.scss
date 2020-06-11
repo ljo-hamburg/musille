@@ -102,10 +102,10 @@ $admin: $editor !default;
     flex-direction: column;
   }
 
-  main#content {
+  body > main {
     @extend %main-content-box;
     flex: 1;
-    padding-top: 20px;
+    width: 100%;
     padding-bottom: 20px;
 
     .page-template-template-no-header & {
@@ -113,10 +113,19 @@ $admin: $editor !default;
     }
 
     // stylelint-disable selector-class-pattern
-    a:not(.wp-block-button__link):not(.button) {
+    a {
       font-weight: 600;
     }
+
+    .wp-block-button__link,
+    .button {
+      font-weight: inherit;
+    }
     // stylelint-enable selector-class-pattern
+  }
+
+  body > header + main {
+    padding-top: 20px;
   }
 }
 

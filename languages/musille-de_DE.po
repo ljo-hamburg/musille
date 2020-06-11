@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: Musille 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/build\n"
 "POT-Creation-Date: 2020-05-27T11:44:37+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2020-06-01 14:34+0200\n"
 "Last-Translator: Kim Wittenburg <codello@wittenburg.kim>\n"
 "Language-Team: German <codello@wittenburg.kim>\n"
-"Language: \n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: WP-CLI 2.4.0\n"
+"X-Generator: Poedit 2.3.1\n"
 "X-Domain: musille\n"
 
 #. Theme Name of the theme
@@ -120,9 +120,8 @@ msgid "With Sidebar"
 msgstr ""
 
 #: blocks/header.js:360
-#, fuzzy
 msgid "Musille Header"
-msgstr "Musille"
+msgstr "Musille Header"
 
 #: blocks/header.js:361
 msgid "Customize the Musille Page Header."

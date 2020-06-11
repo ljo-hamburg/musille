@@ -152,8 +152,10 @@ class Page {
 			$title = __( 'Search', 'musille' );
 		} elseif ( is_404() ) {
 			$title = __( '404', 'musille' );
-		} else {
+		} elseif ( is_archive() ) {
 			$title = get_the_archive_title();
+		} else {
+			$title = get_the_title();
 		}
 
 		/**

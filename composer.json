@@ -3,6 +3,12 @@
   "description": "The Musille WordPress Theme.",
   "type": "project",
   "license": "GPL-3.0-or-later",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/ljo-hamburg/wp-concerts"
+    }
+  ],
   "require": {
     "php": "^7.4",
     "timber/timber": "^1.16",
@@ -14,7 +20,8 @@
     "dealerdirect/phpcodesniffer-composer-installer": "^0.6.2",
     "wp-coding-standards/wpcs": "^2.3",
     "wp-cli/wp-cli": "^2.4",
-    "wp-cli/i18n-command": "^2.2"
+    "wp-cli/i18n-command": "^2.2",
+    "ljo-hamburg/wp-concerts": "dev-master"
   },
   "authors": [
     {

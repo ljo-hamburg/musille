@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace LJO\Musille\Blocks;
 
+use LJO\WPConcerts\Concert;
+
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
@@ -62,7 +64,8 @@ class CustomHeader {
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'init' ) );
-		add_action( 'wp_concerts/load_meta', array( $this, 'init_concert' ), 10, 2 );
+		add_action( 'wp_concerts/load_meta', array( $this, 'init_concert' ) );
+		add_filter( 'wp_concerts/subtitle', array( $this, 'concert_subtitle' ), 10, 2 );
 	}
 
 	/**
@@ -132,22 +135,32 @@ class CustomHeader {
 		);
 	}
 
-	// TODO: Add Concert parameter type.
 	/**
 	 * This hook is called when a `Concert` instance is created. If the user has set a
 	 * custom header image for a concert we add it to the concert images here so it is
 	 * available in the structured data as well.
 	 *
 	 * @param Concert $concert The concert instance.
-	 * @param int     $post_id The ID of the concert post.
 	 */
-	public function init_concert( $concert, int $post_id ) {
-		$image_id = get_post_meta( $post_id, self::IMAGE_ID_META_KEY, true );
+	public function init_concert( Concert $concert ) {
+		$image_id = get_post_meta( $concert->id, self::IMAGE_ID_META_KEY, true );
 		if ( isset( $image_id ) ) {
 			$image = wp_get_attachment_image_src( $image_id, 'full' );
 			if ( isset( $image[0] ) ) {
 				$concert->image_urls[] = $image[0];
 			}
 		}
+	}
+
+	/**
+	 * Returns the subtitle for a concert based on the custom header. This integrates
+	 * the custom header with WP Concerts.
+	 *
+	 * @param string|null $subtitle The existing subtitle.
+	 * @param Concert     $concert The concert for which to get the subtitle.
+	 * @return string The subtitle for $concert.
+	 */
+	public function concert_subtitle( ?string $subtitle, Concert $concert ): ?string {
+		return get_post_meta( $concert->id, self::SUBTITLE_META_KEY, true );
 	}
 }

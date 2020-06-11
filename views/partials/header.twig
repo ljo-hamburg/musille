@@ -15,7 +15,7 @@ The main page header.
       <div class="subtitle">{{ page.subtitle }}</div>
     {% endif %}
 
-    {% if function("is_single") %}
+    {% if function("is_singular", "post") %}
       <div class="meta">
         {{ __("%s by %s in %s", "musille")|format(
           post.date,
