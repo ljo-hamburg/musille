@@ -1,11 +1,12 @@
 @use "../theme/responsive" as *;
 @use "../theme/typography" as fonts;
 @use "../theme/button";
+@use "../theme/colors";
 
 $editor: false !default;
 
 .wp-block-wp-concerts-cast-member {
-  margin-top: 10px;
+  margin-top: 15px;
   line-height: 1.2;
 
   .name-role {
@@ -16,8 +17,8 @@ $editor: false !default;
     margin-right: 8px;
     font-weight: 800;
 
-    &::after {
-      content: " ";
+    &:not(:hover) {
+      color: colors.$text;
     }
   }
   @if $editor {
