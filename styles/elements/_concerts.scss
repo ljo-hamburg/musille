@@ -50,6 +50,25 @@ $editor: false !default;
   .single-concert {
     @include header-styles;
 
+    main#content {
+      flex-wrap: wrap;
+    }
+
+    .cancelled-message {
+      @extend %card;
+      flex: 100%;
+      margin-bottom: 80px;
+      color: colors.$text;
+
+      h2 {
+        margin-bottom: 10px;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+
     .main,
     .sidebar {
       > :not(.concert-meta) {
@@ -74,6 +93,8 @@ $editor: false !default;
     }
 
     .main {
+      flex: 1;
+
       .in-sidebar {
         @include media(">=laptop") {
           display: none;
@@ -87,6 +108,26 @@ $editor: false !default;
       margin-left: 20px;
       @include media(">=laptop") {
         display: block;
+      }
+    }
+
+    &.cancelled main#content,
+    &.cancelled header {
+      color: #d3d3d3 !important;
+      filter: grayscale(100%);
+
+      .main *,
+      .sidebar * {
+        color: #d3d3d3 !important;
+      }
+
+      .wp-block-wp-concerts-tickets .link {
+        display: none;
+      }
+
+      .concert-meta .date .month {
+        background-color: #a9a9a9;
+        box-shadow: 0 2px 0 #a9a9a9;
       }
     }
   }

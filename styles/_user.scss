@@ -5,6 +5,7 @@ the default theme styles. These classes should not be used by the theme itself.
 
 $editor: false !default;
 
+@use "theme/responsive" as *;
 @use "theme/card";
 @use "theme/button";
 @use "theme/overlay";
@@ -24,6 +25,36 @@ $editor: false !default;
 
   .center {
     text-align: center;
+  }
+
+  .small-caps {
+    font-variant: small-caps;
+  }
+
+  .mt0 {
+    margin-top: 0;
+  }
+
+  .mb0 {
+    margin-bottom: 0;
+
+    + * {
+      margin-top: 0;
+    }
+  }
+
+  .nomargin {
+    margin: 0;
+
+    > * {
+      margin: 0;
+    }
+  }
+
+  .no-mobile {
+    @include media("<phone") {
+      display: none;
+    }
   }
 }
 

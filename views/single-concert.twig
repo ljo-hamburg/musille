@@ -8,6 +8,12 @@ This is the page template used to display concerts.
 {% block body_class %}has-sidebar{% endblock %}
 
 {% block content %}
+  {% if concert.cancelled %}
+    <div class="cancelled-message cancel">
+      <h2 class="cancel">{{ __('This concert has been cancelled', 'wp-concerts')|e('esc_html') }}</h2>
+      <p class="cancel">{{ concert.cancelled_message|e('esc_html') }}</p>
+    </div>
+  {% endif %}
   <div class="main">
     <div class="concert-meta">
       {% if concert.date %}

@@ -39,6 +39,7 @@ footer.footer-menu {
 footer.copyright {
   position: relative;
   width: 100%;
+  padding-bottom: env(safe-area-inset-bottom);
   color: #7b7b7b;
   font-weight: 600;
   font-size: 12px;
