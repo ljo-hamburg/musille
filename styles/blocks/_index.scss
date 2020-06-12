@@ -12,3 +12,5 @@ $main-menu-height: 0 !default;
 @forward "code" as code-* with ($editor: $editor);
 @forward "nextpage" as nextpage-* with ($editor: $editor);
 @forward "concerts" as concerts-* with ($editor: $editor);
+@forward "social-icons" as social-* with ($editor: $editor);
+@forward "latest-posts";

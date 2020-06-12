@@ -15,7 +15,6 @@ if ( ! defined( 'WPINC' ) ) {
 
 use LJO\Musille\Blocks\CustomHeader;
 use Timber\Post;
-use Timber\PostQuery;
 use Timber\Site;
 use Timber\Timber;
 
@@ -228,6 +227,26 @@ class Musille extends Site {
 				'label' => __( 'Section Heading', 'musille' ),
 			)
 		);
+		register_block_style(
+			'core/social-links',
+			array(
+				'name'  => 'large-white',
+				'label' => __(
+					'Large & White',
+					'musille'
+				),
+			)
+		);
+		register_block_style(
+			'core/latest-posts',
+			array(
+				'name'  => 'fancy',
+				'label' => __(
+					'Fancy',
+					'musille'
+				),
+			)
+		);
 		foreach ( array( 'post', 'page' ) as $post_type ) {
 			$post_type_object           = get_post_type_object( $post_type );
 			$post_type_object->template = array( array( CustomHeader::BLOCK_NAME ) );
@@ -325,7 +344,7 @@ class Musille extends Site {
 	public function filter_document_title( array $title ): array {
 		$context = Timber::context();
 		$page    = $context['page'];
-		if ( $page ) {
+		if ( ! is_front_page() && $page ) {
 			$title['title'] = $page->title();
 		}
 		return $title;

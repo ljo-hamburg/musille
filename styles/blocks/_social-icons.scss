@@ -1,0 +1,36 @@
+@use "../theme/colors";
+@use "../theme/transition";
+@use "../theme/responsive" as *;
+
+$editor: false !default;
+
+.wp-block-social-links.is-style-large-white {
+  .wp-social-link {
+    width: unset;
+    height: unset;
+    margin-right: 10px;
+    background: none;
+
+    @include media(">=tablet") {
+      margin-right: 40px;
+    }
+
+    @if not $editor {
+      transition: transition.$default;
+    }
+
+    a:hover {
+      color: colors.$highlight;
+    }
+  }
+
+  svg {
+    width: 60px;
+    height: 60px;
+
+    @include media(">=tablet") {
+      width: 80px;
+      height: 80px;
+    }
+  }
+}
