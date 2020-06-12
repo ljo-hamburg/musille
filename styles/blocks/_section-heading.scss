@@ -3,7 +3,8 @@
  */
 @use "../theme/typography" as fonts;
 
-.is-style-section {
+.is-style-section,
+.is-style-section.rich-text {
   font-weight: 700;
   font-family: fonts.$family;
   letter-spacing: 0;
