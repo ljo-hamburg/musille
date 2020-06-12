@@ -24,8 +24,12 @@ provides blocks to insert content at various places.
   {% endblock %}
   {% block main %}
     <main id="content">
-      {% block content %}{% endblock %}
-      {% block aside %}{% endblock %}
+      {% if post.password_required %}
+          {{ post.maybe_show_password_form }}
+      {% else %}
+        {% block content %}{% endblock %}
+        {% block aside %}{% endblock %}
+      {% endif %}
     </main>
   {% endblock %}
   {% block footer %}
