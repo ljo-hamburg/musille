@@ -9,10 +9,12 @@ $editor: false !default;
 @use "theme/card";
 @use "theme/button";
 @use "theme/overlay";
+@use "theme/transition";
 
 @mixin styles {
   .card {
     @extend %card;
+    max-width: unset;
   }
 
   .button {
@@ -25,6 +27,10 @@ $editor: false !default;
 
   .center {
     text-align: center;
+  }
+
+  .alignright {
+    text-align: right;
   }
 
   .small-caps {
@@ -55,6 +61,10 @@ $editor: false !default;
     @include media("<phone") {
       display: none;
     }
+  }
+
+  .animated {
+    transition: all transition.$default;
   }
 }
 

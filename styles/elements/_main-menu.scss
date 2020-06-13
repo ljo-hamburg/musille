@@ -38,8 +38,8 @@ $close-transition: max-height transition.$default-duration cubic-bezier(0, 1, 0,
   }
 
   @at-root .sticky#{&} {
-    @include responsive($height) {
-      height: responsive($height);
+    @include responsive($sticky-height) {
+      height: responsive($sticky-height);
     }
   }
 }

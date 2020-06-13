@@ -17,7 +17,7 @@
     left: 0;
     z-index: 0;
     margin-bottom: 0;
-    transition: 0.4s ease-out transition.$default-delay;
+    transition: transform 0.4s ease-out transition.$default-delay;
 
     &::before {
       position: absolute;

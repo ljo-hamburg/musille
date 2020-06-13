@@ -90,6 +90,10 @@ $editor: false !default;
       > .wp-block-uagb-google-map {
         padding: 10px;
       }
+
+      p:last-child {
+        margin-bottom: 0;
+      }
     }
 
     .main {
