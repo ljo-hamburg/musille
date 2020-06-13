@@ -98,12 +98,6 @@ $editor: false !default;
 
     .main {
       flex: 1;
-
-      .in-sidebar {
-        @include media(">=laptop") {
-          display: none;
-        }
-      }
     }
 
     .sidebar {
