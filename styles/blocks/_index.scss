@@ -14,3 +14,4 @@ $main-menu-height: 0 !default;
 @forward "concerts" as concerts-* with ($editor: $editor);
 @forward "social-icons" as social-* with ($editor: $editor);
 @forward "latest-posts";
+@forward "icon-grid" as icon-grid-* with ($editor: $editor);

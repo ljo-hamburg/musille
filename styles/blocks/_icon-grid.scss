@@ -1,0 +1,77 @@
+$editor: false !default;
+
+@use "../theme/typography" as fonts;
+@use "../theme/colors";
+@use "../theme/responsive" as *;
+@forward "node_modules/@fonticonpicker/react-fonticonpicker/dist/fonticonpicker.base-theme.react";
+
+@mixin block-styles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  @if $editor {
+    align-items: center;
+  }
+}
+
+@if $editor {
+  // stylelint-disable selector-class-pattern
+  .wp-block-musille-icon-grid > .block-editor-inner-blocks > .block-editor-block-list__layout {
+    // stylelint-enable selector-class-pattern
+    @include block-styles;
+
+    > .wp-block,
+    > .block-list-appender {
+      width: calc(25% - 2*15px);
+      margin-right: 15px;
+      margin-left: 15px;
+    }
+  }
+} @else {
+  .wp-block-musille-icon-grid {
+    @include block-styles;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+.wp-block-musille-icon-grid-icon {
+  @if not $editor {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    @include media(">=phone") {
+      width: 33%;
+    }
+    @include media(">=tablet") {
+      width: 25%;
+    }
+  }
+
+  a:not(:hover) {
+    color: colors.$text;
+  }
+
+  &.disabled,
+  &.disabled .description {
+    color: #d3d3d3;
+  }
+
+  .fas,
+  .far {
+    font-size: 70px;
+  }
+
+  .title {
+    margin-top: 10px;
+    margin-bottom: 0;
+    line-height: 1;
+    transition: initial;
+  }
+
+  .description {
+    color: #656565;
+    font-size: 80%;
+  }
+}

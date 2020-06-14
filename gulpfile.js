@@ -112,7 +112,7 @@ function buildBlocks() {
  */
 function buildStyles() {
   return src(["styles/*.scss", "!styles/_*.scss"])
-    .pipe(sourcemaps.init())
+    .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(
       sass({ outputStyle: production ? "compressed" : "expanded" }).on(
         "error",

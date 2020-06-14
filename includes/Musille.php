@@ -13,10 +13,10 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-use LJO\Musille\Blocks\CustomHeader;
 use Timber\Post;
 use Timber\Site;
 use Timber\Timber;
+use WP_Post_Type;
 
 /**
  * The `MusilleTheme` is the main entry point of the Musille theme. On creation it
@@ -92,6 +92,13 @@ class Musille extends Site {
 	public Blocks\Concerts $concerts_block;
 
 	/**
+	 * The icon grid block.
+	 *
+	 * @var Blocks\IconGrid
+	 */
+	public Blocks\IconGrid $icon_grid_block;
+
+	/**
 	 * The main sidebar.
 	 *
 	 * @var MusilleSidebar
@@ -127,12 +134,13 @@ class Musille extends Site {
 			)
 		);
 		add_filter( 'widget_text', 'do_shortcode' );
-		$this->settings       = new Settings();
-		$this->main_menu      = new MainMenu();
-		$this->header         = new Blocks\CustomHeader();
-		$this->concerts_block = new Blocks\Concerts();
-		$this->sidebar        = new MusilleSidebar();
-		$this->footer         = new FooterMenu();
+		$this->settings        = new Settings();
+		$this->main_menu       = new MainMenu();
+		$this->header          = new Blocks\CustomHeader();
+		$this->concerts_block  = new Blocks\Concerts();
+		$this->icon_grid_block = new Blocks\IconGrid();
+		$this->sidebar         = new MusilleSidebar();
+		$this->footer          = new FooterMenu();
 	}
 
 	/**
@@ -193,6 +201,12 @@ class Musille extends Site {
 	 */
 	public function init_theme(): void {
 		add_post_type_support( 'page', 'excerpt' );
+		wp_register_style(
+			'font-awesome',
+			'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css',
+			array(),
+			'5.13.0'
+		);
 	}
 
 	/**
@@ -249,7 +263,7 @@ class Musille extends Site {
 		);
 		foreach ( array( 'post', 'page' ) as $post_type ) {
 			$post_type_object           = get_post_type_object( $post_type );
-			$post_type_object->template = array( array( CustomHeader::BLOCK_NAME ) );
+			$post_type_object->template = array( array( Blocks\CustomHeader::BLOCK_NAME ) );
 		}
 	}
 
@@ -260,7 +274,7 @@ class Musille extends Site {
 		wp_enqueue_style(
 			'musille-editor',
 			get_template_directory_uri() . '/editor.css',
-			array(),
+			array( 'font-awesome' ),
 			filemtime( get_template_directory() . '/editor.css' )
 		);
 	}
@@ -272,7 +286,7 @@ class Musille extends Site {
 		wp_enqueue_style(
 			'musille',
 			get_template_directory_uri() . '/musille.css',
-			array(),
+			array( 'font-awesome' ),
 			filemtime( get_template_directory() . '/musille.css' )
 		);
 		wp_enqueue_script(
@@ -314,7 +328,7 @@ class Musille extends Site {
 		} else {
 			$post           = null;
 			$queried_object = get_queried_object();
-			if ( $queried_object instanceof \WP_Post_Type ) {
+			if ( $queried_object instanceof WP_Post_Type ) {
 				$slug = $queried_object->has_archive;
 				if ( ! is_string( $slug ) ) {
 					$slug = $queried_object->rewrite['slug'];

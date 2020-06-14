@@ -29,7 +29,15 @@ $editor: false !default;
     text-align: center;
   }
 
-  .alignright {
+  .text-align-left {
+    text-align: left;
+  }
+
+  .text-align-center {
+    text-align: center;
+  }
+
+  .text-align-right {
     text-align: right;
   }
 
