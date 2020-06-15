@@ -11,6 +11,8 @@ Go to [Releases](https://github.com/ljo-hamburg/musille/releases) and downlaod t
 
 The theme supports auto update functionality via [Plugin Update Checker](https://github.com/YahnisElsts/plugin-update-checker). This functionality is enabled by default.
 
+**Note**: This theme requires at least PHP 7.4.
+
 ## Comments
 
 The Musille theme **does not support comments**. Although it does nothing to prevent wordpress from using comment functionality, neither comments nor a comment form are included in the theme at the moment.
