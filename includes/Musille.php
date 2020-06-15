@@ -99,6 +99,13 @@ class Musille extends Site {
 	public Blocks\IconGrid $icon_grid_block;
 
 	/**
+	 * The staff grid block.
+	 *
+	 * @var Blocks\StaffGrid
+	 */
+	public Blocks\StaffGrid $staff_grid_block;
+
+	/**
 	 * The main sidebar.
 	 *
 	 * @var MusilleSidebar
@@ -134,13 +141,14 @@ class Musille extends Site {
 			)
 		);
 		add_filter( 'widget_text', 'do_shortcode' );
-		$this->settings        = new Settings();
-		$this->main_menu       = new MainMenu();
-		$this->header          = new Blocks\CustomHeader();
-		$this->concerts_block  = new Blocks\Concerts();
-		$this->icon_grid_block = new Blocks\IconGrid();
-		$this->sidebar         = new MusilleSidebar();
-		$this->footer          = new FooterMenu();
+		$this->settings         = new Settings();
+		$this->main_menu        = new MainMenu();
+		$this->header           = new Blocks\CustomHeader();
+		$this->concerts_block   = new Blocks\Concerts();
+		$this->icon_grid_block  = new Blocks\IconGrid();
+		$this->staff_grid_block = new Blocks\StaffGrid();
+		$this->sidebar          = new MusilleSidebar();
+		$this->footer           = new FooterMenu();
 	}
 
 	/**

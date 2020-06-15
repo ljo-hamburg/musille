@@ -1,0 +1,118 @@
+$editor: false !default;
+
+@use "../theme/typography" as fonts;
+@use "../theme/colors";
+@use "../theme/transition";
+@use "../theme/card";
+@use "../theme/responsive" as *;
+
+@mixin grid-style {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@if $editor {
+  // stylelint-disable selector-class-pattern
+  .wp-block-musille-staff-grid > .block-editor-inner-blocks > .block-editor-block-list__layout {
+    // stylelint-enable selector-class-pattern
+    @include grid-style;
+  }
+} @else {
+  .wp-block-musille-staff-grid {
+    @include grid-style;
+  }
+}
+
+@if $editor {
+  .wp-block[data-type="musille/staff-grid-item"] {
+    width: 50%;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}
+
+.wp-block-musille-staff-grid-item {
+  @if not $editor {
+    width: 100%;
+    padding: 10px;
+
+    @include media(">=phone") {
+      width: 50%;
+    }
+
+    @include media(">=tablet") {
+      width: 25%;
+    }
+  }
+
+  .image {
+    position: relative;
+    overflow: hidden;
+    border-radius: card.$border-radius;
+
+    &::before {
+      float: left;
+      width: 1px;
+      height: 0;
+      margin-left: -1px;
+      padding-top: 100%;
+      content: "";
+    }
+
+    &::after {
+      display: table;
+      clear: both;
+      content: "";
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.6);
+    opacity: 0;
+    transition: opacity 0.4s transition.$default-timing-function;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    > .name {
+      @extend %h3;
+      margin: 0;
+    }
+
+    > .meta {
+      font-size: fonts.$h4-font-size;
+      font-variant: small-caps;
+    }
+  }
+
+  > .name {
+    margin: 5px 0 0;
+    line-height: 1.2;
+  }
+
+  > .position {
+    color: #606060;
+  }
+
+}
