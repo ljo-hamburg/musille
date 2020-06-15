@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Musille 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/build\n"
-"POT-Creation-Date: 2020-05-27T11:44:37+00:00\n"
-"PO-Revision-Date: 2020-06-01 14:34+0200\n"
+"POT-Creation-Date: 2020-06-15T14:53:51+00:00\n"
+"PO-Revision-Date: 2020-06-15 17:08+0200\n"
 "Last-Translator: Kim Wittenburg <codello@wittenburg.kim>\n"
 "Language-Team: German <codello@wittenburg.kim>\n"
 "Language: de_DE\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Domain: musille\n"
 
 #. Theme Name of the theme
-#: includes/MusilleTheme.php:192
+#: includes/Musille.php:228
 msgid "Musille"
 msgstr "Musille"
 
@@ -38,177 +38,430 @@ msgstr "https://github.com/codello"
 msgid "Timber context not set in footer. Did you forget get_header()?"
 msgstr ""
 
-#: includes/FooterMenu.php:47
+#: includes/FooterMenu.php:51
 msgid "Footer Menu"
-msgstr ""
+msgstr "Folter-Menü"
 
-#: includes/MainMenu.php:40
+#: includes/MainMenu.php:45
 msgid "Main Menu"
 msgstr "Hauptmenü"
 
-#: includes/MusilleSidebar.php:39
-msgid "Main MusilleSidebar"
-msgstr ""
-
-#: includes/MusilleTheme.php:143
+#: includes/Musille.php:174
 msgid "Primary"
-msgstr ""
+msgstr "Primär"
 
-#: includes/MusilleTheme.php:148
+#: includes/Musille.php:179
 msgid "Accent"
-msgstr ""
+msgstr "Akzent"
 
-#: includes/MusilleTheme.php:153
+#: includes/Musille.php:184
 msgid "Link"
-msgstr ""
+msgstr "Link"
 
-#: includes/MusilleTheme.php:158
+#: includes/Musille.php:189
 msgid "Dark"
-msgstr ""
+msgstr "Dunkel"
 
-#: includes/MusilleTheme.php:163
+#: includes/Musille.php:194
 msgid "White"
-msgstr ""
+msgstr "Weiß"
 
-#: includes/MusilleTheme.php:168
+#: includes/Musille.php:199
 msgid "Black"
-msgstr ""
+msgstr "Schwarz"
 
-#: includes/MusilleTheme.php:199
+#: includes/Musille.php:235
+msgid "Full Background"
+msgstr "Volle Hintergrundbreite"
+
+#: includes/Musille.php:242
 msgid "Full Width"
-msgstr ""
+msgstr "Volle Breite"
 
-#: includes/MusilleTheme.php:206
+#: includes/Musille.php:249
 msgid "Section Heading"
-msgstr ""
+msgstr "Abschnitts-Überschrift"
 
-#: includes/Page.php:148
+#: includes/Musille.php:256
+msgid "Large & White"
+msgstr "Groß und Weiß"
+
+#: includes/Musille.php:266 blocks/header.js:284
+msgid "Fancy"
+msgstr "Fancy"
+
+#: includes/MusilleSidebar.php:43
+msgid "Musille Sidebar"
+msgstr "Musille Seitenleiste"
+
+#: includes/Page.php:152 blocks/icon-grid.js:300
 msgid "Search"
-msgstr ""
+msgstr "Suchen"
 
-#: includes/Page.php:150
+#: includes/Page.php:154
 msgid "404"
-msgstr ""
+msgstr "404"
 
 #. Translators: Page title for search results.
-#: includes/Page.php:173
+#: includes/Page.php:179
 msgid "Results for \"%s\""
-msgstr ""
+msgstr "Suchergebnisse für „%s“"
 
-#: includes/Page.php:175
+#: includes/Page.php:181
 msgid "Page not found"
-msgstr ""
+msgstr "Seite nicht gefunden"
 
-#: includes/Settings.php:47
+#: includes/Settings.php:51
 msgid "Copyright"
-msgstr ""
+msgstr "Copyright"
 
-#: includes/Settings.php:48
+#: includes/Settings.php:52
 msgid "The copyright notice to be displayed in the page footer."
+msgstr "Die Copyright-Anmerkung im Footer der Seite."
+
+#: single-concert.php:23
+msgid ""
+"An error occurred loading the concert. This error cannot be fixed "
+"automatically."
 msgstr ""
+"Beim Laden der Seite ist ein Fehler aufgetreten. Dieser Fehler kann nicht "
+"automatisch behoben werden."
 
 #. Template Name of the theme
 msgid "Full"
-msgstr ""
+msgstr "Komplett"
 
 #. Template Name of the theme
 msgid "No Header"
-msgstr ""
+msgstr "Kein Header"
 
 #. Template Name of the theme
 msgid "With Sidebar"
-msgstr ""
+msgstr "Mit Seitenleiste"
 
-#: blocks/header.js:360
+#: blocks/concerts.js:144
+msgid "Appearance"
+msgstr "Darstellung"
+
+#: blocks/concerts.js:146
+msgid "Show in sidebar"
+msgstr "In Seitenleiste zeigen"
+
+#: blocks/concerts.js:147
+msgid "Show this block in the sidebar if the screen is large enough"
+msgstr ""
+"Zeige diesen Block in der Seitenleiste, wenn der Bildschirm groß genug ist"
+
+#: blocks/header.js:134
 msgid "Musille Header"
 msgstr "Musille Header"
 
-#: blocks/header.js:361
+#: blocks/header.js:135
 msgid "Customize the Musille Page Header."
-msgstr ""
+msgstr "Wähle ein Header-Design für diese Seite."
 
-#: blocks/header.js:448
+#: blocks/header.js:222
 msgid "Background Image"
-msgstr ""
+msgstr "Hintergrundbild"
 
-#: blocks/header.js:451
+#: blocks/header.js:225
 msgid "Image Attribution"
 msgstr "Urheberrecht anzeigen"
 
-#: blocks/header.js:452
+#: blocks/header.js:226
 msgid "Display the image's caption as an attribution notice."
-msgstr ""
+msgstr "Zeige die Beschriftung des Bildes als Urheberrechtsanmerkung."
 
-#: blocks/header.js:460
+#: blocks/header.js:234
 msgid "Select Background Image"
-msgstr ""
+msgstr "Hintergrundbild auswählen"
 
-#: blocks/header.js:461
+#: blocks/header.js:235
 msgid "Remove Image"
-msgstr ""
+msgstr "Bild entfernen"
 
-#: blocks/header.js:462
+#: blocks/header.js:236
 msgid "To edit the background image, you need permission to upload media."
-msgstr ""
+msgstr "Die Berechtigung zum Hochladen von Bildern fehlt."
 
-#: blocks/header.js:481
+#: blocks/header.js:255
 msgid "Subtitle"
-msgstr ""
+msgstr "Untertitel"
 
-#: blocks/header.js:494
+#: blocks/header.js:271
 msgid "Basic"
-msgstr ""
+msgstr "Normal"
 
-#: blocks/header.js:499
+#: blocks/header.js:276
 msgid "Colored"
-msgstr ""
+msgstr "Farbig"
 
-#: blocks/header.js:503
+#: blocks/header.js:280
 msgid "With Subtitle"
-msgstr ""
+msgstr "Mit Untertitel"
 
-#: blocks/header.js:507
-msgid "Fancy"
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Accessibility"
+msgstr "Barrierefreiheit"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Arrows"
+msgstr "Pfeile"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Audio & Video"
+msgstr "Audio & Video"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Business"
+msgstr "Geschäftlich"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Chess"
+msgstr "Schach"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Code"
+msgstr "Code"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Communication"
+msgstr "Kommunikation"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Computers"
+msgstr "Computer"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Currency"
+msgstr "Währungen"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Date & Time"
+msgstr "Datum & Uhrzeit"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Design"
+msgstr "Design"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Editors"
+msgstr "Formatierungen"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Files"
+msgstr "Dateien"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Genders"
+msgstr "Geschlecht"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Hands"
+msgstr "Hände"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Health"
+msgstr "Gesundheit"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Images"
+msgstr "Bilder"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Interfaces"
+msgstr "Interfaces"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Maps"
+msgstr "Karten"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Objects"
+msgstr "Objekte"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Payments & Shopping"
+msgstr "Shopping"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Shapes"
+msgstr "Formen"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Spinners"
+msgstr "Ladesymbole"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Sports"
+msgstr "Sport"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Status"
+msgstr "Status"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Users & People"
+msgstr "Benutzer & Menschen"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Vehicles"
+msgstr "Fahrzeuge"
+
+#: blocks/icon-grid.js:107
+msgctxt "Font Awesome"
+msgid "Writing"
+msgstr "Schreiben"
+
+#: blocks/icon-grid.js:224
+msgid "Icon Grid"
+msgstr "Symbole"
+
+#: blocks/icon-grid.js:225
+msgid "A list of action icons."
+msgstr "Eine Liste von Symbolen und Aktionen."
+
+#: blocks/icon-grid.js:246 blocks/icon-grid.js:289
+msgid "Icon"
+msgstr "Icon"
+
+#: blocks/icon-grid.js:247
+msgid "An Action Item"
+msgstr "Ein Action-Item"
+
+#: blocks/icon-grid.js:299
+msgid "All Categories"
+msgstr "Alle Kategorien"
+
+#: blocks/icon-grid.js:301
+msgid "No Icons Found"
+msgstr "Keine Icons gefunden"
+
+#: blocks/icon-grid.js:336
+msgid "Title"
+msgstr "Titel"
+
+#: blocks/icon-grid.js:347
+msgid "Description"
+msgstr "Beschreibung"
+
+#: blocks/staff-grid.js:128
+msgid "Staff Grid"
+msgstr "Mitarbeiter"
+
+#: blocks/staff-grid.js:129
+msgid "A list of staff members."
+msgstr "Eine Liste von Mitarbeitern."
+
+#: blocks/staff-grid.js:150
+msgid "Staff Member"
+msgstr "Mitarbeiter"
+
+#: blocks/staff-grid.js:151
+msgid "A staff grid item."
+msgstr "Ein einzelner Mitarbeiter."
+
+#: blocks/staff-grid.js:191 blocks/staff-grid.js:193
+msgid "Photo"
+msgstr "Foto"
+
+#: blocks/staff-grid.js:194
+msgid "To edit the photo, you need permission to upload media."
 msgstr ""
+"Um das Foto zu bearbeiten, sind Rechte zum Hochladen von Medien erforderlich."
+
+#: blocks/staff-grid.js:202
+msgid "Extra Info"
+msgstr "Zusatzinformationen"
+
+#: blocks/staff-grid.js:210
+msgid "Show Photo Attribution"
+msgstr "Urheberrecht anzeigen"
+
+#: blocks/staff-grid.js:219
+msgid "Select a Photo"
+msgstr "Foto auswählen"
+
+#: blocks/staff-grid.js:220
+msgid "Select a photo for this staff member in the inspector."
+msgstr "Wähle das Foto für diese*n Mitarbeiter*in in der Seitenleiste."
+
+#: blocks/staff-grid.js:246
+msgid "Name"
+msgstr "Name"
+
+#: blocks/staff-grid.js:257
+msgid "Position"
+msgstr "Position"
 
 #: views/404.twig:53
 msgid ""
 "Sorry, the page you are looking for does not exist. Please return back to "
 "the site&#39;s homepage or contact us to report a problem."
 msgstr ""
+"Die aufgerufene Seite existiert leider nicht. Bitte gehen Sie zurück zur "
+"Startseite oder kontaktieren Sie uns, um ein Problem mit der Website zu "
+"melden."
 
 #: views/404.twig:59
 msgid "Go Home"
-msgstr ""
+msgstr "Zur Startseite"
 
 #: views/index.twig:89
 msgid "Nothing to see here…"
-msgstr ""
+msgstr "Hier gibt es nichts zu sehen…"
 
 #: views/partials/header.twig:83
 msgid "%s by %s in %s"
-msgstr ""
+msgstr "%s von %s in %s"
 
 #: views/partials/pagination.twig:55
 msgid "< Newer"
-msgstr ""
+msgstr "< Neuer"
 
 #: views/partials/pagination.twig:61
 msgid "< Previous"
-msgstr ""
+msgstr "< Vorherige"
 
 #: views/partials/pagination.twig:121
 msgid "Older >"
-msgstr ""
+msgstr "Älter >"
 
 #: views/partials/pagination.twig:127
 msgid "Next >"
-msgstr ""
+msgstr "Nächste >"
 
 #: views/partials/post-item.twig:82
 msgid "Published on %s by %s in %s"
-msgstr ""
+msgstr "Veröffentlicht am %s von %s in %s"
 
 #: views/partials/post-item.twig:91
 msgid "Published on %s by %s"
-msgstr ""
+msgstr "Veröffentlicht am %s von %s"
