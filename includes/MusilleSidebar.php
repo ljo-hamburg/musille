@@ -40,7 +40,7 @@ class MusilleSidebar {
 	public function register_sidebar() {
 		register_sidebar(
 			array(
-				'name'          => esc_html__( 'Main MusilleSidebar', 'musille' ),
+				'name'          => esc_html__( 'Musille Sidebar', 'musille' ),
 				'id'            => self::SLUG,
 				'before_widget' => '<div id="%1$s" class="widget %2$s">',
 				'after_widget'  => '</div>',
