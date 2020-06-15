@@ -12,6 +12,7 @@ import {
   Placeholder,
   Spinner,
   TextControl,
+  ToggleControl,
 } from "@wordpress/components";
 import ImageSelector from "@ljo-hamburg/gutenberg-image-selector";
 import { useSelect } from "@wordpress/data";
@@ -71,10 +72,13 @@ registerBlockType(ITEM_BLOCK_NAME, {
     meta: {
       type: "string",
     },
+    showAttribution: {
+      type: "boolean",
+    },
   },
   edit({
     className,
-    attributes: { imageID, name, position, meta },
+    attributes: { imageID, name, position, meta, showAttribution },
     setAttributes,
   }) {
     const image = useSelect((select) => select("core").getMedia(imageID), [
@@ -101,6 +105,11 @@ registerBlockType(ITEM_BLOCK_NAME, {
               value={meta}
               onChange={(meta) => setAttributes({ meta })}
             />
+            <ToggleControl
+              label={__("Show Photo Attribution", "musille")}
+              checked={showAttribution}
+              onChange={(showAttribution) => setAttributes({ showAttribution })}
+            />
           </PanelBody>
         </InspectorControls>
         {!imageID && (
@@ -122,6 +131,9 @@ registerBlockType(ITEM_BLOCK_NAME, {
                 <div className="name">{name}</div>
                 <div className="meta">{meta}</div>
               </div>
+              {showAttribution && (
+                <span className="attribution">{image.caption.raw}</span>
+              )}
             </div>
             <RichText
               tagName="h3"
@@ -144,7 +156,7 @@ registerBlockType(ITEM_BLOCK_NAME, {
       </>
     );
   },
-  save({ attributes: { image, name, position, meta } }) {
+  save({ attributes: { image, name, position, meta, showAttribution } }) {
     if (!image) {
       return null;
     }
@@ -156,6 +168,9 @@ registerBlockType(ITEM_BLOCK_NAME, {
             <div className="name">{name}</div>
             <div className="meta">{meta}</div>
           </div>
+          {showAttribution && (
+            <span className="attribution">{image.caption.raw}</span>
+          )}
         </div>
         <RichText.Content tagName="h3" className="name" value={name} />
         <RichText.Content tagName="div" className="position" value={position} />

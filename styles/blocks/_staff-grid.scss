@@ -106,6 +106,16 @@ $editor: false !default;
     }
   }
 
+  .attribution {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+    z-index: 1;
+    text-align: right;
+    pointer-events: none;
+  }
+
   > .name {
     margin: 5px 0 0;
     line-height: 1.2;
