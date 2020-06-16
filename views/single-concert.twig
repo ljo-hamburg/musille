@@ -10,7 +10,7 @@ This is the page template used to display concerts.
 {% block content %}
   {% if concert.cancelled %}
     <div class="cancelled-message cancel">
-      <h2 class="cancel">{{ __('This concert has been cancelled', 'wp-concerts')|e('esc_html') }}</h2>
+      <h2 class="cancel">{{ __('This concert has been cancelled', 'musille')|e('esc_html') }}</h2>
       <p class="cancel">{{ concert.cancelled_message|e('esc_html') }}</p>
     </div>
   {% endif %}
@@ -46,11 +46,11 @@ This is the page template used to display concerts.
             <span class="date">{{ concert.date|date("l, j.n.Y") }}</span>
             <span class="time">
               {% if concert.end_date %}
-                {{ __("Time: %s – %s", "wp-concerts")|
+                {{ __("Time: %s – %s", "musille") |
                   format(concert.date|date("H:i"),
                          concert.end_date|date("H:i")) }}
               {% else %}
-                {{ __("Time: %s", "wp-concerts")|format(concert.date|date("H:i")) }}
+                {{ __("Time: %s", "musille") | format(concert.date|date("H:i")) }}
               {% endif %}
             </span>
           </div>

@@ -1,0 +1,24 @@
+{#
+Renders a list of concerts, potentially augmenting it with the contents of a page.. This
+template is roughly equivalent to the WordPress archive-concert.php template.
+#}
+{% extends "template-full.twig" %}
+
+{% block content %}
+  {% if page.has_post %}
+    <article class="{{ post.class }}">
+      {{ post.content }}
+    </article>
+  {% endif %}
+  <div class="post-list">
+    {% for post in posts %}
+      {% set concert = function('\\LJO\\WPConcerts\\Concert::get', post.id) %}
+      {{ concert.html(true, false) }}
+    {% else %}
+      <h2 class="message">{{ __("Nothing to see here…", "musille") }}</h2>
+    {% endfor %}
+    {% block pagination %}
+      {% include "partials/pagination.twig" %}
+    {% endblock %}
+  </div>
+{% endblock %}

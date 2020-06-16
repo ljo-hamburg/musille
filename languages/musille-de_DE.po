@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Musille 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/build\n"
-"POT-Creation-Date: 2020-06-15T14:53:51+00:00\n"
-"PO-Revision-Date: 2020-06-15 17:08+0200\n"
+"POT-Creation-Date: 2020-06-16T20:33:45+00:00\n"
+"PO-Revision-Date: 2020-06-16 22:34+0200\n"
 "Last-Translator: Kim Wittenburg <codello@wittenburg.kim>\n"
 "Language-Team: German <codello@wittenburg.kim>\n"
 "Language: de_DE\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Domain: musille\n"
 
 #. Theme Name of the theme
-#: includes/Musille.php:228
+#: includes/Musille.php:236
 msgid "Musille"
 msgstr "Musille"
 
@@ -46,47 +46,47 @@ msgstr "Folter-Menü"
 msgid "Main Menu"
 msgstr "Hauptmenü"
 
-#: includes/Musille.php:174
+#: includes/Musille.php:175
 msgid "Primary"
 msgstr "Primär"
 
-#: includes/Musille.php:179
+#: includes/Musille.php:180
 msgid "Accent"
 msgstr "Akzent"
 
-#: includes/Musille.php:184
+#: includes/Musille.php:185
 msgid "Link"
 msgstr "Link"
 
-#: includes/Musille.php:189
+#: includes/Musille.php:190
 msgid "Dark"
 msgstr "Dunkel"
 
-#: includes/Musille.php:194
+#: includes/Musille.php:195
 msgid "White"
 msgstr "Weiß"
 
-#: includes/Musille.php:199
+#: includes/Musille.php:200
 msgid "Black"
 msgstr "Schwarz"
 
-#: includes/Musille.php:235
+#: includes/Musille.php:243
 msgid "Full Background"
 msgstr "Volle Hintergrundbreite"
 
-#: includes/Musille.php:242
+#: includes/Musille.php:250
 msgid "Full Width"
 msgstr "Volle Breite"
 
-#: includes/Musille.php:249
+#: includes/Musille.php:257
 msgid "Section Heading"
 msgstr "Abschnitts-Überschrift"
 
-#: includes/Musille.php:256
+#: includes/Musille.php:264
 msgid "Large & White"
 msgstr "Groß und Weiß"
 
-#: includes/Musille.php:266 blocks/header.js:284
+#: includes/Musille.php:274 blocks/header.js:284
 msgid "Fancy"
 msgstr "Fancy"
 
@@ -139,15 +139,15 @@ msgstr "Kein Header"
 msgid "With Sidebar"
 msgstr "Mit Seitenleiste"
 
-#: blocks/concerts.js:144
+#: blocks/concerts.js:145
 msgid "Appearance"
 msgstr "Darstellung"
 
-#: blocks/concerts.js:146
+#: blocks/concerts.js:147
 msgid "Show in sidebar"
 msgstr "In Seitenleiste zeigen"
 
-#: blocks/concerts.js:147
+#: blocks/concerts.js:148
 msgid "Show this block in the sidebar if the screen is large enough"
 msgstr ""
 "Zeige diesen Block in der Seitenleiste, wenn der Bildschirm groß genug ist"
@@ -434,7 +434,7 @@ msgstr ""
 msgid "Go Home"
 msgstr "Zur Startseite"
 
-#: views/index.twig:89
+#: views/archive-concert.twig:85 views/archive.twig:103 views/index.twig:89
 msgid "Nothing to see here…"
 msgstr "Hier gibt es nichts zu sehen…"
 
@@ -465,3 +465,15 @@ msgstr "Veröffentlicht am %s von %s in %s"
 #: views/partials/post-item.twig:91
 msgid "Published on %s by %s"
 msgstr "Veröffentlicht am %s von %s"
+
+#: views/single-concert.twig:68
+msgid "This concert has been cancelled"
+msgstr "Dieses Konzert wurde leider abgesagt"
+
+#: views/single-concert.twig:168
+msgid "Time: %s – %s"
+msgstr "%s – %s Uhr"
+
+#: views/single-concert.twig:176
+msgid "Time: %s"
+msgstr "%s Uhr"

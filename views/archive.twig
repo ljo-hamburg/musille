@@ -1,0 +1,23 @@
+{#
+Renders a list of posts, potentially augmenting it with the contents of a page.. This
+template is roughly equivalent to the WordPress archive.php template.
+#}
+{% extends "template-sidebar.twig" %}
+
+{% block content %}
+  {% if page.has_post %}
+    <article class="{{ post.class }}">
+      {{ post.content }}
+    </article>
+  {% endif %}
+  <div class="post-list">
+    {% for post in posts %}
+      {% include "partials/post-item.twig" with {'post': post} %}
+    {% else %}
+      <h2 class="message">{{ __("Nothing to see here…", "musille") }}</h2>
+    {% endfor %}
+    {% block pagination %}
+      {% include "partials/pagination.twig" %}
+    {% endblock %}
+  </div>
+{% endblock %}

@@ -13,10 +13,10 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-use Cassandra\Custom;
 use LJO\Musille\Blocks\CustomHeader;
 use Timber\Image;
 use Timber\Post;
+use WP_Query;
 
 /**
  * An object of the `Page` class wraps the current `Post` object providing fallbacks
@@ -27,20 +27,80 @@ use Timber\Post;
 class Page {
 
 	/**
-	 * The post associated with the current page, if any.
+	 * The `Page` instance representing the current page.
+	 *
+	 * @var Page|null
+	 */
+	private static ?Page $current_page = null;
+
+	/**
+	 * Returns the singleton instance of the current page. This is the preferred way of
+	 * obtaining a `Page` instance.
+	 *
+	 * @return Page
+	 */
+	public static function current(): Page {
+		if ( ! isset( self::$current_page ) ) {
+			self::$current_page = new Page();
+		}
+		return self::$current_page;
+	}
+
+	/**
+	 * The query that this page represents.
+	 *
+	 * @var WP_Query
+	 */
+	public WP_Query $query;
+
+	/**
+	 * The post object representing the single post for this page. For singular pages
+	 * this is the singular post object. For other pages this object might be set to the
+	 * post object for a page that is associated with that URL. For example for an
+	 * archive page this might be set to the post with the same URL as the archive page.
 	 *
 	 * @var Post|null
 	 */
-	public ?Post $post;
+	public ?Post $post = null;
 
 	/**
-	 * Page constructor. Creates a new `Page` object representing the specified post.
+	 * Page constructor. Creates a new `Page` object representing the specified query.
 	 *
-	 * @param Post|null $post The post that this page represents or `null` if this page
-	 *                        is not associated with a single post object.
+	 * @param WP_Query|null $query The query represented by this page. If this is falsey
+	 *                             the main query is used.
 	 */
-	public function __construct( ?Post $post ) {
-		$this->post = $post;
+	protected function __construct( ?WP_Query $query = null ) {
+		if ( ! isset( $query ) ) {
+			global $wp_query;
+			$query = $wp_query;
+		}
+		$this->query = $query;
+		$this->initialize( $query );
+	}
+
+	/**
+	 * Initializes the page with the specified query.
+	 *
+	 * @param WP_Query $query The same as `$this->query`.
+	 */
+	protected function initialize( WP_Query $query ) {
+		if ( $query->is_singular() ) {
+			$this->post = new Post( $query->get_queried_object_id() );
+		} elseif ( $query->is_home() ) {
+			$this->post = new Post( get_option( 'page_for_posts' ) );
+		} elseif ( $query->is_post_type_archive() ) {
+			$post           = null;
+			$queried_object = $query->get_queried_object();
+			$slug           = $queried_object->has_archive;
+			if ( ! is_string( $slug ) ) {
+				$slug = $queried_object->rewrite['slug'];
+			}
+			if ( ! is_string( $slug ) ) {
+				$slug = $queried_object->name;
+			}
+			$page_data  = get_page_by_path( $slug );
+			$this->post = $page_data ? new Post( $page_data->ID ) : null;
+		}
 	}
 
 	/**
@@ -78,8 +138,9 @@ class Page {
 		 * Filters the background image display on a page.
 		 *
 		 * @param Image $background The background as specified by the post.
+		 * @param Page $page The page for which to filter the background.
 		 */
-		return apply_filters( 'musille/header_background', $background );
+		return apply_filters( 'musille/header_background', $background, $this );
 	}
 
 	/**
@@ -97,8 +158,9 @@ class Page {
 			 * Filters the default value for whether to show an attribution text or not.
 			 *
 			 * @param bool $value `false` by default.
+			 * @param Page $page The page for which to filter the attribution flag.
 			 */
-			$show_attribution = apply_filters( 'musille/show_header_attribution', false );
+			$show_attribution = apply_filters( 'musille/show_header_attribution', false, $this );
 		}
 
 		if ( $show_attribution ) {
@@ -112,8 +174,9 @@ class Page {
 		 *
 		 * @param string $attribution The attribution from the displayed image or the
 		 *                            empty string if no attribution exists.
+		 * @param Page $page The page for which to filter the attribution value.
 		 */
-		return apply_filters( 'musille/header_attribution', $attribution );
+		return apply_filters( 'musille/header_attribution', $attribution, $this );
 	}
 
 	/**
@@ -125,7 +188,7 @@ class Page {
 	public function header_style(): string {
 		if ( $this->has_post() ) {
 			$style = $this->post->meta( CustomHeader::HEADER_STYLE_META_KEY ) ?? 'basic';
-		} elseif ( is_404() ) {
+		} elseif ( $this->query->is_404() ) {
 			$style = 'fancy';
 		} else {
 			$style = 'basic';
@@ -136,8 +199,9 @@ class Page {
 		 *
 		 * @param string $style The header style as specified by the post or `'basic'`
 		 *                      for all other pages.
+		 * @param Page $page The page for which to filter the header style.
 		 */
-		return apply_filters( 'musille/header_style', $style );
+		return apply_filters( 'musille/header_style', $style, $this );
 	}
 
 	/**
@@ -148,11 +212,12 @@ class Page {
 	public function title(): string {
 		if ( $this->has_post() ) {
 			$title = $this->post->title();
-		} elseif ( is_search() ) {
+		} elseif ( $this->query->is_search() ) {
 			$title = __( 'Search', 'musille' );
-		} elseif ( is_404() ) {
+		} elseif ( $this->query->is_404() ) {
 			$title = __( '404', 'musille' );
-		} elseif ( is_archive() ) {
+		} elseif ( $this->query->is_archive() ) {
+			// FIXME: This only works for the main query.
 			$title = get_the_archive_title();
 		} else {
 			$title = get_the_title();
@@ -162,8 +227,9 @@ class Page {
 		 * Filters the page title before it is displayed.
 		 *
 		 * @param string $title The default title.
+		 * @param Page $page The page for which to filter the title.
 		 */
-		return apply_filters( 'musille/title', $title );
+		return apply_filters( 'musille/title', $title, $this );
 	}
 
 	/**
@@ -174,10 +240,10 @@ class Page {
 	public function subtitle(): string {
 		if ( $this->has_post() ) {
 			$subtitle = $this->post->meta( CustomHeader::SUBTITLE_META_KEY ) ?? '';
-		} elseif ( is_search() ) {
+		} elseif ( $this->query->is_search() ) {
 			// Translators: Page title for search results.
 			$subtitle = sprintf( __( 'Results for "%s"', 'musille' ), get_search_query() );
-		} elseif ( is_404() ) {
+		} elseif ( $this->query->is_404() ) {
 			$subtitle = __( 'Page not found', 'musille' );
 		} else {
 			$subtitle = '';
@@ -187,7 +253,8 @@ class Page {
 		 * Filters the subtitle before it is displayed.
 		 *
 		 * @param string $subtitle The subtitle configured by the post.
+		 * @param Page $page The page for which to filter the subtitle.
 		 */
-		return apply_filters( 'musille/subtitle', $subtitle );
+		return apply_filters( 'musille/subtitle', $subtitle, $this );
 	}
 }

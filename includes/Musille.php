@@ -13,10 +13,9 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-use Timber\Post;
 use Timber\Site;
 use Timber\Timber;
-use WP_Post_Type;
+use WP_Admin_Bar;
 
 /**
  * The `MusilleTheme` is the main entry point of the Musille theme. On creation it
@@ -131,6 +130,7 @@ class Musille extends Site {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_block_editor_assets' ) );
 		add_filter( 'document_title_parts', array( $this, 'filter_document_title' ) );
+		add_action( 'admin_bar_menu', array( $this, 'add_admin_bar_edit' ), 80 );
 
 		add_filter( 'timber/context', array( $this, 'setupContext' ) );
 		add_filter(
@@ -336,29 +336,38 @@ class Musille extends Site {
 	 * @return array The new Timber context.
 	 */
 	public function setupContext( array $context ): array {
-		if ( is_singular() ) {
-			$post = new Post();
-		} elseif ( is_home() ) {
-			$post = new Post( get_option( 'page_for_posts' ) );
-		} else {
-			$post           = null;
-			$queried_object = get_queried_object();
-			if ( $queried_object instanceof WP_Post_Type ) {
-				$slug = $queried_object->has_archive;
-				if ( ! is_string( $slug ) ) {
-					$slug = $queried_object->rewrite['slug'];
-				}
-				if ( ! is_string( $slug ) ) {
-					$slug = $queried_object->name;
-				}
-				$page_data = get_page_by_path( $slug );
-				$post      = $page_data ? new Post( $page_data->ID ) : null;
+		$page            = Page::current();
+		$context['site'] = $this;
+		$context['page'] = $page;
+		$context['post'] = $page->post;
+		return $context;
+	}
+
+	/**
+	 * Adds an "edit page" item to the admin bar, if the current page is a post archive
+	 * and a page exists at the same path.
+	 *
+	 * @param WP_Admin_Bar $wp_admin_bar The admin bar.
+	 */
+	public function add_admin_bar_edit( WP_Admin_Bar $wp_admin_bar ): void {
+		if ( is_post_type_archive() ) {
+			$post = Page::current()->post;
+			if ( empty( $post ) ) {
+				return;
+			}
+			$post_type = get_post_type_object( $post->post_type );
+			if ( $post_type
+				&& $post->can_edit()
+				&& $post_type->show_in_admin_bar ) {
+				$wp_admin_bar->add_node(
+					array(
+						'id'    => 'edit',
+						'title' => get_post_type_object( 'page' )->labels->edit_item,
+						'href'  => $post->edit_link(),
+					)
+				);
 			}
 		}
-		$context['site'] = $this;
-		$context['post'] = apply_filters( 'musille/post', $post );
-		$context['page'] = apply_filters( 'musille/page', new Page( $context['post'] ) );
-		return $context;
 	}
 
 	/**
