@@ -32,22 +32,11 @@ if (argv.dest) {
 /**
  * Installs PHP dependencies in the build directory using composer. This step only
  * installs runtime dependencies and no build dependencies.
- *
- * In production this task will generate an authoritative classmap as well.
  */
 function installDependencies() {
-  const command = [
-    "composer",
-    "install",
-    `--working-dir=${BUILD_DIR}`,
-    "--no-dev",
-  ];
-  if (production) {
-    command.push("--classmap-authoritative");
-  }
   return src(["composer.json", "composer.lock"])
     .pipe(dest(BUILD_DIR))
-    .pipe(exec(command.join(" ")));
+    .pipe(exec(`composer install --working-dir=${BUILD_DIR} --no-dev`));
 }
 
 /**
@@ -181,6 +170,20 @@ function compileJedTranslations() {
 }
 
 /**
+ * Dumps the composer autoload files for production builds. This will generate an
+ * authoritative classmap for all PHP files.
+ */
+function dumpAutoload() {
+  const command = ["composer", "dump-autoload", `--working-dir=${BUILD_DIR}`];
+  if (production) {
+    command.push("--classmap-authoritative");
+  }
+  return src(["composer.json", "composer.lock"])
+    .pipe(dest(BUILD_DIR))
+    .pipe(exec(command.join(" ")));
+}
+
+/**
  * Removes temporary files from the build directory. This should always be the last step
  * in a build pipeline.
  */
@@ -213,9 +216,10 @@ function serve() {
  */
 exports.default = series(
   parallel(
-    installDependencies,
-    copyIncludes,
-    copyTemplates,
+    series(
+      parallel(installDependencies, copyIncludes, copyTemplates),
+      dumpAutoload
+    ),
     copyViews,
     compileScripts,
     buildBlocks,

@@ -58,7 +58,6 @@ jobs:
         run: |
           npm run build -- --dest=musille
           zip -qr9 $FILENAME musille
-          cat musille/vendor/composer/autoload_classmap.php
         env:
           FILENAME: ${{ steps.version.outputs.filename }}
       - name: Upload Build Artifacts
