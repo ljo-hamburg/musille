@@ -387,6 +387,7 @@ class Musille extends Site {
 	 * @return string The copyright string.
 	 */
 	public function copyright(): string {
-		return $this->settings->get( Settings::COPYRIGHT_KEY );
+		$copyright = $this->settings->get( Settings::COPYRIGHT_KEY );
+		return $copyright ? $copyright : '';
 	}
 }
