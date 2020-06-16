@@ -23,7 +23,9 @@ $editor: false !default;
 $admin: $editor !default;
 
 * {
-  box-sizing: border-box;
+  @if not $editor {
+    box-sizing: border-box;
+  }
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
