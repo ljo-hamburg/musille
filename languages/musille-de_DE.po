@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Musille 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/build\n"
-"POT-Creation-Date: 2020-06-16T20:33:45+00:00\n"
-"PO-Revision-Date: 2020-06-16 22:34+0200\n"
+"POT-Creation-Date: 2020-06-16T22:43:31+00:00\n"
+"PO-Revision-Date: 2020-06-17 00:47+0200\n"
 "Last-Translator: Kim Wittenburg <codello@wittenburg.kim>\n"
 "Language-Team: German <codello@wittenburg.kim>\n"
 "Language: de_DE\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Domain: musille\n"
 
 #. Theme Name of the theme
-#: includes/Musille.php:236
+#: includes/Musille.php:235
 msgid "Musille"
 msgstr "Musille"
 
@@ -46,47 +46,47 @@ msgstr "Folter-Menü"
 msgid "Main Menu"
 msgstr "Hauptmenü"
 
-#: includes/Musille.php:175
+#: includes/Musille.php:174
 msgid "Primary"
 msgstr "Primär"
 
-#: includes/Musille.php:180
+#: includes/Musille.php:179
 msgid "Accent"
 msgstr "Akzent"
 
-#: includes/Musille.php:185
+#: includes/Musille.php:184
 msgid "Link"
 msgstr "Link"
 
-#: includes/Musille.php:190
+#: includes/Musille.php:189
 msgid "Dark"
 msgstr "Dunkel"
 
-#: includes/Musille.php:195
+#: includes/Musille.php:194
 msgid "White"
 msgstr "Weiß"
 
-#: includes/Musille.php:200
+#: includes/Musille.php:199
 msgid "Black"
 msgstr "Schwarz"
 
-#: includes/Musille.php:243
+#: includes/Musille.php:242
 msgid "Full Background"
 msgstr "Volle Hintergrundbreite"
 
-#: includes/Musille.php:250
+#: includes/Musille.php:249
 msgid "Full Width"
 msgstr "Volle Breite"
 
-#: includes/Musille.php:257
+#: includes/Musille.php:256
 msgid "Section Heading"
 msgstr "Abschnitts-Überschrift"
 
-#: includes/Musille.php:264
+#: includes/Musille.php:263
 msgid "Large & White"
 msgstr "Groß und Weiß"
 
-#: includes/Musille.php:274 blocks/header.js:284
+#: includes/Musille.php:273 blocks/header.js:284
 msgid "Fancy"
 msgstr "Fancy"
 
@@ -94,20 +94,20 @@ msgstr "Fancy"
 msgid "Musille Sidebar"
 msgstr "Musille Seitenleiste"
 
-#: includes/Page.php:152 blocks/icon-grid.js:300
+#: includes/Page.php:216 blocks/icon-grid.js:300
 msgid "Search"
 msgstr "Suchen"
 
-#: includes/Page.php:154
+#: includes/Page.php:218
 msgid "404"
 msgstr "404"
 
 #. Translators: Page title for search results.
-#: includes/Page.php:179
+#: includes/Page.php:245
 msgid "Results for \"%s\""
 msgstr "Suchergebnisse für „%s“"
 
-#: includes/Page.php:181
+#: includes/Page.php:247
 msgid "Page not found"
 msgstr "Seite nicht gefunden"
 
@@ -465,6 +465,10 @@ msgstr "Veröffentlicht am %s von %s in %s"
 #: views/partials/post-item.twig:91
 msgid "Published on %s by %s"
 msgstr "Veröffentlicht am %s von %s"
+
+#: views/partials/post-item.twig:99
+msgid "Read More…"
+msgstr "Weiterlesen…"
 
 #: views/single-concert.twig:68
 msgid "This concert has been cancelled"

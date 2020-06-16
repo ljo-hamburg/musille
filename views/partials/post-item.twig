@@ -24,6 +24,6 @@ Renders a simple post item in a list of items.
         {{ __("Published on %s by %s", "musille")|format(post.date, post.author) }}
       {% endif %}
     </div>
-    <div class="excerpt">{{ post.preview }}</div>
+    <div class="excerpt">{{ post.preview.read_more(__("Read More…", "musille")) }}</div>
   </div>
 </article>

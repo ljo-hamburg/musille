@@ -9,13 +9,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-06-16T20:33:45+00:00\n"
+"POT-Creation-Date: 2020-06-16T22:49:45+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: musille\n"
 
 #. Theme Name of the theme
-#: includes/Musille.php:236
+#: includes/Musille.php:235
 msgid "Musille"
 msgstr ""
 
@@ -47,47 +47,47 @@ msgstr ""
 msgid "Main Menu"
 msgstr ""
 
-#: includes/Musille.php:175
+#: includes/Musille.php:174
 msgid "Primary"
 msgstr ""
 
-#: includes/Musille.php:180
+#: includes/Musille.php:179
 msgid "Accent"
 msgstr ""
 
-#: includes/Musille.php:185
+#: includes/Musille.php:184
 msgid "Link"
 msgstr ""
 
-#: includes/Musille.php:190
+#: includes/Musille.php:189
 msgid "Dark"
 msgstr ""
 
-#: includes/Musille.php:195
+#: includes/Musille.php:194
 msgid "White"
 msgstr ""
 
-#: includes/Musille.php:200
+#: includes/Musille.php:199
 msgid "Black"
 msgstr ""
 
-#: includes/Musille.php:243
+#: includes/Musille.php:242
 msgid "Full Background"
 msgstr ""
 
-#: includes/Musille.php:250
+#: includes/Musille.php:249
 msgid "Full Width"
 msgstr ""
 
-#: includes/Musille.php:257
+#: includes/Musille.php:256
 msgid "Section Heading"
 msgstr ""
 
-#: includes/Musille.php:264
+#: includes/Musille.php:263
 msgid "Large & White"
 msgstr ""
 
-#: includes/Musille.php:274
+#: includes/Musille.php:273
 #: blocks/header.js:284
 msgid "Fancy"
 msgstr ""
@@ -96,21 +96,21 @@ msgstr ""
 msgid "Musille Sidebar"
 msgstr ""
 
-#: includes/Page.php:152
+#: includes/Page.php:216
 #: blocks/icon-grid.js:300
 msgid "Search"
 msgstr ""
 
-#: includes/Page.php:154
+#: includes/Page.php:218
 msgid "404"
 msgstr ""
 
 #. Translators: Page title for search results.
-#: includes/Page.php:179
+#: includes/Page.php:245
 msgid "Results for \"%s\""
 msgstr ""
 
-#: includes/Page.php:181
+#: includes/Page.php:247
 msgid "Page not found"
 msgstr ""
 
@@ -460,6 +460,10 @@ msgstr ""
 
 #: views/partials/post-item.twig:91
 msgid "Published on %s by %s"
+msgstr ""
+
+#: views/partials/post-item.twig:99
+msgid "Read More…"
 msgstr ""
 
 #: views/single-concert.twig:68

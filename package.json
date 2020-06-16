@@ -13,7 +13,7 @@
     "lint:scss": "stylelint --allow-empty-input styles",
     "pregettext": "npm run build-dev",
     "gettext": "./vendor/bin/wp --require=tasks/make-pot.php i18n make-twig-pot build languages/musille.pot",
-    "postgettext": "for FILE in ./languages/*.po; do msgmerge --update $FILE languages/musille.pot; done"
+    "postgettext": "for FILE in ./languages/*.po; do msgmerge --update $FILE languages/musille.pot --backup=off; done"
   },
   "repository": {
     "type": "git",
