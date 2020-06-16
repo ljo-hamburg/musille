@@ -215,6 +215,13 @@ class Musille extends Site {
 			array(),
 			'5.13.0'
 		);
+		wp_register_style(
+			'musille-fonts',
+			'https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800|' .
+			'Oswald:300,400,700&subset=latin,latin-ext',
+			array(),
+			MUSILLE_VERSION
+		);
 	}
 
 	/**
@@ -282,7 +289,7 @@ class Musille extends Site {
 		wp_enqueue_style(
 			'musille-editor',
 			get_template_directory_uri() . '/editor.css',
-			array( 'font-awesome' ),
+			array( 'musille-fonts', 'font-awesome' ),
 			filemtime( get_template_directory() . '/editor.css' )
 		);
 	}
@@ -294,7 +301,7 @@ class Musille extends Site {
 		wp_enqueue_style(
 			'musille',
 			get_template_directory_uri() . '/musille.css',
-			array( 'font-awesome' ),
+			array( 'musille-fonts', 'font-awesome' ),
 			filemtime( get_template_directory() . '/musille.css' )
 		);
 		wp_enqueue_script(

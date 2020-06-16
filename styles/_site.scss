@@ -22,8 +22,6 @@
 $editor: false !default;
 $admin: $editor !default;
 
-@import url("#{text.$url}");
-
 * {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;

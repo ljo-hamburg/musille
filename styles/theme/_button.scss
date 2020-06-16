@@ -17,11 +17,14 @@
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
-  background-color: transparent;
   border: 1px solid colors.$dark;
   border-radius: card.$border-radius;
   cursor: pointer;
   transition: background-color transition.$default, color transition.$default;
+
+  &:not(.has-background) {
+    background-color: transparent;
+  }
 
   &:hover {
     color: colors.$background;
