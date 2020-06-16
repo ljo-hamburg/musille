@@ -23,7 +23,7 @@ $editor: false !default;
 $admin: $editor !default;
 
 * {
-  @if not $editor {
+  @if not $admin {
     box-sizing: border-box;
   }
   -webkit-font-smoothing: antialiased;

@@ -1000,12 +1000,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ljo-hamburg/wp-concerts.git",
-                "reference": "38d11c1726c56a73845da868d1ae3ae7daed09de"
+                "reference": "d2e8b1c8706529c0667977335361239dd3aaeb29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ljo-hamburg/wp-concerts/zipball/38d11c1726c56a73845da868d1ae3ae7daed09de",
-                "reference": "38d11c1726c56a73845da868d1ae3ae7daed09de",
+                "url": "https://api.github.com/repos/ljo-hamburg/wp-concerts/zipball/d2e8b1c8706529c0667977335361239dd3aaeb29",
+                "reference": "d2e8b1c8706529c0667977335361239dd3aaeb29",
                 "shasum": ""
             },
             "require": {
@@ -1041,10 +1041,10 @@
             ],
             "description": "Concerts for WordPress.",
             "support": {
-                "source": "https://github.com/ljo-hamburg/wp-concerts/tree/master",
+                "source": "https://github.com/ljo-hamburg/wp-concerts/tree/0.1.0-rc.1",
                 "issues": "https://github.com/ljo-hamburg/wp-concerts/issues"
             },
-            "time": "2020-06-11T18:15:38+00:00"
+            "time": "2020-06-16T15:44:18+00:00"
         },
         {
             "name": "mck89/peast",
@@ -1239,7 +1239,7 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v5.1.0",
+            "version": "v5.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
