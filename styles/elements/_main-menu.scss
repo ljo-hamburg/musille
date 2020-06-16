@@ -48,15 +48,17 @@ $close-transition: max-height transition.$default-duration cubic-bezier(0, 1, 0,
 .main-menu {
   // Main Menu Bar
   @include wp.admin-bar-fix;
-  position: absolute;
+  position: fixed;
   top: 0;
   z-index: 100;
   width: 100%;
   background-color: $background-color;
   transition: background-color transition.$default;
 
-  @include media(">600px") {
-    position: fixed;
+  @include media("<=600px") {
+    .admin-bar & {
+      position: absolute;
+    }
   }
 
   &.sticky {
