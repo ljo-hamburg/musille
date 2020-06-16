@@ -32,7 +32,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "LJO\\Musille\\": "includes/"
+      "LJO\\Musille\\": "includes/",
+      "LJO\\Musille\\Blocks\\": "includes/Blocks/"
     }
   }
 }
