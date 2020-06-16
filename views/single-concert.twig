@@ -3,8 +3,11 @@ This is the page template used to display concerts.
 #}
 {% extends "base.twig" %}
 
-{% set blocks = function('parse_blocks', post.post_content) %}
+{% block head_extra %}
+  <script type="application/ld+json">{{ function('wp_json_encode', concert.get_schema_data) }}</script>
+{% endblock %}
 
+{% set blocks = function('parse_blocks', post.post_content) %}
 {% block body_class %}has-sidebar{% endblock %}
 
 {% block content %}

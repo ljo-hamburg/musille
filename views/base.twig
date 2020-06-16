@@ -4,38 +4,39 @@ provides blocks to insert content at various places.
 #}
 <!DOCTYPE html>
 <html {{ site.language_attributes }} class="{% if site.admin_bar_showing %}admin-bar{% endif %}">
-<head>
-  {% block head %}
+{% block head %}
+  <head>
     <meta charset="{{ site.charset }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
     <meta name="description" content="{{ site.description }}">
     <link rel="pingback" href="{{ site.pingback_url }}"/>
     {{ function('wp_site_icon') }}
     {{ function('wp_head') }}
-  {% endblock %}
-</head>
-<body class="{% block body_class %}{% endblock %} {{ body_class }}">
-{% block body %}
-  {% block main_menu %}
-    {% include "partials/main-menu.twig" %}
-  {% endblock %}
-  {% block header %}
-    {% include "partials/header.twig" %}
-  {% endblock %}
-  {% block main %}
-    <main id="content">
-      {% if post.password_required %}
-          {{ post.maybe_show_password_form }}
-      {% else %}
-        {% block content %}{% endblock %}
-        {% block aside %}{% endblock %}
-      {% endif %}
-    </main>
-  {% endblock %}
-  {% block footer %}
-    {% include "partials/footer.twig" %}
-  {% endblock %}
+    {% block head_extra %}{% endblock %}
+  </head>
 {% endblock %}
-{{ wp_footer }}
-</body>
+{% block body %}
+  <body class="{% block body_class %}{% endblock %} {{ body_class }}">
+    {% block main_menu %}
+      {% include "partials/main-menu.twig" %}
+    {% endblock %}
+    {% block header %}
+      {% include "partials/header.twig" %}
+    {% endblock %}
+    {% block main %}
+      <main id="content">
+        {% if post.password_required %}
+            {{ post.maybe_show_password_form }}
+        {% else %}
+          {% block content %}{% endblock %}
+          {% block aside %}{% endblock %}
+        {% endif %}
+      </main>
+    {% endblock %}
+    {% block footer %}
+      {% include "partials/footer.twig" %}
+    {% endblock %}
+    {{ wp_footer }}
+  </body>
+{% endblock %}
 </html>
