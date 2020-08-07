@@ -3,15 +3,27 @@
 @use "../theme/card";
 @use "../theme/forms";
 @use "../theme/colors";
+@use "../theme/button";
 
 $editor: false !default;
 
-input[type=text] {
+input[type=text],
+input[type=email],
+input[type=password] {
+  padding: 5px;
   color: colors.$text;
+  font-size: 120%;
+  border: 1px solid colors.$dark;
+  border-radius: card.$border-radius;
+}
+
+input[type=submit] {
+
+  @extend %button;
 }
 
 @if not $editor {
-  .post-password-form {
+  form.post-password-form {
     @extend %simple-input;
     text-align: center;
 
