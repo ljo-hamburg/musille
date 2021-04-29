@@ -114,6 +114,7 @@
                 "extension",
                 "twig"
             ],
+            "abandoned": "twig/cache-extension",
             "time": "2020-01-01T20:47:37+00:00"
         },
         {
@@ -1000,12 +1001,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ljo-hamburg/wp-concerts.git",
-                "reference": "d2e8b1c8706529c0667977335361239dd3aaeb29"
+                "reference": "10428a6988782c56a1f4bafb2d5e0d20a6ee2157"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ljo-hamburg/wp-concerts/zipball/d2e8b1c8706529c0667977335361239dd3aaeb29",
-                "reference": "d2e8b1c8706529c0667977335361239dd3aaeb29",
+                "url": "https://api.github.com/repos/ljo-hamburg/wp-concerts/zipball/10428a6988782c56a1f4bafb2d5e0d20a6ee2157",
+                "reference": "10428a6988782c56a1f4bafb2d5e0d20a6ee2157",
                 "shasum": ""
             },
             "require": {
@@ -1041,10 +1042,10 @@
             ],
             "description": "Concerts for WordPress.",
             "support": {
-                "source": "https://github.com/ljo-hamburg/wp-concerts/tree/0.1.0-rc.1",
+                "source": "https://github.com/ljo-hamburg/wp-concerts/tree/master",
                 "issues": "https://github.com/ljo-hamburg/wp-concerts/issues"
             },
-            "time": "2020-06-16T15:44:18+00:00"
+            "time": "2020-06-22T15:21:26+00:00"
         },
         {
             "name": "mck89/peast",
@@ -1139,23 +1140,30 @@
         },
         {
             "name": "rmccue/requests",
-            "version": "v1.7.0",
+            "version": "v1.8.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/rmccue/Requests.git",
-                "reference": "87932f52ffad70504d93f04f15690cf16a089546"
+                "url": "https://github.com/WordPress/Requests.git",
+                "reference": "afbe4790e4def03581c4a0963a1e8aa01f6030f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rmccue/Requests/zipball/87932f52ffad70504d93f04f15690cf16a089546",
-                "reference": "87932f52ffad70504d93f04f15690cf16a089546",
+                "url": "https://api.github.com/repos/WordPress/Requests/zipball/afbe4790e4def03581c4a0963a1e8aa01f6030f1",
+                "reference": "afbe4790e4def03581c4a0963a1e8aa01f6030f1",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2"
             },
             "require-dev": {
-                "requests/test-server": "dev-master"
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+                "php-parallel-lint/php-console-highlighter": "^0.5.0",
+                "php-parallel-lint/php-parallel-lint": "^1.3",
+                "phpcompatibility/php-compatibility": "^9.0",
+                "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5 || ^7.5",
+                "requests/test-server": "dev-master",
+                "squizlabs/php_codesniffer": "^3.5",
+                "wp-coding-standards/wpcs": "^2.0"
             },
             "type": "library",
             "autoload": {
@@ -1174,7 +1182,7 @@
                 }
             ],
             "description": "A HTTP library written in PHP, for human beings.",
-            "homepage": "http://github.com/rmccue/Requests",
+            "homepage": "http://github.com/WordPress/Requests",
             "keywords": [
                 "curl",
                 "fsockopen",
@@ -1184,7 +1192,7 @@
                 "iri",
                 "sockets"
             ],
-            "time": "2016-10-13T00:11:37+00:00"
+            "time": "2021-04-27T11:05:25+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
