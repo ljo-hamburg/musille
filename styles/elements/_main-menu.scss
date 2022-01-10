@@ -2,6 +2,7 @@
  * The Musille Main Menu.
  */
 
+@use "sass:math";
 @use "sass:color";
 @use "../theme/colors";
 @use "../theme/transition";
@@ -143,11 +144,11 @@ $close-transition: max-height transition.$default-duration cubic-bezier(0, 1, 0,
 
     @at-root .sticky#{&} {
       @include media(">=tablet") {
-        $offset: $logo-offset / 2;
+        $offset: math.div($logo-offset, 2);
         padding: 0 40px;
         background: linear-gradient(0deg, $solid-background-color $offset, rgba(0, 0, 0, 0) $offset);
         box-shadow: 0 14px 10px -10px rgba(0, 0, 0, 0.5);
-        transform: translateY($logo-offset/2);
+        transform: translateY(math.div($logo-offset, 2));
       }
     }
   }
