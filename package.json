@@ -1,6 +1,6 @@
 {
   "name": "musille",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The Musille WordPress Theme.",
   "scripts": {
     "clean": "rm -rf build/*",
