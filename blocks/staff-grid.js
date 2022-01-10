@@ -81,9 +81,10 @@ registerBlockType(ITEM_BLOCK_NAME, {
     attributes: { imageID, name, position, meta, showAttribution },
     setAttributes,
   }) {
-    const image = useSelect((select) => select("core").getMedia(imageID), [
-      imageID,
-    ]);
+    const image = useSelect(
+      (select) => select("core").getMedia(imageID),
+      [imageID]
+    );
     setAttributes({ image });
     return (
       <>

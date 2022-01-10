@@ -13,13 +13,14 @@ import React, { Fragment, useEffect } from "react";
 import { __ } from "@wordpress/i18n";
 import { registerBlockType, registerBlockStyle } from "@wordpress/blocks";
 import { useSelect } from "@wordpress/data";
-import { InspectorControls } from "@wordpress/block-editor";
+import { InspectorControls, useBlockProps } from "@wordpress/block-editor";
 import { PanelBody, TextControl, ToggleControl } from "@wordpress/components";
 import ImageSelector from "@ljo-hamburg/gutenberg-image-selector";
 
 const BLOCK_NAME = "musille/header";
 
 registerBlockType(BLOCK_NAME, {
+  apiVersion: 2,
   title: __("Musille Header", "musille"),
   description: __("Customize the Musille Page Header.", "musille"),
   category: "formatting",
@@ -58,10 +59,29 @@ registerBlockType(BLOCK_NAME, {
     multiple: false, // Only one header is allowed per page/post.
   },
   edit({
-    className,
+    clientId,
     attributes: { imageID, subtitle, style, showAttribution },
+    isSelected,
     setAttributes,
   }) {
+    const blockStyle = useSelect(
+      (select) => {
+        const { getBlockAttributes } = select("core/block-editor");
+        return (
+          (getBlockAttributes(clientId).className ?? "")
+            .split(" ")
+            .find((className) => className.startsWith("is-style-")) ??
+          "is-style-basic"
+        ).substring("is-style-".length);
+      },
+      [true]
+    );
+    useEffect(() => {
+      if (blockStyle !== style && isSelected) {
+        console.log(`Setting current style from ${style} to ${blockStyle}`);
+        setAttributes({ style: blockStyle });
+      }
+    });
     const { title: postTitle, imageID: postImageID } = useSelect(
       (select) => {
         const editor = select("core/editor");
@@ -82,25 +102,13 @@ registerBlockType(BLOCK_NAME, {
       (select) => select("core").getMedia(imageID || postImageID),
       [imageID, postImageID]
     );
-    const currentStyle = (
-      className
-        .split(" ")
-        .find((className) => className.startsWith("is-style-")) ??
-      "is-style-basic"
-    ).substring("is-style-".length);
-    useEffect(() => {
-      if (currentStyle !== style) {
-        setAttributes({ style: currentStyle });
-      }
-    });
     const imageStyle = {};
-    if (
-      ["subtitle", "fancy"].includes(currentStyle) &&
-      image &&
-      image.source_url
-    ) {
+    if (["subtitle", "fancy"].includes(style) && image && image.source_url) {
       imageStyle.backgroundImage = `url(${image.source_url})`;
     }
+    const blockProps = useBlockProps({
+      style: imageStyle,
+    });
     return (
       <Fragment>
         <InspectorControls>
@@ -129,7 +137,7 @@ registerBlockType(BLOCK_NAME, {
             />
           </PanelBody>
         </InspectorControls>
-        <div className={className} style={imageStyle}>
+        <div {...blockProps}>
           <div className={"overlay"} />
           <div className={"content"}>
             <h1 className={"title"}>{postTitle}</h1>

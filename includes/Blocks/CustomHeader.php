@@ -137,7 +137,7 @@ class CustomHeader {
 
 	/**
 	 * This hook is called when a `Concert` instance is created. If the user has set a
-	 * custom header image for a concert we add it to the concert images here so it is
+	 * custom header image for a concert we add it to the concert images here, so it is
 	 * available in the structured data as well.
 	 *
 	 * @param Concert $concert The concert instance.
